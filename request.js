@@ -9,7 +9,7 @@ const conf = {
 	write_data_now: 0,
 	users: [],
 	user: {
-		storage: 'Filesystem',
+		storage: 'Local',
 		username: 0,
 		add_user: 0,
 		dl_userdata: 0,
