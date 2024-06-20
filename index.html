@@ -1,0 +1,154 @@
+<!DOCTYPE html> <html id='html' lang='en' dir='ltr'>
+<head id='head'> <meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
+	<title>V A 二ｌｌA</title>
+
+	<!-- Core Modules -->
+	<link id='favicon' rel='icon' type='image/x-icon' href='res/va2.webp'>
+	<link rel='stylesheet' href='lib/va2.css'>
+	<link rel='stylesheet' href='lib/va2temp.css'>
+	<script src='lib/va2.js'></script>
+	<script src='request.js' defer async></script>
+
+	<!-- SEO Core Metadata -->
+	<meta name='author' content='Eimi Rein (霊音・永旻)'>
+	<link rel='author' href='https://github.com/eimirein'>
+	<meta name='description' content='Vanilla Project (Va2) by 霊音永旻 (@reineimi) is a Desktop Environment 
+	made on Apache24 server for browsers. It will include built-in apps like: file manager, image editor, picture gallery, 
+	website constructor (graphic frontend framework), code editor (IDE), Spotify integration and more. 
+	It also offers embeddable modules like: swipe.js, va2.util.js, va2.util.css and more.'>
+	<meta name='keywords' content='reineimi, vanilla, desktop environment, web application, webserver, filesystem,
+	website constructor, website builder, html, css, js, lua, apache2, frontend platform, frontend library'>
+	<meta name='robots' content='index, follow, archive, noimageindex'>
+
+	<!-- SEO Social Media Cards -->
+	<meta name='twitter:card' content='summary'>
+	<meta name='twitter:creator' content='@reineimi'>
+	<meta property='og:url' content='https://eimirein.github.io/va2'>
+	<meta property='og:title' content='Vanilla Project by Eimi Rein (霊音・永旻)'>
+	<meta property='og:description' content='Vanilla Project (Va2) is a Desktop Environment 
+	made on Apache24 server for browsers. It will include built-in apps like: file manager, image editor, picture gallery, 
+	website constructor (graphic frontend framework), code editor (IDE), Spotify integration and more. 
+	It also offers embeddable modules like: swipe.js, va2.js, va2.css and more.'>
+	<meta property='og:image' content='https://eimirein.github.io/va2/res/preview.webp'>
+
+	<!-- Google stuff -->
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<meta name="google-site-verification" content="" />
+
+	<!-- Twemoji -->
+	<!-- <script src='https://twemoji.maxcdn.com/v/latest/twemoji.min.js' crossorigin='anonymous' defer></script> -->
+
+	<!-- Anicons - https://typogram.github.io/Anicons/use.html -->
+	<link href="https://res.cloudinary.com/dr6lvwubh/raw/upload/v1581441981/Anicons/anicons-regular.css" rel="stylesheet">
+</head>
+
+<body id='body' class='theme-light' onload='init()' tabIndex=0 onclick>
+	<!--div class='va2topRightArea fix rtop nosel'>
+		<div class='trc_top_part w'>
+			<div class='trc_status right h'>
+				<p id='operating_system'></p>
+				<p id='elapsed'></p>
+			</div>
+		</div>
+		<div class='trc_top_part w fh'>
+			<p id='btn_settings' onclick='va2.set.settings()'><gicon>settings</gicon><br>Settings</p>
+			<p id='btn_theme' onclick='va2.set.theme()'><gicon>dark_mode</gicon><br>Dark mode</p>
+		</div>
+	</div-->
+
+	<!-- "Behind" the desktop -->
+	<div id='va2workspace' class='fill' style='display: none'>
+		<div id='va2statusFrame' class='abs w nosel'>
+			<p id='elapsed'></p>
+		</div>
+		<div id='va2taskbarFrame' class='abs nosel w f lbot'>
+			<div id='va2taskbar' class='fh i'></div>
+			<p id='va2toApplist' class='w center va2wsScrollTo' onclick='scrollto("va2applist")'>
+				<x>List of all</x><gicon>keyboard_arrow_down</gicon><x>applications</x></p>
+		</div>
+		<div id='va2wsApplistFrame' class='abs f w'>
+			<div id='va2applist' class='nosel center'>
+				<h2 class='center abs w'>Applications list</h2>
+				<div id='va2wsAddShortcut' style='display: none'>
+					<h3>New shortcut</h3>
+					<h3><c>Names</c> should be unique, identical ones will be replaced.
+						<c>Data</c> can be either a system shell command, full web URL (<x>https://</x>...), or path to executable.
+						<c>Symbol id</c> can be found at <a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a>.</h3>
+					<input placeholder='Name' class='input' type='text' size='18'>
+					<input placeholder='Data' class='input' type='text' spellcheck='false'>
+					<input placeholder='Symbol id (optional)' class='input' type='text' size='64'>
+					<p onclick='hide(this.root(1), "shortcuts_ln")'>Cancel</p>
+					<p onclick='va2.set.shortcut(this.root(1), 2); hide(this.root(1), "shortcuts_ln")'>Save</p>
+				</div>
+				<ln id='shortcuts_ln' style='display: none'></ln>
+				<div class='shortcut' onclick='tshow(1, "va2wsAddShortcut", "shortcuts_ln")'>
+					<p>Add</p><mask><gicon>add</gicon></mask></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Desktop -->
+	<div id='va2desktop' class='fill f'>
+		<!-- Desktop workspace trigger -->
+		<div id='va2expandWorkspace' class='abs nosel'
+			onmouseover='va2.set.workspace("open")'
+			onmouseout='va2.set.workspace(0)'>
+		</div>
+		<!-- Background -->
+		<div id='va2pageBackground' class='fillx bgfill nosel nil'></div>
+		<!-- Shortcuts -->
+		<div id='va2desktopGrid'></div>
+		<!-- Clocks -->
+		<div id='timedate' class='nosel'>
+			<p id='time'></p>
+			<p id='date'></p>
+			<p id='ram'></p>
+			<p id='cpu'></p>
+		</div>
+		<!-- Windows -->
+		<div id='va2windowsFrame' class='i h fh'>
+
+			<!-- Settings menu -->
+			<div id='va2settingsFrame' style='display: none' class='nosel'>
+				<div id='va2settingsHead'>
+					<gicon id='conf_back' onclick="hide(this.root(2)); emi('shcut::Settings').chroot('va2applist')">arrow_back</gicon>
+					<h2 id='conf_title'>Settings</h2>
+					<p></p>
+				</div>
+				<div id='va2settingsBody'>
+					<div id='page1' class='page' data-title='Settings' style='display: block'></div>
+				</div>
+			</div>
+
+			<!-- Console -->
+			<div id='console' class='console'></div>
+
+		</div>
+	</div>
+
+	<!-- Loading/request screen -->
+	<div id='loading' class='va2loading center nosel fillx'>
+		<div class='va2loadCircle'> <div></div> <div></div> <div></div> <div></div> </div>
+		<p><span class='material-symbols-outlined'>radio_button_unchecked</span><br>Resolving request...</p>
+	</div>
+
+	<!-- Context (/"Right click") menu -->
+	<div id='va2ctxt' class='abs nosel' style='display: none'></div>
+
+	<div id='va2loginScreen' class='fillx center bgblur nosel'>
+		<div id='va2loginScreenMask' class='fill'></div>
+		<div class='center i'>
+			<p id='va2welcome'><x>Welcome to V A 二ｌｌA !</x>
+				You can view project page <a class='ref' href='https://github.com/reineimi/va2' target='_blank'>here</a>.
+				<x>Select a user from the list below.</x>
+			</p>
+			<div class='w i f'> <div id='va2userSelect'></div> </div>
+		</div>
+	</div>
+
+	<div id='__notif'></div>
+	<div id='__prompt'></div>
+</body>
+
+</html>
