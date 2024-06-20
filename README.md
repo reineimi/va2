@@ -6,6 +6,7 @@
 - [Installation](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#installation)
 - [Screenshots](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#screenshots)
 - [Configuration](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#configuration)
+- [Module embedding](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#module-embedding)
 
 # Introduction
 V A 二ｌｌA (`Vanilla Project` or `Va2`) is a webserver-based (Apache2) Desktop Environment application.<br>
@@ -74,3 +75,9 @@ WIN_HTTPD_PATH = 'C:\\Apache24\\bin'
 
 Then put `httpd.conf` in, presumably, one of these locations: `C:/Apache24/conf/` or `/etc/httpd`.
 
+# Module embedding
+To embed any library module, for example `va2.js` and `va2.css`, you only need to put the following in your `<head>` tag:
+```html
+<script src='https://reineimi.github.io/va2/lib/va2.js' async></script>
+<link rel='stylesheet' href='https://reineimi.github.io/va2/lib/va2.css'>
+```
