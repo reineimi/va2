@@ -1,5 +1,5 @@
 > Please note that the Github Pages demo is not going to work as expected, as it requires a webserver
-> for handshakes with the Operating System and the frontend of this web application.
+> for handshakes between the Operating System and the frontend of this web application.
 
 ## Content:
 - [Introduction](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#introduction)
