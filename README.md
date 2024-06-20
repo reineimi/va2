@@ -1,3 +1,8 @@
+## Content:
+- [Introduction](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#introduction)
+- [Screenshots](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#screenshots)
+- [Configuration](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#configuration)
+
 # Introduction
 V A 二ｌｌA (`Vanilla Project` or `Va2`) is a webserver-based (Apache2) Desktop Environment application.<br>
 It is made to be flexible and cross-platform, however currently focused on Linux machines only.<br>
