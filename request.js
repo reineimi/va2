@@ -145,11 +145,11 @@ va2.env.load = async function() {
 		if (_conf) { _conf.clone(conf); }
 		if (_udata) { _udata.clone(userdata); }
 	} else if (conf.user.storage === 'Local') {
-		storage.loc.get('conf').clone(conf);
-		storage.loc.get('userdata').clone(userdata);
+		oclone(storage.loc.get('conf'), conf);
+		oclone(storage.loc.get('userdata'), userdata);
 	} else if (conf.user.storage === 'Session') {
-		storage.sess.get('conf').clone(conf);
-		storage.sess.get('userdata').clone(userdata);
+		oclone(storage.sess.get('conf'), conf);
+		oclone(storage.sess.get('userdata'), userdata);
 	}
 }
 
