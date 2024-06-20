@@ -1,5 +1,6 @@
 ## Content:
 - [Introduction](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#introduction)
+- [Installation](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#installation)
 - [Screenshots](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#screenshots)
 - [Configuration](https://github.com/reineimi/va2/tree/main?tab=readme-ov-file#configuration)
 
@@ -8,6 +9,22 @@ V A 二ｌｌA (`Vanilla Project` or `Va2`) is a webserver-based (Apache2) Deskt
 It is made to be flexible and cross-platform, however currently focused on Linux machines only.<br>
 Being under development it does not have a lot of features; however, there is a lot of native features and
 applications that have already been scheduled for development.
+
+# Installation
+The only requirement for this application is `Apache webserver`, which can be:
+- [Downloaded for Windows](https://www.apachelounge.com/download/)
+- [Compiled from source](https://httpd.apache.org/download.cgi)
+- Or installed as a package, for example:
+```
+(Arch Linux)
+sudo pacman -Syy apache
+
+(Ubuntu Linux)
+sudo apt install apache2
+
+(Termux, Android)
+pkg install apache2
+```
 
 # Screenshots
 ### Alpha ver. GUI: Light mode
