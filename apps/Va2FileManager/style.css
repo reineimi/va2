@@ -1,0 +1,223 @@
+.va2gallery {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	overflow-x: auto;
+}
+.va2gallery div {
+	display: flex;
+	flex-wrap: wrap;
+	height: 9.5rem;
+	width: 9.5rem;
+	margin: 0.5rem 0;
+	border: 2px solid var(--itemBg);
+	border-radius: var(--corners);
+	overflow: scroll;
+}
+.va2gallery div:hover {
+	color: var(--fontColorX);
+	transform: scale(0.95);
+}
+.va2gallery div span {
+	display: block;
+	margin: auto;
+	font-size: 7rem;
+}
+.va2gallery div p {
+	height: 2rem;
+	width: 100%;
+	margin: auto auto 0 auto;
+	text-align: center;
+}
+.va2gallery warn {
+	display: block;
+	margin: 3rem;
+	padding: 2rem;
+	border-radius: var(--cornersL);
+	background: var(--windowFg);
+	text-align: center;
+	line-height: 1.5rem;
+}
+.va2gallery warn x {
+	font: 600 1.4rem var(--font);
+	color: var(--fontColorX);
+}
+.va2gallery div:nth-child(5n+1) span { color: var(--green) }
+.va2gallery div:nth-child(5n+2) span { color: var(--yellow) }
+.va2gallery div:nth-child(5n+3) span { color: var(--blue) }
+.va2gallery div:nth-child(5n+4) span { color: var(--pink) }
+.va2gallery div:nth-child(5n+5) span { color: var(--purple) }
+.va2gallery div:nth-child(5n+1):hover { border-color: var(--green) }
+.va2gallery div:nth-child(5n+2):hover { border-color: var(--yellow) }
+.va2gallery div:nth-child(5n+3):hover { border-color: var(--blue) }
+.va2gallery div:nth-child(5n+4):hover { border-color: var(--pink) }
+.va2gallery div:nth-child(5n+5):hover { border-color: var(--purple) }
+.va2gallery .file {
+	text-align: left;
+	padding: 1rem 0.5rem;
+	color: var(--fontColorX);
+	min-height: 100%;
+}
+
+.va2FMPopup {
+	width: 80vmin;
+	min-height: 10rem;
+	background: var(--windowFg);
+	border: 2px solid var(--windowBg);
+	border-radius: var(--corners);
+}
+.va2FMPopup textarea { height: 10rem }
+.va2FMPopup .btn {
+	margin: 1rem auto;
+	padding: 0.5rem;
+	min-width: 8rem
+}
+.va2FMPopup .btn:hover {
+	color: var(--colorMax);
+	animation: colors_bg 5s linear infinite
+}
+.va2FMPopup h1 {
+	font: 500 1.6rem var(--font);
+	margin-top: 0.6rem;
+}
+.va2FMPopup hr {
+	border: none;
+	width: 100%;
+	height: 1px;
+}
+
+.va2windowHead input {
+	float: left;
+	width: calc(100% - 13rem);
+	height: calc(100% - 4px);
+	text-align: left;
+	text-indent: 0.6rem;
+	font-size: 1.2rem;
+	color: var(--fontColor);
+	background: #0000;
+	border-radius: var(--corners) 0 0 var(--corners);
+}
+.va2windowHead input:hover {
+	color: var(--fontColorX);
+}
+
+.va2windowBackBtn {
+	width: 9rem;
+	height: 2.5rem;
+	float: left;
+	border: none;
+	border-right: 1px solid var(--windowBg);
+	border-radius: var(--cornersS) 0 0 0;
+}
+.va2windowBackBtn:hover {
+	background-color: var(--green);
+	color: var(--theme);
+}
+.va2windowBackBtn x { transform: translateY(-0.1rem) }
+
+.va2windowFootPanel {
+	float: left;
+	width: calc(100% - 17rem);
+	height: 2.5rem;
+}
+.va2windowFootPanel:hover {
+	color: var(--fontColorX);
+	background: var(--itemBg);
+}
+.va2windowFootPanel p { transform: translateY(0.1rem) }
+.va2windowFootPanel x { display: inline-block }
+.va2windowFootPanel .fillx { z-index: 0 }
+
+.va2windowFootStats {
+	display: flex;
+	float: right;
+	height: 2.5rem;
+	width: 8rem;
+	font-size: 0.9rem;
+	padding-right: 1rem;
+	border-left: 1px solid var(--windowBg);
+}
+.va2windowFootStats p {
+	display: block;
+	margin: auto 0 auto auto;
+	line-height: 1.2;
+	text-align: right;
+}
+
+.va2FMMenu {
+	z-index: 1;
+	bottom: 1rem;
+	left: calc(50% - 13rem);
+	width: 26rem;
+	max-height: 50vh;
+	border-radius: var(--cornersL);
+	background: var(--windowFg);
+	padding: 0.5rem 0;
+	border: 1px solid var(--windowBg);
+	box-shadow: 0 0 2rem #0001;
+	overflow: scroll;
+	text-align: center;
+	transform: scaleY(0);
+	animation: expandT 0.2s forwards;
+}
+.va2FMMenu p {
+	font-size: 1.2rem;
+	width: 95%;
+	padding: 1rem 0;
+	border-radius: var(--cornersL);
+	margin: auto;
+}
+.va2FMMenu p:last-child { border: none }
+.va2FMMenu p:hover {
+	color: var(--fontColorX);
+	background: var(--itemBg);
+}
+.va2FMMenu hr { width: 60%; opacity: 0.3 }
+.va2FMMenu div {
+	width: 100%;
+	height: 6rem;
+	margin-bottom: 0.6rem
+}
+.va2FMMenu div x {
+	display: block;
+	margin: auto;
+	font-size: 1rem;
+	width: 5rem;
+}
+.va2FMMenu div gicon, .va2FMMenu div giconx {
+	display: block;
+	font-size: 3.5rem;
+}
+.va2FMMenu div x:hover { color: var(--fontColorX) }
+.va2FMMenu div x:hover gicon,
+.va2FMMenu div x:hover giconx { transform: scale(1.3) }
+.va2FMMenu div x:nth-child(4n+2) gicon { color: var(--green) }
+.va2FMMenu div x:nth-child(4n+3) gicon { color: var(--yellow) }
+.va2FMMenu div x:nth-child(4n+4) gicon { color: var(--blue) }
+.va2FMMenu div x:nth-child(4n+1) gicon { color: var(--pink) }
+
+.va2fmUnsel { color: var(--fontColorX) }
+.va2fmUnsel anicon {
+	float: right;
+	padding: 0 0.25rem;
+	font-size: 3rem;
+	border: none;
+	border-radius: 50%;
+	background: var(--windowBg);
+}
+.va2fmSel anicon {
+	color: var(--themeInv);
+	font-variation-settings: "TIME" 100;
+}
+
+.va2colors {
+	animation: colors_font 3s linear infinite;
+	font-variation-settings: "TIME" 100;
+}
+
+/*	: Code above is licensed under VPCDP  :
+	: by Eimi Rein (霊音 永旻) - @reineimi  :
+	:. https://github.com/reineimi/VPCDP .:  */
