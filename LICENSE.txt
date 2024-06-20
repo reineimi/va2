@@ -1,6 +1,6 @@
 VANILLA PASTEL CRAYON DIGITAL PRODUCT LICENSE
 Version 1.1, Copyright (C) 2023 Eimi Rein
-<eimireindayo@gmail.com>
+<reineimi.dev@gmail.com>
 
 This is a simplified license that can be provided to 
 people of any age, as long as comprehended accurately. 
@@ -159,7 +159,7 @@ therefore the current version is not considered final.
 
 If you wish to update your current license or contribute 
 to further versions - feel free to contact the license's 
-copyright owner via e-mail (eimireindayo@gmail.com), 
+copyright owner via e-mail (reineimi.dev@gmail.com), 
 or create a pull request:
 
-https://github.com/eimirein/VPCDP/pulls
+https://github.com/reineimi/VPCDP/pulls
