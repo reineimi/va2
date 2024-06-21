@@ -42,7 +42,7 @@ pkg install apache2
 ![image](https://github.com/reineimi/va2/assets/109428665/c85af16e-10e6-4d29-9e72-ae69bf6de56b)
 
 # Configuration
-Change your host **username** and **paths** in the following files:
+Change your host **username** and **paths** in the following files (the paths in the example below are genuine for Arch Linux and doesn't have to be changed on those OS distributions):
 
 `httpd.conf`
 ```conf
@@ -74,7 +74,7 @@ WIN_HTTPD_PATH = 'C:\\Apache24\\bin'
 }
 ```
 
-Then put `httpd.conf` in, presumably, one of these locations: `C:/Apache24/conf/` or `/etc/httpd`.
+Then put `httpd.conf` in, presumably, one of these locations (where the old `httpd.conf` can be found): `C:/Apache24/conf/` (Windows) or `/etc/httpd` (Arch Linux).
 
 # Module embedding
 To embed any library module, for example `va2.js` and `va2.css`, you only need to put the following in your `<head>` tag:
