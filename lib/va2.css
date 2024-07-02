@@ -34,7 +34,7 @@ S and L means Small and Large */
 	--fontIco: 'Material Symbols Outlined';
 
 	/* Main styles */
-	--fontSize: calc(0.14vw + 1.7vh);
+	--fontSize: calc(0.5vmin + 1.2vh);
 	--corners: 1.4rem;
 	--cornersS: 1rem;
 	--cornersL: 2.5rem;

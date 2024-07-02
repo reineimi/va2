@@ -195,8 +195,8 @@ va2obj {
 }
 #va2taskbar {
 	margin-top: 2rem;
-	height: 5.5rem;
-	min-width: 5.5rem;
+	height: 7rem;
+	min-width: 7rem;
 	max-width: 95%;
 	padding-right: 1rem;
 	background: var(--windowFg);
@@ -205,8 +205,8 @@ va2obj {
 }
 #va2taskbar div {
 	margin: auto 0px auto 1rem;
-	width: calc(var(--dvh) * 0.08);
-	height: calc(var(--dvh) * 0.08);
+	width: 5rem;
+	height: 5rem;
 }
 #va2taskbar mask {
 	display: flex;
@@ -266,7 +266,7 @@ va2obj {
 /* App list */
 #va2wsApplistFrame { top: 100% }
 #va2applist {
-	min-height: 6rem;
+	min-height: 4rem;
 	width: calc(75vmin + 20vw);
 	margin: 4rem auto;
 	padding: 2rem 0.5rem 0px 0.5rem;
@@ -341,7 +341,7 @@ va2obj {
 	margin: auto;
 	text-align: left;
 	font: 500 1.2rem var(--fontCode);
-	padding: 0px 1rem;
+	padding: 1rem 2rem;
 }
 #va2wsAddShortcut h3:nth-child(1) {
 	width: 100%;
