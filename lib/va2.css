@@ -285,7 +285,7 @@ select * {
 .ul { text-decoration: underline }
 .uc { text-transform: uppercase }
 .lc { text-transform: lowercase }
-.caps { text-transform: capitalize }
+.cp { text-transform: capitalize }
 .tl, .center .tl { text-align: left }
 .tr, .center .tr { text-align: right }
 .tc, .center .tc { text-align: center }
