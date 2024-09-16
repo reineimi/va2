@@ -475,6 +475,10 @@ select * {
 	height: var(--blockHeight);
 	width: var(--blockWidth);
 }
+/* Space items equally */
+.spread {
+	justify-content: space-between;
+}
 
 
 		/*=== INPUTS ===*/
