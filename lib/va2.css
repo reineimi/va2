@@ -693,11 +693,31 @@ giconx { color: var(--fontColor) }
 	0% { transform-origin: 50% 50% }
 	100% { transform-origin: 50% 50%; transform: scaleY(1) }
 }
-@keyframes slideL { 100% { transform: translateX(100%) } }
-@keyframes slideR { 100% { transform: translateX(-100%) } }
+@keyframes slideL { 100% { transform: translateX(-100%) } }
+@keyframes slideFromL { 0% { transform: translateX(-100%) } }
+@keyframes slideR { 100% { transform: translateX(100%) } }
+@keyframes slideFromR { 0% { transform: translateX(100%) } }
 @keyframes slideT { 100% { transform: translateY(-100%) } }
+@keyframes slideFromT { 0% { transform: translateY(-100%) } }
 @keyframes slideB { 100% { transform: translateY(100%) } }
+@keyframes slideFromB { 0% { transform: translateY(100%) } }
 @keyframes slideout { 100% { transform: translate(0px, 0px) } }
+@keyframes appearFromLT {
+	0% { opacity: 0; transform: translate(-50%, -50%); }
+	100% { opacity: 1; }
+}
+@keyframes appearFromLB {
+	0% { opacity: 0; transform: translate(-50%, 50%); }
+	100% { opacity: 1; }
+}
+@keyframes appearFromRT {
+	0% { opacity: 0; transform: translate(50%, -50%); }
+	100% { opacity: 1; }
+}
+@keyframes appearFromRB {
+	0% { opacity: 0; transform: translate(50%, 50%); }
+	100% { opacity: 1; }
+}
 @keyframes rotL { 100% { transform: rotate(-360deg) } }
 @keyframes rotR { 100% { transform: rotate(360deg) } }
 @keyframes fall { 0% { opacity: 0; transform: translateY(-20vmin) scaleY(0) } }
