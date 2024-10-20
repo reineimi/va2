@@ -582,6 +582,11 @@ input:checked ~.chbox { background: var(--accent) }
 	padding: 1rem 2rem;
 	background: var(--itemBg);
 }
+#console {
+	padding: 0.5rem 1rem;
+	text-wrap: wrap;
+	word-break: break-word;
+}
 
 /* va2.slide() */
 .slide { display: block }
