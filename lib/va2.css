@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..700&family=Roboto+Slab:wght@100..700&family=Noto+Sans+JP:wght@100..700&family=Inconsolata:wght@200..700&family=Cinzel&family=Dancing+Script&family=Pixelify+Sans&family=Smooch+Sans:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..700&family=Roboto+Slab:wght@100..700&family=Noto+Sans+JP:wght@100..700&family=Inconsolata:wght@200..700&family=Cinzel&family=Dancing+Script&family=VT323&family=Smooch+Sans:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 /* Fonts:
 	Noto Sans JP:   [Basic]
@@ -8,7 +8,7 @@
 	Inconsolata:    Code
 	Dancing Script: Fancy
 	Cinzel:         Novel
-	Pixelify Sans:  Pixel
+	VT323:          Pixel
 	google_icons: 	Ico
 */
 
@@ -30,7 +30,7 @@ S and L means Small and Large */
 	--fontCode: 'Inconsolata';
 	--fontFancy: 'Dancing Script';
 	--fontNovel: 'Cinzel';
-	--fontPixel: 'Pixelify Sans';
+	--fontPixel: 'VT323';
 	--fontIco: 'Material Symbols Outlined';
 
 	/* Main styles */
