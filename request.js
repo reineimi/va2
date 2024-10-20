@@ -140,8 +140,8 @@ va2.env.req = async function(action, arg1, arg2, arg3, _logging) {
 va2.env.load = async function() {
 	if (conf.user.storage === 'Filesystem') {
 		let user = conf.user.username,
-			_conf = await extern.file(`usr/${user}/${user}.conf`, 1),
-			_udata = await extern.file(`usr/${user}/${user}.userdata`, 1);
+			_conf = await extern.file(`usr/${user}/${user}.conf`, 0, 1),
+			_udata = await extern.file(`usr/${user}/${user}.userdata`, 0, 1);
 		if (_conf) { _conf.clone(conf); }
 		if (_udata) { _udata.clone(userdata); }
 	} else if (conf.user.storage === 'Local') {
@@ -200,10 +200,10 @@ va2.set.user = async function(name, em) {
 }
 
 va2.env.srvinit = async function() {
-	const default_conf = await extern.file('server.conf', 1);
+	const default_conf = await extern.file('server.conf', 0, 1);
 	conf.merge(default_conf);
 	conf.temp = conf.server_path+'temp';
-	const _users = await extern.file(`usr/users.json`, 1);
+	const _users = await extern.file(`usr/users.json`, 0, 1);
 	if (_users) { conf.users = _users; }
 
 	if (!conf.users[0]) {
