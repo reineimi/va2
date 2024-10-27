@@ -40,15 +40,18 @@ function crawl.sitemap:loop(url, _has_ssl)
 
 	-- Add inner links to self.temp and run recursion
 	for link in html:gmatch('href=[\'"](.-)[\'"].->') do
-		if (link:match('^/.+') and not link:match(http))
+		if (link:match('^..+') and not link:match(http))
 		or link:match(http..domain..'/.+') then
-			local rel = link:gsub(http..domain, '')
+			local rel = link:gsub(http..domain, ''):gsub('//', '/'):gsub('/$', '')
+			if not rel:match('^/') then
+				rel = '/'..rel
+			end
 			local ref = http..domain..'/'..rel
 			local __, prio = rel:gsub('/', '')
 			local prio = 1.1 - (prio * 0.1)
 
 			-- Check if URL was already crawled -> crawl new URL
-			if not self.urls[link] then
+			if not self.urls[rel] then
 				local temp = string.format('<url>\n  %s\n  %s\n  %s\n  %s\n</url>',
 				'<loc>'..ref:gsub('//', '/'):gsub('http[s]?:/', http)..'</loc>',
 				'<lastmod>'..os.date('%Y-%m-%d')..'</lastmod>',
@@ -58,7 +61,7 @@ function crawl.sitemap:loop(url, _has_ssl)
 
 				self.total = self.total + 1
 				print(string.format('%s: %s  -  %s', self.total, rel, prio))
-				self.urls[link] = 1
+				self.urls[rel] = 1
 				crawl.sitemap:loop(ref, _has_ssl)
 			end
 		end
