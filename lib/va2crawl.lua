@@ -5,7 +5,7 @@ local crawl = { temp={}, sitemap={}, pages={} }
 function crawl:loop(url, _args)
 	local _args = _args or {}
 	local domain = url:match('http[s]?://(.+)'):gsub('/.*', '')
-	local html = curl(url)
+	local html = curl(url, _args.redir)
 	local http = 'http://'
 	if _args.ssl then http = 'https://' end
 	local excludes = _args.exclude or {}
@@ -16,7 +16,8 @@ function crawl:loop(url, _args)
 		echo = function() end
 		echoF = function() end
 	end
-	if not html:match('<!DOCTYPE html>') then
+
+	if not (html:match('<!DOCTYPE html>') or html:match('<!doctype html>')) then
 		echo('#grey;Page is not of the HTML type, does not exist, or has been redirected;')
 		print ''
 		return 0
@@ -53,7 +54,7 @@ function crawl:loop(url, _args)
 	page.title = title
 	if title then
 		if title ~= '' then
-			echo('#b;Title:; #green;'..title:gsub('\n', ' ')..';')
+			echoF({'Title: ', 'b'}, {title:gsub('\n', ' '), 'green'})
 		else
 			echo('#b;Title:; #yellow;(Empty);')
 		end
@@ -230,6 +231,8 @@ function crawl:run_in_shell()
 	local addr = io.read()
 	echo '#cyan;#i;...And your (GMT) timezone (default: +00:00):;'
 	meta.gmt = io.read()
+	echo '#cyan;#i;Follow redirects? (leave empty to decline);'
+	if io.read() ~= '' then meta.redir = 1 end
 	echo '#cyan;#i;You can also exclude inner pages (separated with whitespaces):;'
 	local exclude = io.read()..' '
 	meta.exclude = {}
