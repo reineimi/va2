@@ -1,6 +1,6 @@
 -- Bash utils by @reineimi [https://github.com/reineimi]
-if not va2 then va2 = {env={}, e={}} end
-va2.env.echo = {}
+if not va2 then va2 = {mod={}, e={}} end
+va2.mod.echo = {}
 
 -- Get HTML document from URL
 function curl(url, _follow_redir)
@@ -13,8 +13,8 @@ function curl(url, _follow_redir)
 end
 
 -- Styled bash stdout (echo -e) ...
-va2.env.echo.prefix = '> '
-va2.env.echo.padding = '  '
+va2.mod.echo.prefix = '> '
+va2.mod.echo.padding = '  '
 va2.e.echo = {
 	-- Style
 	normal = 0,
@@ -69,8 +69,8 @@ va2.e.echo = {
 
 --... >> echo('Hello #green;#u;world;!')
 function echo(...)
-	local pref = va2.env.echo.prefix or ''
-	local pad = va2.env.echo.padding or false
+	local pref = va2.mod.echo.prefix or ''
+	local pad = va2.mod.echo.padding or false
 	local inputs, stringset, output = {...}, {}, ''
 
 	for _, str in ipairs(inputs) do
@@ -89,8 +89,8 @@ end
 
 --... More precise echo. >> echoF({'Hello'}, {'world', 'green','u'}, {'!'})
 function echoF(...)
-	local pref = va2.env.echo.prefix or ''
-	local pad = va2.env.echo.padding or false
+	local pref = va2.mod.echo.prefix or ''
+	local pad = va2.mod.echo.padding or false
 	local inputs, strings = {...}, {}
 
 	for _, strdata in ipairs(inputs) do
