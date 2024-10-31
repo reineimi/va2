@@ -1,5 +1,4 @@
 -- URL crawler by @reineimi [https://github.com/reineimi]
---require 'va2bash'
 local crawl = { temp={}, sitemap={}, pages={} }
 
 -- Crawl the page, check/generate SEO content
@@ -248,6 +247,5 @@ function crawl:run_in_shell()
 		'\n#grey;#i;Crawling in progress...;')
 	crawl:run(addr, 2, meta)
 end
---crawl:run_in_shell()
 
 return crawl
