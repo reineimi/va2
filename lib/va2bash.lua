@@ -78,7 +78,7 @@ function echo(...)
 			local id = pattern:match('[%a]+')
 			str = str:gsub(pattern, '\\e['..va2.e.echo[id]..'m')
 		end
-		local str = str:gsub(';', '\\e[0m')
+		local str = str:gsub(';', '\\e[0m'):gsub('"', '\\"')
 		table.insert(stringset, str)
 	end
 	output = table.concat(stringset, '\n')

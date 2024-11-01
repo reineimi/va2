@@ -192,23 +192,26 @@ function crawl:run(url, _state, _args)
 		if not robots:match('Host:') then
 			echo('robots.txt: #red;No host(s) set;')
 		end
+
 		local bots = 0
 		for bot in robots:gmatch('[Uu]ser[-][Aa]gent:[ ]?([%a%d%p]+)') do
 			echo('robots.txt: #cyan;Agent found: '..bot..';')
 			bots = bots + 1
 		end
+
 		if bots < 1 then
 			echo('robots.txt: #red;No agents set;')
 		elseif bots < 2 then
 			echo('robots.txt: #yellow;Only one agent set;')
 		end
+
 		local sitemap_alt = robots:match('Sitemap: (.-)\n')
 		if sitemap_alt then
-			echo('robots.txt: #cyan;Alternative sitemap.xml found at:; #blue;'..sitemap_alt..';')
+			echo('robots.txt: #cyan;Checking alternative sitemap.xml at:; #blue;'..sitemap_alt..';')
 			if curl(sitemap_alt):match('schemas/sitemap') then
 				echo('sitemap.xml (Alt) - #green;Found;')
 			else
-				echo('sitemap.xml (Alt) - #yellow;Unsupported format;')
+				echo('sitemap.xml (Alt) - #red;Not found or format is not supported;')
 			end
 		end
 	else
