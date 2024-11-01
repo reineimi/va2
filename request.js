@@ -836,9 +836,7 @@ va2.set.workspace = function(state) {
 		desk = emi('va2desktop'),
 		ws = emi('va2workspace');
 
-	if (!state) {
-		timeout.rm('va2workspace');
-	}
+	if (!state) { timeout.rm('va2workspace'); }
 
 	else if (state==='close') {
 		timeout.rm('va2workspace');
@@ -854,12 +852,16 @@ va2.set.workspace = function(state) {
 			show(1, ws);
 			addclass(desk, 'unfocused');
 			emi('timedate').chroot('va2statusFrame');
+			// Desktop click
 			desk.onclick = ()=>{
-				va2.set.workspace('close');
-				desk.onmouseover = undefined;
-				desk.onmouseout = undefined;
-			} //*
-			wait(300, 0, ()=>{
+				if (va2.cur.type === 'mouse') {
+					va2.set.workspace('close');
+					desk.onmouseover = undefined;
+					desk.onmouseout = undefined;
+				}
+			}
+			// Desktop hover
+			wait(0.3, 0, ()=>{
 				desk.onmouseover = ()=>{
 					timeout.set('va2desktopFocus', ()=>{
 						va2.set.workspace('close');
@@ -870,7 +872,7 @@ va2.set.workspace = function(state) {
 				desk.onmouseout = ()=>{
 					timeout.rm('va2desktopFocus');
 				}
-			}); //*/
+			});
 		}, conf.lib.hold_s);
 	}
 }
