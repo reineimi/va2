@@ -154,11 +154,10 @@ va2.env.load = async function() {
 }
 
 // Save userdata and configs
-va2.env.save = async function(no_timeout) {
+va2.env.save = async function(_interval) {
 	if (conf.server_storage === 'Filesystem') {
 		let user = conf.user.username;
-		let _t = 4.5 + conf.write_interval_min;
-		if (no_timeout) { _t = 1; }
+		let _t = _interval || 3;
 		mkfile(`users.json`, conf.users);
 		mkfile(`${user}.conf`, conf);
 		mkfile(`${user}.userdata`, userdata);
@@ -235,7 +234,7 @@ va2.env.srvinit = async function() {
 			notify(`User <c>${str}</c> has been created.<br>`+
 				`Your data will be stored under: <c>${conf.server_path}usr/${str}/</c>`);
 			conf.users.push(str);
-			await va2.env.save();
+			await va2.env.save(2);
 
 			let em = create('div', {
 				innerHTML: `<p>${str}</p>`,
