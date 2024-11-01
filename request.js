@@ -87,7 +87,7 @@ const db = {
 
 // Load library
 conf.lib.js.loop((i,v)=>{
-	if (v) { extern.js(`lib/${i}.js`); }
+	if (v) { extern.js(`lib/${i}.js`, i); }
 });
 
 // Load modules
@@ -101,8 +101,8 @@ va2.e.modules = {
 }
 va2.e.modules.loop((i,v)=>{
 	if (conf.modules[i]) {
-		extern.js(`apps/${v}/core.js`);
-		extern.css(`apps/${v}/style.css`);
+		extern.js(`apps/${v}/core.js`, i);
+		extern.css(`apps/${v}/style.css`, i);
 	}
 });
 
@@ -236,6 +236,9 @@ va2.env.srvinit = async function() {
 			}, 'va2userSelect');
 		});
 	}
+
+	// Ignore request.lua if storage is not set to Filesystem
+	if (!default_conf) { va2.env.req = ()=>{ return 0; } }
 }
 va2.env.srvinit();
 
