@@ -5,7 +5,7 @@ const conf = {
 	server_user: 0,
 	server_path: 0,
 	server_restart: 0,
-	server_storage: 'Local',
+	server_storage: 0,
 	write_interval_min: 2.5,
 	write_data_now: 0,
 	users: [],
@@ -205,10 +205,24 @@ va2.env.srvinit = async function() {
 	const default_conf = await extern.file('server.conf', 0, 1);
 	if (default_conf) {
 		conf.merge(default_conf);
-		conf.temp = conf.server_path+'temp';
-		const _users = await extern.file('usr/users.json', 0, 1);
-		if (_users) { conf.users = _users; }
-	} else if (conf.server_storage === 'Local') {
+		if (conf.server_storage === 'Filesystem') {
+			conf.temp = conf.server_path+'temp';
+			const _users = await extern.file('usr/users.json', 0, 1);
+			if (_users) { conf.users = _users; }
+		} else {
+			default_conf = null;
+		}
+	}
+
+	// Ignore request.lua if storage is not set to Filesystem
+	// and set Local as default storage type if not set
+	if (!default_conf) {
+		va2.env.req = ()=>{ return 0; }
+		conf.server_storage = 'Local';
+	}
+
+	// If set, load local/session storage data
+	if (conf.server_storage === 'Local') {
 		oclone(storage.loc.get('conf'), conf);
 	} else if (conf.server_storage === 'Session') {
 		oclone(storage.sess.get('conf'), conf);
@@ -236,9 +250,6 @@ va2.env.srvinit = async function() {
 			}, 'va2userSelect');
 		});
 	}
-
-	// Ignore request.lua if storage is not set to Filesystem
-	if (!default_conf) { va2.env.req = ()=>{ return 0; } }
 }
 va2.env.srvinit();
 
