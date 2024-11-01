@@ -49,9 +49,7 @@ va2obj {
 	opacity: 0.8;
 	transition: opacity 1.5s linear;
 }
-#va2loginScreen:hover #va2loginScreenMask {
-	opacity: 0.9;
-}
+#va2loginScreen:hover #va2loginScreenMask {}
 #va2welcome {
 	width: 90vmin;
 	background: var(--windowFg);
