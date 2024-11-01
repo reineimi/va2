@@ -202,7 +202,7 @@ va2.set.user = async function(name, em) {
 }
 
 va2.env.srvinit = async function() {
-	const default_conf = await extern.file('server.conf', 0, 1);
+	let default_conf = await extern.file('server.conf', 0, 1);
 	if (default_conf) {
 		conf.merge(default_conf);
 		if (conf.server_storage === 'Filesystem') {
