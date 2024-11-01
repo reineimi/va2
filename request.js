@@ -5,11 +5,11 @@ const conf = {
 	server_user: 0,
 	server_path: 0,
 	server_restart: 0,
+	server_storage: 'Local',
 	write_interval_min: 2.5,
 	write_data_now: 0,
 	users: [],
 	user: {
-		storage: 'Local',
 		username: 0,
 		add_user: 0,
 		dl_userdata: 0,
@@ -138,25 +138,27 @@ va2.env.req = async function(action, arg1, arg2, arg3, _logging) {
 
 // Load userdata and configs
 va2.env.load = async function() {
-	if (conf.user.storage === 'Filesystem') {
+	if (conf.server_storage === 'Filesystem') {
 		let user = conf.user.username,
 			_conf = await extern.file(`usr/${user}/${user}.conf`, 0, 1),
 			_udata = await extern.file(`usr/${user}/${user}.userdata`, 0, 1);
 		if (_conf) { _conf.clone(conf); }
 		if (_udata) { _udata.clone(userdata); }
-	} else if (conf.user.storage === 'Local') {
+	} else if (conf.server_storage === 'Local') {
 		oclone(storage.loc.get('conf'), conf);
 		oclone(storage.loc.get('userdata'), userdata);
-	} else if (conf.user.storage === 'Session') {
+	} else if (conf.server_storage === 'Session') {
 		oclone(storage.sess.get('conf'), conf);
 		oclone(storage.sess.get('userdata'), userdata);
 	}
 }
 
 // Save userdata and configs
-va2.env.save = async function() {
-	if (conf.user.storage === 'Filesystem') {
+va2.env.save = async function(no_timeout) {
+	if (conf.server_storage === 'Filesystem') {
 		let user = conf.user.username;
+		let _t = 4.5 + conf.write_interval_min;
+		if (no_timeout) { _t = 1; }
 		mkfile(`users.json`, conf.users);
 		mkfile(`${user}.conf`, conf);
 		mkfile(`${user}.userdata`, userdata);
@@ -165,11 +167,11 @@ va2.env.save = async function() {
 			await va2.env.req('mv', conf.downloads+`${user}.conf`, `${conf.server_path}usr/${user}/`, 1);
 			await va2.env.req('mv', conf.downloads+`${user}.userdata`, `${conf.server_path}usr/${user}/`, 1);
 			timeout.rm('env_save');
-		}, 4.5 + conf.write_interval_min);
-	} else if (conf.user.storage === 'Local') {
+		}, _t);
+	} else if (conf.server_storage === 'Local') {
 		storage.loc.set('conf', conf);
 		storage.loc.set('userdata', userdata);
-	} else if (conf.user.storage === 'Session') {
+	} else if (conf.server_storage === 'Session') {
 		storage.sess.set('conf', conf);
 		storage.sess.set('userdata', userdata);
 	}
@@ -201,17 +203,26 @@ va2.set.user = async function(name, em) {
 
 va2.env.srvinit = async function() {
 	const default_conf = await extern.file('server.conf', 0, 1);
-	conf.merge(default_conf);
-	conf.temp = conf.server_path+'temp';
-	const _users = await extern.file(`usr/users.json`, 0, 1);
-	if (_users) { conf.users = _users; }
+	if (default_conf) {
+		conf.merge(default_conf);
+		conf.temp = conf.server_path+'temp';
+		const _users = await extern.file('usr/users.json', 0, 1);
+		if (_users) { conf.users = _users; }
+	} else if (conf.server_storage === 'Local') {
+		oclone(storage.loc.get('conf'), conf);
+	} else if (conf.server_storage === 'Session') {
+		oclone(storage.sess.get('conf'), conf);
+	}
 
+	// Add user to menu
 	if (!conf.users[0]) {
-		stdin('Please specify your username.', (str)=>{
+		stdin('Please specify your username.', async (str)=>{
 			conf.user.username = str;
 			notify(`User <c>${str}</c> has been created.<br>`+
 				`Your data will be stored under: <c>${conf.server_path}usr/${str}/</c>`);
 			conf.users.push(str);
+			await va2.env.save();
+
 			let em = create('div', {
 				innerHTML: `<p>${str}</p>`,
 				onclick: ()=>{ va2.set.user(str, em); }
@@ -278,6 +289,11 @@ va2.env.init[1] = function() {
 // Category: [ 0:title, 1:icon, 2:info ]
 va2.env.confMenu = {
 	// Options
+	server_storage: ['Storage', 'list', ['Filesystem', 'Local', 'Session'],
+		'Where to store user data and server configs:<br>'+
+		'<c class="it bold">Filesystem</c> - User directory ("./usr/(username)/");<br>'+
+		'<c class="it bold">Local</c> - Browser local storage. Limited to ~10mb;<br>'+
+		'<c class="it bold">Session</c> - Browser session storage. Will be cleared after exit.'],
 	server_restart: ['Server reboot', 'button', 0,
 		'Server reboot is recommended once in a while to free the RAM.',
 		()=>{ va2.env.req('restart'); location.reload(); }],
@@ -289,11 +305,6 @@ va2.env.confMenu = {
 	
 	// Params
 	user: ['User', 'manage_accounts'],
-	storage: ['Storage', 'list', ['Filesystem', 'Local', 'Session'],
-		'Where to store user data and server configs:<br>'+
-		'<c class="it bold">Filesystem</c> - User directory ("./usr/(username)/");<br>'+
-		'<c class="it bold">Local</c> - Browser local storage. Limited to ~10mb;<br>'+
-		'<c class="it bold">Session</c> - Browser session storage. Will be cleared after exit.'],
 	username: ['Username', 'info', 0,
 		'Local user name, used to store data under "./usr/(username)/" directory.'],
 	add_user: ['Add user', 'button', 0,0, ()=>{
@@ -496,10 +507,11 @@ if (va2.env.confMenu[param]) {
 				}
 			});
 			item[2].loop((_,v)=>{
-				create('option', {
+				let __item = create('option', {
 					value: v,
 					innerHTML: v
 				}, input);
+				if (oseek(conf, v)) { __item.selected = '1' }
 			});
 		} else if (item[1] === 'button') {
 			input = create('div', {
