@@ -167,7 +167,7 @@ function crawl:run(url, _state, _args)
 	end
 
 	-- Look for current sitemap
-	local current_sitemap = curl(url..'/sitemap.xml')
+	local current_sitemap = curl(url..'sitemap.xml')
 	if current_sitemap:match('<urlset') then
 		mainpage['sitemap.xml'] = true
 		echo('sitemap.xml - #green;Found;')
@@ -177,7 +177,7 @@ function crawl:run(url, _state, _args)
 	end
 
 	-- Check robots.txt
-	local robots = curl(url..'/robots.txt')
+	local robots = curl(url..'robots.txt')
 	if robots:match('[Uu]ser[-][Aa]gent:') then
 		mainpage['robots.txt'] = true
 		echo('robots.txt - #green;Found;')
