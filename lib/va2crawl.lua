@@ -159,19 +159,21 @@ function crawl:run(url, _state, _args)
 	local mainpage = crawl.pages[url]
 
 	-- Check redirects
-	local redir1, redir2, redirs_on = '/', 'index.html', 1
-	if curl(url..redir1):match('<html') then
-		redirs_on = nil
-	elseif curl(url..redir2) == curl(url) then
-		redirs_on = nil
-	end
-
 	if _args.redir then
 		echo 'Redirects - #grey;Cannot check while following redirects;'
-	elseif redirs_on then
-		echo 'Redirects - #green;Working;'
 	else
-		echo 'Redirects - #red;Unset or incomplete;'
+		local redir1, redir2, redirs_on = '/', 'index.html', 1
+		if curl(url..redir1):match('<html') then
+			redirs_on = nil
+		elseif curl(url..redir2) == curl(url) then
+			redirs_on = nil
+		end
+
+		if redirs_on then
+			echo 'Redirects - #green;Working;'
+		else
+			echo 'Redirects - #red;Unset or incomplete;'
+		end
 	end
 
 	-- Look for current sitemap
