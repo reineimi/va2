@@ -99,7 +99,7 @@ function crawl:loop(url, _args)
 		end
 
 		if (inner:len() > 1) and included
-		and not (inner:match('[?#!@$%^&*:;]') or inner:match('www'))
+		and not (inner:match('[?#!@$%^&*:;]') or inner:match('^[/]?[+]') or inner:match('www'))
 		and not (inner:match('[/]?[.][%a%d]+$'))
 		and not (link:match('wp[-]content/') or link:match('wp[-]json')) then
 			local rel = '/'..inner
