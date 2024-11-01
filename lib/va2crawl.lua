@@ -199,6 +199,8 @@ function crawl:run(url, _state, _args)
 			echo('robots.txt: #cyan;Alternative sitemap.xml found at:; #blue;'..sitemap_alt..';')
 			if curl(sitemap_alt):match('schemas/sitemap') then
 				echo('sitemap.xml (Alt) - #green;Found;')
+			else
+				echo('sitemap.xml (Alt) - #yellow;Unsupported format;')
 			end
 		end
 	else
