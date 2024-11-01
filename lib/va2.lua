@@ -1,6 +1,9 @@
 --	This code and all included modules are licensed
 --	under VPCDP by Eimi Rein (霊音 永旻) - @reineimi
 -->		https://github.com/reineimi/VPCDP
+print 'V A 二ｌｌA (Va2) by @reineimi - https://github.com/reineimi/va2'
+print(os.date('%B %d (%a), %H:%M - %Y/%m/%d\n'))
+
 _ENV.va2 = {
 	-- Includes
 	modules = {
@@ -43,9 +46,12 @@ local va2_init = function()
 	for _, M in ipairs(va2.modules) do
 		local STATUS, RES = pcall(require, M)
 		if STATUS then
-			_G[M:match('[.](.+)')] = RES
+			local M = M:match('[.](.+)')
+			_G[M] = RES
+			print('Module loaded: '..M)
 		end
 	end
+	print ''
 end
 
 va2_init()
