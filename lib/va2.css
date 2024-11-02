@@ -138,7 +138,7 @@ h5 { font-size: 1.2rem }
 hr {
 	margin: auto; padding: 0px;
 	height: 0px; border: none;
-	border-bottom: 1px solid var(--itemBg);
+	border-bottom: 2px solid var(--itemFg);
 }
 img { z-index: 1 }
 img.emoji { width: 1em; pointer-events: none }
