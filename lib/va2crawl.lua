@@ -162,10 +162,14 @@ function crawl:run(url, _state, _args)
 	if _args.redir then
 		echo 'Redirects - #grey;Cannot check while following redirects;'
 	else
-		local redir1, redir2, redirs_on = '/', 'index.html', 1
-		if curl(url..redir1):match('<html') then
+		local redirs_on = 1
+		local homepage = curl(url)
+		local redir1 = curl(url..'/')
+		local redir2 = curl(url..'index.html')
+
+		if redir1:match('<html') and not ((redir1:match('302') or redir1:match('404')) or (redir1 == homepage)) then
 			redirs_on = nil
-		elseif curl(url..redir2) == curl(url) then
+		elseif redir2:match('<html') and not ((redir2:match('302') or redir2:match('404')) or (redir2 == homepage)) then
 			redirs_on = nil
 		end
 
