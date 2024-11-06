@@ -183,7 +183,7 @@ function crawl:run(url, _state, _args)
 	end
 
 	-- Look for current sitemap
-	local current_sitemap = curl(url..'sitemap.xml')
+	local current_sitemap = curl(url..'sitemap.xml', _args.redir)
 	if current_sitemap:match('<urlset') then
 		mainpage['sitemap.xml'] = true
 		echo('sitemap.xml - #green;Found;')
@@ -193,7 +193,7 @@ function crawl:run(url, _state, _args)
 	end
 
 	-- Check robots.txt
-	local robots = curl(url..'robots.txt')
+	local robots = curl(url..'robots.txt', _args.redir)
 	if robots:match('[Uu]ser[-][Aa]gent:') then
 		mainpage['robots.txt'] = true
 		echo('robots.txt - #green;Found;')
@@ -248,6 +248,9 @@ end
 
 function crawl:run_in_shell()
 	local meta = { out=1 }
+	echo '#grey;#i;Va2:Crawl - @reineimi - https://github.com/reineimi/va2/blob/main/lib/va2crawl.lua;'
+	echo '#grey;#i;(Tip: Something is missing? Try to re-crawl while following redirects);'
+	print ''
 	echo '#cyan;#i;Please specify the URL of the website to crawl:;'
 	local addr = io.read()
 	echo '#cyan;#i;...And your (GMT) timezone (default: +00:00):;'
