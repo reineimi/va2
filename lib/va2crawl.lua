@@ -167,9 +167,11 @@ function crawl:run(url, _state, _args)
 		local redir1 = curl(url..'/')
 		local redir2 = curl(url..'index.html')
 
-		if redir1:match('<html') and not ((redir1:match('302') or redir1:match('404')) or (redir1 == homepage)) then
+		if redir1:match('<html') and not ((redir1:match('301') or redir1:match('302')
+		or redir1:match('404')) or (redir1 == homepage)) then
 			redirs_on = nil
-		elseif redir2:match('<html') and not ((redir2:match('302') or redir2:match('404')) or (redir2 == homepage)) then
+		elseif redir2:match('<html') and not ((redir1:match('301') or redir2:match('302')
+		or redir2:match('404')) or (redir2 == homepage)) then
 			redirs_on = nil
 		end
 
