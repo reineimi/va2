@@ -1,4 +1,4 @@
--- URL crawler by @reineimi [https://github.com/reineimi]
+-- URL crawler by @reineimi [https://github.com/reineimi/va2/blob/main/lib/va2crawl.lua]
 local crawl = { temp={}, sitemap={}, pages={} }
 
 -- Crawl the page, check/generate SEO content
@@ -49,14 +49,14 @@ function crawl:loop(url, _args)
 	'<lastmod>'..os.date('%Y-%m-%dT%H:%M:%S')..GMT..'</lastmod>',
 	'<priority>'..(_args.prio or '1.0')..'</priority>'))
 
-	-- Check SEO metatags
+	-- Page Title
 	local title = html:match('<title.->(.-)</title>')
 	page.title = title
 	if title then
 		if title ~= '' then
-			echoF({'Title: ', 'b'}, {title:gsub('\n', ' '):gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
-			if utf8.len(title) > 60 then
-				echo('#cyan;Title length is above 60 characters;')
+			echoF({'Title:', 'b'}, {title:gsub('\n', ' '):gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
+			if utf8.len(title) > 62 then
+				echo('#cyan;Title length is above 62 characters;')
 			end
 		else
 			echo('#b;Title:; #yellow;(Empty);')
@@ -65,13 +65,14 @@ function crawl:loop(url, _args)
 		echo('#red;<title> is missing or did not load initially;')
 	end
 
+	-- SEO: Meta Title
 	local mtitle = html:match('<meta.-name[=]["\']title["\'].-content=["\'](.-)["\'].->')
 	page.meta_title = mtitle
 	if mtitle then
 		if mtitle ~= '' then
 			echoF({'Meta Title:', 'b'}, {mtitle:gsub('\n', ' '):gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
-			if utf8.len(mtitle) > 60 then
-				echo('#cyan;Meta Title length is above 60 characters;')
+			if utf8.len(mtitle) > 62 then
+				echo('#cyan;Meta Title length is above 62 characters;')
 			end
 		else
 			echo('#b;Meta Title:; #yellow;(Empty);')
@@ -80,13 +81,14 @@ function crawl:loop(url, _args)
 		echo('#yellow;<meta name="title"> is missing or did not load initially;')
 	end
 
+	-- SEO: Meta Description
 	local descr = html:match('<meta.-name[=]["\']description["\'].-content=["\'](.-)["\'].->')
 	page.meta_descr = descr
 	if descr then
 		if descr ~= '' then
 			echoF({'Meta Description:', 'b'}, {descr:gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
-			if utf8.len(descr) > 160 then
-				echo('#cyan;Description length is above 160 characters;')
+			if utf8.len(descr) > 156 then
+				echo('#cyan;Description length is above 156 characters;')
 			end
 		else
 			echo('#b;Meta Description:; #yellow;(Empty);')
@@ -95,6 +97,7 @@ function crawl:loop(url, _args)
 		echo('#red;<meta name="description"> is missing or did not load initially;')
 	end
 
+	-- SEO: Meta Keywords
 	local kwds = html:match('<meta.-name[=]["\']keywords["\'].-content=["\'](.-)["\'].->')
 	page.meta_keywords = kwds
 	if kwds then
@@ -189,6 +192,7 @@ function crawl:run(url, _state, _args)
 	self.urls = {}
 	self.total = 1
 	crawl.pages[url] = { err={} }
+	local html = curl(url)
 	local mainpage = crawl.pages[url]
 
 	-- Check redirects
@@ -196,15 +200,14 @@ function crawl:run(url, _state, _args)
 		echo 'Redirects - #grey;Cannot check while following redirects;'
 	else
 		local redirs_on = 1
-		local homepage = curl(url)
 		local redir1 = curl(url..'/')
 		local redir2 = curl(url..'index.html')
 
 		if redir1:match('<html') and not ((redir1:match('301') or redir1:match('302')
-		or redir1:match('404')) or (redir1 == homepage)) then
+		or redir1:match('404')) or (redir1 == html)) then
 			redirs_on = nil
 		elseif redir2:match('<html') and not ((redir1:match('301') or redir2:match('302')
-		or redir2:match('404')) or (redir2 == homepage)) then
+		or redir2:match('404')) or (redir2 == html)) then
 			redirs_on = nil
 		end
 
@@ -260,7 +263,25 @@ function crawl:run(url, _state, _args)
 		echo('robots.txt - #red;Not found;')
 	end
 
-	-- Crawl cleanup process
+	-- Check schema.org
+	if html:match('schema[.]org') then
+		echo('Schema.org Structured Data - #green;Found;')
+		local json = html:match('<script.-application/ld[+]json.->(.-)</script>')
+		if json then echoF({'Schema.org:'}, {'json-ld:', 'purple'}, {json, 'grey'}) end
+		for prop in html:gmatch('property.-content[ ]?=[ ]?["\'].-["\']') do
+			echoF({'Schema.org:'}, {'rdfa:', 'purple'}, {prop, 'grey'})
+		end
+		for itype in html:gmatch('itemtype[ ]?=[ ]?["\'].-["\']') do
+			echoF({'Schema.org:'}, {'micro:', 'purple'}, {itype, 'grey'})
+		end
+		for iprop in html:gmatch('itemprop[ ]?=[ ]?["\'].-["\']') do
+			echoF({'Schema.org:'}, {'micro:', 'purple'}, {iprop, 'grey'})
+		end
+	else
+		echo('Schema.org structured data - #yellow;Not Found;')
+	end
+
+	-- Crawl and cleanup process
 	print ''
 	crawl:loop(url, _args)
 	table.insert(self.sitemap, '</urlset>')
@@ -304,7 +325,7 @@ function crawl:run_in_shell()
 		'#grey;#i;#b;Ignored; - #i;Has been ignored for a specific reason;',
 		'#lightgrey;#i;#b;Reference; - #i;Reference to object in context;',
 		'#blue;#i;#b;Link; - #i;Link to resource;',
-		'#purple;#i;#b;Query; - #i;Query entry:  #purple;<query>:; #blue;#i;<url>; #purple;#i;<priority>;\n',
+		'#purple;#i;#b;Query; - #i;Query entry (for example: #purple;<query>:; #blue;#i;<url>; #purple;#i;<priority>);\n',
 		'#grey;#i;Crawling in progress...;')
 	crawl:run(addr, 2, meta)
 end
