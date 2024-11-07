@@ -33,7 +33,7 @@ function crawl:loop(url, _args)
 	if #self.sitemap == 0 then
 		self.total = 0
 		self.urls = {}
-		echo('#yellow;0:; #blue;'..url..';  #cyan;1.0;')
+		echo('#purple;0:; #blue;'..url..';  #purple;1.0;')
 
 		-- Add sitemap sources
 		table.insert(self.sitemap,
@@ -54,24 +54,57 @@ function crawl:loop(url, _args)
 	page.title = title
 	if title then
 		if title ~= '' then
-			echoF({'Title: ', 'b'}, {title:gsub('\n', ' '), 'green'})
+			echoF({'Title: ', 'b'}, {title:gsub('\n', ' '):gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
+			if utf8.len(title) > 60 then
+				echo('#cyan;Title length is above 60 characters;')
+			end
 		else
 			echo('#b;Title:; #yellow;(Empty);')
 		end
 	else
-		echo('#red;Title tag is missing or did not load initially;')
+		echo('#red;<title> is missing or did not load initially;')
+	end
+
+	local mtitle = html:match('<meta.-name[=]["\']title["\'].-content=["\'](.-)["\'].->')
+	page.meta_title = mtitle
+	if mtitle then
+		if mtitle ~= '' then
+			echoF({'Meta Title:', 'b'}, {mtitle:gsub('\n', ' '):gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
+			if utf8.len(mtitle) > 60 then
+				echo('#cyan;Meta Title length is above 60 characters;')
+			end
+		else
+			echo('#b;Meta Title:; #yellow;(Empty);')
+		end
+	else
+		echo('#yellow;<meta name="title"> is missing or did not load initially;')
 	end
 
 	local descr = html:match('<meta.-name[=]["\']description["\'].-content=["\'](.-)["\'].->')
-	page.descr = descr
+	page.meta_descr = descr
 	if descr then
 		if descr ~= '' then
-			echoF({'Description: ', 'b'}, {descr, 'green'})
+			echoF({'Meta Description:', 'b'}, {descr:gsub('&quot;', '"'):gsub('&nbsp;', ' '):gsub('&ndash;', '-'), 'green'})
+			if utf8.len(descr) > 160 then
+				echo('#cyan;Description length is above 160 characters;')
+			end
 		else
-			echo('#b;Description:; #yellow;(Empty);')
+			echo('#b;Meta Description:; #yellow;(Empty);')
 		end
 	else
-		echo('#red;Description metatag is missing or did not load initially;')
+		echo('#red;<meta name="description"> is missing or did not load initially;')
+	end
+
+	local kwds = html:match('<meta.-name[=]["\']keywords["\'].-content=["\'](.-)["\'].->')
+	page.meta_keywords = kwds
+	if kwds then
+		if kwds ~= '' then
+			echoF({'Meta Keywords:', 'b'}, {kwds, 'green'})
+		else
+			echo('#b;Meta Keywords:; #yellow;(Empty);')
+		end
+	else
+		echo('#yellow;<meta name="keywords"> is missing or did not load initially;')
 	end
 
 	-- Check for missing alts in <img>
@@ -112,7 +145,7 @@ function crawl:loop(url, _args)
 			-- Check if URL was already crawled -> crawl new URL
 			if not self.urls[rel] then
 				self.total = self.total + 1
-				echo('#yellow;'..self.total..':; '..rel..'  #cyan;'..prio..';')
+				echo('#purple;'..self.total..':; '..rel..'  #purple;'..prio..';')
 				self.urls[rel] = 1
 				crawl:loop(ref, _args)
 			end
@@ -271,7 +304,8 @@ function crawl:run_in_shell()
 		'#grey;#i;#b;Ignored; - #i;Has been ignored for a specific reason;',
 		'#lightgrey;#i;#b;Reference; - #i;Reference to object in context;',
 		'#blue;#i;#b;Link; - #i;Link to resource;',
-		'\n#grey;#i;Crawling in progress...;')
+		'#purple;#i;#b;Query; - #i;Query entry:  #purple;<query>:; #blue;#i;<url>; #purple;#i;<priority>;\n',
+		'#grey;#i;Crawling in progress...;')
 	crawl:run(addr, 2, meta)
 end
 
