@@ -110,6 +110,16 @@ function crawl:loop(url, _args)
 		echo('#yellow;<meta name="keywords"> is missing or did not load initially;')
 	end
 
+	-- SEO: Heading Tags
+	local h1 = '<h1.->(.-)</h1>'
+	if html:match(h1) then
+		for h in html:gmatch(h1) do
+			echoF({'Heading (H1):', 'b'}, {h, 'green'})
+		end
+	else
+		echo('#red;No main heading tags (<h1>) found;')
+	end
+
 	-- Check for missing alts in <img>
 	for img in html:gmatch('<img .->') do
 		local img = img:gsub('\n', ' ')
@@ -266,16 +276,22 @@ function crawl:run(url, _state, _args)
 	-- Check schema.org
 	if html:match('schema[.]org') then
 		echo('Schema.org Structured Data - #green;Found;')
-		local json = html:match('<script.-application/ld[+]json.->(.-)</script>')
-		if json then echoF({'Schema.org:'}, {'json-ld:', 'purple'}, {json, 'grey'}) end
-		for prop in html:gmatch('property.-content[ ]?=[ ]?["\'].-["\']') do
-			echoF({'Schema.org:'}, {'rdfa:', 'purple'}, {prop, 'grey'})
+		local json, first = html:match('<script.-application/ld[+]json.->(.-)</script>'), {}
+		if json then echoF({'Schema.org:'}, {'json-ld:', 'purple'}, {json, 'lightgrey'}) end
+		for prop in html:gmatch('property[ ]?=[ ]?["\'].-["\'][ ]?content[ ]?=[ ]?["\'].-["\']') do
+			echoF({'Schema.org:'}, {'rdfa:', 'purple'}, {prop, 'lightgrey'})
 		end
 		for itype in html:gmatch('itemtype[ ]?=[ ]?["\'].-["\']') do
-			echoF({'Schema.org:'}, {'micro:', 'purple'}, {itype, 'grey'})
+			if first.itype ~= itype then
+				echoF({'Schema.org:'}, {'micro:', 'purple'}, {itype, 'lightgrey'})
+				first.itype = itype
+			end
 		end
 		for iprop in html:gmatch('itemprop[ ]?=[ ]?["\'].-["\']') do
-			echoF({'Schema.org:'}, {'micro:', 'purple'}, {iprop, 'grey'})
+			if first.iprop ~= iprop then
+				echoF({'Schema.org:'}, {'micro:', 'purple'}, {iprop, 'lightgrey'})
+				first.iprop = iprop
+			end
 		end
 	else
 		echo('Schema.org structured data - #yellow;Not Found;')
