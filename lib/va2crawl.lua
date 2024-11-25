@@ -5,17 +5,25 @@ local crawl = { temp={}, sitemap={}, pages={} }
 function crawl:loop(url, _args)
 	local _args = _args or {}
 	local domain = url:match('http[s]?://(.+)'):gsub('/.*', '')
-	local html = curl(url, _args.redir)
+	local html, ms = curl(url, _args.redir)
 	local http = 'http://'
 	if _args.ssl then http = 'https://' end
 	local excludes = _args.exclude or {}
 	local GMT = _args.gmt or '+00:00'
-	local print, echo = print, echo, echoF
+	local print, echo, echoF = print, echo, echoF
 	if not _args.out then
 		print = function() end
 		echo = function() end
 		echoF = function() end
 	end
+
+	-- Query info
+	local mspref = 'green'
+	if ms > 1000 then mspref = 'yellow' end
+	if ms > 2250 then mspref = 'red' end
+	echo(string.format(
+		'#purple;%s:; #blue;%s;  #lightgrey;(prio: #purple;%s;#lightgrey;, load: #%s;%s ms#lightgrey;, len: %s KiB);',
+		self.total or 0, url, _args.prio or 1.0, mspref, ms, tostring(#html/1024):sub(1,6)))
 
 	if not (html:match('<!DOCTYPE html>') or html:match('<!doctype html>')) then
 		echo('#grey;Page is not of the HTML type, does not exist, or has been redirected;')
@@ -33,7 +41,6 @@ function crawl:loop(url, _args)
 	if #self.sitemap == 0 then
 		self.total = 0
 		self.urls = {}
-		echo('#purple;0:; #blue;'..url..';  #purple;1.0;')
 
 		-- Add sitemap sources
 		table.insert(self.sitemap,
@@ -126,7 +133,7 @@ function crawl:loop(url, _args)
 		if not img:match('[ ]?alt[= >]') then
 			local err = 'Image missing alt attribute:'
 			table.insert(page.err, err..' '..img)
-			echo('#red;'..err..'; #lightgrey;'..img..';')
+			echoF({err, 'red'}, {img, 'lightgrey'})
 		end
 	end
 
@@ -154,11 +161,11 @@ function crawl:loop(url, _args)
 			local prio = 1.1 - (prio * 0.1)
 			if prio < 0.1 then prio = 0.1 end
 			_args.prio = prio
+			_args.rel = rel
 
 			-- Check if URL was already crawled -> crawl new URL
 			if not self.urls[rel] then
 				self.total = self.total + 1
-				echo('#purple;'..self.total..':; '..rel..'  #purple;'..prio..';')
 				self.urls[rel] = 1
 				crawl:loop(ref, _args)
 			end
@@ -179,7 +186,7 @@ end
 --]]
 function crawl:run(url, _state, _args)
 	local _args = _args or {}
-	local print, echo = print, echo, echoF
+	local print, echo, echoF = print, echo, echoF
 	if not _args.out then
 		print = function() end
 		echo = function() end
@@ -202,7 +209,7 @@ function crawl:run(url, _state, _args)
 	self.urls = {}
 	self.total = 1
 	crawl.pages[url] = { err={} }
-	local html = curl(url)
+	local html, ms = curl(url)
 	local mainpage = crawl.pages[url]
 
 	-- Check redirects
@@ -320,6 +327,7 @@ function crawl:run_in_shell()
 	local meta = { out=1 }
 	echo '#grey;#i;Va2:Crawl - @reineimi - https://github.com/reineimi/va2/blob/main/lib/va2crawl.lua;'
 	echo '#grey;#i;(Tip: Something is missing? Try to re-crawl while following redirects);'
+	echo '#grey;#i;(Note: Load speed is not very precise, it depends on your network speed and system performance);'
 	print ''
 	echo '#cyan;#i;Please specify the URL of the website to crawl:;'
 	local addr = io.read()
@@ -341,7 +349,7 @@ function crawl:run_in_shell()
 		'#grey;#i;#b;Ignored; - #i;Has been ignored for a specific reason;',
 		'#lightgrey;#i;#b;Reference; - #i;Reference to object in context;',
 		'#blue;#i;#b;Link; - #i;Link to resource;',
-		'#purple;#i;#b;Query; - #i;Query entry (for example: #purple;<query>:; #blue;#i;<url>; #purple;#i;<priority>);\n',
+		'#purple;#i;#b;Query; - #i;Query entry (for example: #purple;<query>:; #blue;#i;<url>;);\n',
 		'#grey;#i;Crawling in progress...;')
 	crawl:run(addr, 2, meta)
 end

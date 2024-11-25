@@ -6,10 +6,12 @@ va2.mod.echo = {}
 function curl(url, _follow_redir)
 	local L = ''
 	if _follow_redir then L = 'L' end
+	local clock_start = os.clock()
 	local p = io.popen(string.format('curl -s%s %s', L, url))
 	local out = p:read('*a')
+	local ms = math.floor(((os.clock() - clock_start)*1000)*1000)
 	p:close()
-	return out
+	return out, ms
 end
 
 -- Styled bash stdout (echo -e) ...
