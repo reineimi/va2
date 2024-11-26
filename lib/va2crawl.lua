@@ -19,8 +19,8 @@ function crawl:loop(url, _args)
 
 	-- Query info
 	local mspref = 'green'
-	if ms > 1000 then mspref = 'yellow' end
-	if ms > 2250 then mspref = 'red' end
+	if ms > 1250 then mspref = 'yellow' end
+	if ms > 2500 then mspref = 'red' end
 	echo(string.format(
 		'#purple;%s:; #blue;%s;  #lightgrey;(prio: #purple;%s;#lightgrey;, load: #%s;%s ms#lightgrey;, len: %s KiB);',
 		self.total or 0, url, _args.prio or 1.0, mspref, ms, tostring(#html/1024):sub(1,6)))
@@ -207,7 +207,7 @@ function crawl:run(url, _state, _args)
 	_args.ssl = SSL
 	self.sitemap = {}
 	self.urls = {}
-	self.total = 1
+	self.total = 0
 	crawl.pages[url] = { err={} }
 	local html, ms = curl(url)
 	local mainpage = crawl.pages[url]
@@ -335,7 +335,7 @@ function crawl:run_in_shell()
 	meta.gmt = io.read()
 	echo '#cyan;#i;Follow redirects? (leave empty to decline);'
 	if io.read() ~= '' then meta.redir = 1 end
-	echo '#cyan;#i;You can also exclude inner pages (separated with whitespaces):;'
+	echo '#cyan;#i;You can also exclude URLs with specified matches (separated with whitespaces):;'
 	local exclude = io.read()..' '
 	meta.exclude = {}
 	for rel in exclude:gmatch('(/.-)[ ]') do
