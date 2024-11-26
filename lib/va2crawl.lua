@@ -17,6 +17,19 @@ function crawl:loop(url, _args)
 		echoF = function() end
 	end
 
+	-- Create page table
+	if not crawl.pages[url] then
+		crawl.pages[url] = { err={} }
+	end
+	local page = crawl.pages[url]
+	page.query = {
+		ind = self.total or 0,
+		url = url,
+		priority = _args.prio or 1.0,
+		load = ms,
+		len = tonumber(tostring(#html/1024):sub(1,6))
+	}
+
 	-- Query info
 	local mspref = 'green'
 	if ms > 1250 then mspref = 'yellow' end
@@ -30,12 +43,6 @@ function crawl:loop(url, _args)
 		print ''
 		return 0
 	end
-
-	-- Create page table
-	if not crawl.pages[url] then
-		crawl.pages[url] = { err={} }
-	end
-	local page = crawl.pages[url]
 
 	-- Initiate sitemap
 	if #self.sitemap == 0 then
@@ -119,6 +126,7 @@ function crawl:loop(url, _args)
 
 	-- SEO: Heading Tags
 	local h1 = '<h1.->(.-)</h1>'
+	page.h1 = h1
 	if html:match(h1) then
 		for h in html:gmatch(h1) do
 			echoF({'Heading (H1):', 'b'}, {h, 'green'})
@@ -351,7 +359,7 @@ function crawl:run_in_shell()
 		'#blue;#i;#b;Link; - #i;Link to resource;',
 		'#purple;#i;#b;Query; - #i;Query entry (for example: #purple;<query>:; #blue;#i;<url>;);\n',
 		'#grey;#i;Crawling in progress...;')
-	crawl:run(addr, 2, meta)
+	local res = crawl:run(addr, 2, meta)
 end
 
 return crawl
