@@ -689,7 +689,7 @@ input:checked ~.chbox { background: var(--accent) }
 	'wght' 400,
 	'GRAD' 0,
 	'opsz' 40;
-	vertical-align: -16%;
+	vertical-align: -10%;
 }
 giconx { color: var(--fontColor) }
 
