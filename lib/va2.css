@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..700&family=Roboto+Slab:wght@100..700&family=Noto+Sans+JP:wght@100..700&family=Inconsolata:wght@200..700&family=Cinzel&family=Dancing+Script&family=VT323&family=Smooch+Sans:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 /* Fonts:
 	Noto Sans JP:   [Basic]
 	Montserrat:     [Basic] Extra (Multi-language)
@@ -12,7 +10,6 @@
 	google_icons: 	Ico
 */
 
-
 		/*=== ELEMENTS ===*/
 
 /* Note:
@@ -22,8 +19,8 @@ S and L means Small and Large */
 	--dvh: 100dvh;
 
 	/* Font styles */
-	--font: 'Noto Sans JP';
-	--fontX: 'Montserrat';
+	--font: 'Noto Sans JP', sans-serif;
+	--fontX: 'Montserrat', sans-serif;
 	--fontBtn: '';
 	--fontPrint: 'Roboto Slab';
 	--fontPrintX: 'Smooch Sans';
@@ -34,12 +31,13 @@ S and L means Small and Large */
 	--fontIco: 'Material Symbols Outlined';
 
 	/* Main styles */
-	--fontSize: calc(0.5vmin + 1.2vh);
+	--fontSize: calc(4px + 0.25vmin + 1vh);
+	--tabSize: 2rem;
+	--headerH: 5rem;
 	--corners: 1.4rem;
 	--cornersS: 1rem;
 	--cornersL: 2.5rem;
 	--border: 1px;
-	--tabSize: 2rem;
 
 	/* Other styles */
 	--blockDistance: 0px;
@@ -50,33 +48,6 @@ S and L means Small and Large */
 	--accent: #c95;
 	--accentX: #c59;
 	--accentFont: #59c;
-}
-
-body {
-	z-index: -10;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-
-	height: var(--dvh);
-	width: 100vw;
-	position: relative;
-	margin: 0px; padding: 0px;
-
-	font: 500 1rem var(--font);
-	line-height: 1.2;
-	color: var(--fontColor);
-
-	background-color: var(--windowBg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	backface-visibility: hidden;
-
-	overflow: hidden;
-	overflow-y: scroll;
-	overscroll-behavior-x: none;
 }
 
 * {
@@ -98,6 +69,9 @@ html {
 	scrollbar-width: none !important;
 	scroll-padding-top: 10vmin !important;
 	scroll-behavior: smooth !important;
+	overflow: hidden !important;
+	overscroll-behavior-x: none !important;
+	overscroll-behavior-y: none !important;
 	font-size: var(--fontSize);
 }
 ::-webkit-scrollbar { width: 0px; height: 0px; background: #0000 }
@@ -122,19 +96,63 @@ sel { color: var(--highlight) }
 	border-radius: 50%;
 	cursor: pointer;
 }
-header, footer {
-	z-index: 1;
+
+body { height: 100vh; width: 100vw; margin: 0px; font: inherit }
+#page_content_min { animation: remove 0s linear 1s forwards; }
+#page_content_wrap {
+	z-index: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+
+	height: 100%;
 	width: 100%;
-	min-height: 10%;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	overflow: scroll;
+
+	background-color: var(--windowBg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	backface-visibility: hidden;
+	box-shadow: 0px 0px 10rem #0009;
+
+	color: var(--fontColor);
+	line-height: 1.2;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-size: 1rem;
+	font-weight: 500;
+	font-family: var(--font);
+
+	animation: slideFromR 0.5s;
 }
+
+main {
+	width: 100%;
+	height: calc(100% - var(--headerH));
+	margin: var(--headerH) 0px 0px 0px;
+	overflow: scroll;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center
+}
+header, footer { z-index: 10; width: 100%; display: flex; flex-wrap: wrap; background: var(--windowFg); color: var(--fontColorX) }
+header { position: fixed; top: 0px; left: 0px; height: var(--headerH); border-bottom: 1px solid var(--windowBg) }
+footer { border-top: 1px solid var(--windowBg) }
+aside { background: var(--windowFg); color: var(--fontColorX); border-right: 1px solid var(--windowBg); padding: 1.5rem; height: 100%; overflow: scroll; }
+aside > div { margin-bottom: 1rem }
 div { position: relative; z-index: 1 }
 h, h1, h2, h3, h4, h5 { display: block }
 h { font-size: 3.5rem; font-weight: 900 }
-h1 { font-size: 2rem }
-h2 { font-size: 1.75rem }
-h3 { font-size: 1.55rem }
-h4 { font-size: 1.35rem }
-h5 { font-size: 1.2rem }
+h1, .h1 { font-size: 2rem }
+h2, .h2 { font-size: 1.75rem }
+h3, .h3 { font-size: 1.55rem }
+h4, .h4 { font-size: 1.35rem }
+h5, .h5 { font-size: 1.2rem }
 hr {
 	margin: auto; padding: 0px;
 	height: 0px; border: none;
@@ -199,13 +217,13 @@ select * {
 		/*=== THEMES ===*/
 
 .theme-light {
-	--fontColor: #999;
-	--fontColorX: #7a7a7a;
+	--fontColor: #858585;
+	--fontColorX: #717171;
 	--colorMax: #fff;
 	--colorMin: #000;
 	--highlight: #000;
-	--windowBg: #eee;
-	--windowBgX: #eeed;
+	--windowBg: #e9e9e9;
+	--windowBgX: #e9e9e9dd;
 	--windowFg: #f6f6f6;
 	--windowFgX: #f6f6f6dd;
 	--itemBg: #e7e7e7;
@@ -221,14 +239,15 @@ select * {
 	--pink: #e58;
 	--brown: #da8;
 }
+
 .theme-dark {
-	--fontColor: #7b7b7b;
-	--fontColorX: #8c8c8c;
+	--fontColor: #6d6d6d;
+	--fontColorX: #959595;
 	--colorMax: #000;
 	--colorMin: #fff;
 	--highlight: #fff;
-	--windowBg: #272727;
-	--windowBgX: #272727dd;
+	--windowBg: #232323;
+	--windowBgX: #232323dd;
 	--windowFg: #2e2e2e;
 	--windowFgX: #2e2e2edd;
 	--itemBg: #3a3a3a;
@@ -245,6 +264,29 @@ select * {
 	--brown: #b86;
 }
 
+.border, .th_windowBg, .th_windowFg {
+	border: var(--border) solid var(--itemFg);
+	border-radius: var(--corners);
+}
+.th_windowBg {
+	color: var(--fontColor);
+	background: var(--windowBg);
+	border-color: var(--itemBg);
+}
+.th_windowFg {
+	color: var(--fontColorX);
+	background: var(--windowFg);
+}
+.th_itemBg {
+	color: var(--fontColor);
+	background: var(--itemBg);
+	border-radius: var(--corners);
+}
+.th_itemFg {
+	color: var(--fontColorX);
+	background: var(--itemFg);
+	border-radius: var(--corners);
+}
 
 		/*=== GENERAL ===*/
 
@@ -617,10 +659,10 @@ input:checked ~.chbox { background: var(--accent) }
 	display: inline-block;
 	font-family: var(--fontIco) !important;
 	font-variation-settings:
-	'FILL' 0,
-	'wght' 300,
+	'FILL' 1,
+	'wght' 400,
 	'GRAD' 0,
-	'opsz' 24;
+	'opsz' 40;
 	vertical-align: -16%;
 }
 giconx { color: var(--fontColor) }
@@ -641,6 +683,7 @@ giconx { color: var(--fontColor) }
 
 		/*=== ANIMATIONS ===*/
 
+@keyframes remove { 100% { display: none; } }
 @keyframes fade { 0% { opacity: 1 } 100% { opacity: 0 } }
 @keyframes fadeout { 0% { opacity: 0 } 100% { opacity: 1 } }
 @keyframes moveL { 100% { left: -100% } }
@@ -707,12 +750,20 @@ giconx { color: var(--fontColor) }
 @keyframes slideB { 100% { transform: translateY(100%) } }
 @keyframes slideFromB { 0% { transform: translateY(100%) } }
 @keyframes slideout { 100% { transform: translate(0px, 0px) } }
+@keyframes appearFromL {
+	0% { opacity: 0; transform: translateX(-100%); }
+	100% { opacity: 1; }
+}
 @keyframes appearFromLT {
 	0% { opacity: 0; transform: translate(-50%, -50%); }
 	100% { opacity: 1; }
 }
 @keyframes appearFromLB {
 	0% { opacity: 0; transform: translate(-50%, 50%); }
+	100% { opacity: 1; }
+}
+@keyframes appearFromR {
+	0% { opacity: 0; transform: translateX(100%); }
 	100% { opacity: 1; }
 }
 @keyframes appearFromRT {
