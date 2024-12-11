@@ -97,7 +97,7 @@ sel { color: var(--highlight) }
 	cursor: pointer;
 }
 
-body { height: 100vh; width: 100vw; margin: 0px; font: inherit }
+body { height: 100vh; width: 100vw; margin: 0px; font: inherit; display: flex; flex-wrap: wrap; background: var(--windowBg); }
 #page_content_min { animation: remove 0s linear 1s forwards; }
 #page_content_wrap {
 	z-index: 0;
