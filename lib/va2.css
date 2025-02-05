@@ -157,7 +157,7 @@ footer { border-top: 1px solid var(--windowBg) }
 aside { background: var(--windowFg); color: var(--fontColorX); border-right: 1px solid var(--windowBg); padding: 1.5rem; height: 100%; overflow: scroll; }
 aside > div { margin-bottom: 1rem }
 div { position: relative; z-index: 1 }
-h, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { display: block }
+h, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { display: block; font-weight: bold; }
 h { font-size: 3.5rem; font-weight: 900 }
 h1, .h1 { font-size: 2rem }
 h2, .h2 { font-size: 1.75rem }
