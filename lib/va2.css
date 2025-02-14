@@ -439,6 +439,12 @@ select * {
 	position: fixed;
 	width: 100vw;
 	height: var(--dvh);
+	top: 0px; left: 0px;
+	margin: 0px;
+	background-color: #000;
+	border: none;
+	border-radius: 0px;
+	object-fit: contain;
 }
 
 /* Box positions */
