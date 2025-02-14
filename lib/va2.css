@@ -440,7 +440,7 @@ select * {
 	width: 100vw;
 	height: var(--dvh);
 	top: 0px; left: 0px;
-	margin: 0px;
+	margin: 0px !important;
 	background-color: #000;
 	border: none;
 	border-radius: 0px;
