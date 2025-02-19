@@ -265,12 +265,12 @@ select * {
 	--colorMax: #000;
 	--colorMin: #fff;
 	--highlight: #fff;
-	--windowBg: #232323;
-	--windowBgX: #232323dd;
-	--windowFg: #2e2e2e;
-	--windowFgX: #2e2e2edd;
-	--itemBg: #353535;
-	--itemFg: #464646;
+	--windowBg: ##1c1c1c;
+	--windowBgX: ##1c1c1cdd;
+	--windowFg: ##252525;
+	--windowFgX: ##252525dd;
+	--itemBg: #333;
+	--itemFg: #444;
 	--theme: #000;
 	--themeInv: #fff;
 
@@ -291,12 +291,6 @@ select * {
 	--darkbrown: #975;
 }
 
-.ani { transition: 0.3s; }
-.round { border-radius: var(--corners); }
-.border {
-	border: var(--border) solid var(--itemFg);
-	border-radius: var(--corners);
-}
 .th_windowBg {
 	color: var(--fontColor);
 	background: var(--windowBg);
@@ -318,6 +312,14 @@ select * {
 }
 .th_windowFg.hover:hover { background: var(--itemBg); }
 .th_itemBg.hover:hover { background: var(--itemFg); color: var(--fontColorX); }
+
+.ani { transition: 0.3s; }
+.round { border-radius: var(--corners); }
+.border {
+	border: var(--border) solid var(--itemFg);
+	border-radius: var(--corners);
+}
+.shadow { box-shadow: 0px 0.5rem 2rem #0004; }
 
 		/*=== GENERAL ===*/
 
