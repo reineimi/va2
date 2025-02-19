@@ -265,10 +265,10 @@ select * {
 	--colorMax: #000;
 	--colorMin: #fff;
 	--highlight: #fff;
-	--windowBg: ##1c1c1c;
-	--windowBgX: ##1c1c1cdd;
-	--windowFg: ##252525;
-	--windowFgX: ##252525dd;
+	--windowBg: #1c1c1c;
+	--windowBgX: #1c1c1cdd;
+	--windowFg: #252525;
+	--windowFgX: #252525dd;
 	--itemBg: #333;
 	--itemFg: #444;
 	--theme: #000;
