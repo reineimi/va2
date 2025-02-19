@@ -291,6 +291,7 @@ select * {
 	--darkbrown: #975;
 }
 
+.ani { transition: 0.3s; }
 .border, .th_windowBg, .th_windowFg {
 	border: var(--border) solid var(--itemFg);
 	border-radius: var(--corners);
@@ -314,6 +315,7 @@ select * {
 	background: var(--itemFg);
 	border-radius: var(--corners);
 }
+.th_itemBg.hover:hover { background: var(--itemFg); color: var(--fontColorX); }
 
 		/*=== GENERAL ===*/
 
