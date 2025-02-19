@@ -292,7 +292,7 @@ select * {
 }
 
 .ani { transition: 0.3s; }
-.border, .th_windowBg, .th_windowFg {
+.border {
 	border: var(--border) solid var(--itemFg);
 	border-radius: var(--corners);
 }
@@ -302,7 +302,7 @@ select * {
 	border-color: var(--itemBg);
 }
 .th_windowFg {
-	color: var(--fontColorX);
+	color: var(--fontColor);
 	background: var(--windowFg);
 }
 .th_itemBg {
@@ -315,6 +315,7 @@ select * {
 	background: var(--itemFg);
 	border-radius: var(--corners);
 }
+.th_windowFg.hover:hover { background: var(--itemBg); }
 .th_itemBg.hover:hover { background: var(--itemFg); color: var(--fontColorX); }
 
 		/*=== GENERAL ===*/
