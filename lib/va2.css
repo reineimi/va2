@@ -292,6 +292,7 @@ select * {
 }
 
 .ani { transition: 0.3s; }
+.round { border-radius: var(--corners); }
 .border {
 	border: var(--border) solid var(--itemFg);
 	border-radius: var(--corners);
