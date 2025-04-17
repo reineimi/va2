@@ -50,7 +50,7 @@
 				<p class='w mb3 fs1-2 fontCode'>You can write HTML code in the left/top box below to view it from the adjacent box</p>
 				<div class='w1-6-3'>
 					<div class='hv80 my1 mx2 round border fh'>
-						<textarea class='f1 p2 fontCode' id='demoField'></textarea>
+						<textarea class='f1 p2 fontCode' id='demoField'>&lt;div class='i p6 round blue'&gt;&lt;/div&gt;</textarea>
 						<div class='w f bot p1'>
 							<div class='w1-6-2'><p class='m1 btn' onclick="emi('demoField').value=''; emi('demoPreview').innerHTML = ''">Clear</p></div>
 							<div class='w1-6-2'><p class='m1 btn' onclick="addclass(emi('demoPreview'), 'fs'); show('demoPreviewClose')"><x class='gicon scale15'>fullscreen</x></p></div>
@@ -59,7 +59,9 @@
 					</div>
 				</div>
 				<div class='w1-6-3 z2'>
-					<div class='hv80 my1 mx2 round th_windowBg center' id='demoPreview'></div>
+					<div class='hv80 my1 mx2 round th_windowBg center' id='demoPreview'>
+						<div class='i p6 round blue'></div>
+					</div>
 					<p class='btn fix top-r m2 z1 gicon fs2 px2 hide' id='demoPreviewClose' onclick="rmclass(emi('demoPreview'), 'fs'); hide(this)">close</p>
 				</div>
 			</div>
