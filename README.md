@@ -1,6 +1,9 @@
 > [!WARNING]
 > Project is currently under re-development
 
+> [!TIP]
+> To test the functionality of the Va2 library, go to: https://reineimi.github.io/va2/demo/
+
 [Click for demo](https://reineimi.github.io/va2/)
 > Please note that the Github Pages demo is not going to work as expected, as it requires a webserver
 > for handshakes between the Operating System and the frontend of this web application.
