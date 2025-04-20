@@ -106,7 +106,7 @@ sel { color: var(--highlight); background: #0001; }
 }
 
 body {
-	height: 100vh;
+	height: var(--dvh);
 	width: 100vw;
 	margin: 0px;
 	font-size: inherit;
