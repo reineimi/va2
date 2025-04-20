@@ -95,7 +95,7 @@ To embed any library module, for example `va2.js` and `va2.css`, you only need t
 ```
 It's also recommended to include the following meta tag:
 ```html
-<meta id='va2meta' data-ver='CURRENT_VER'>
+<meta name='va2meta' content='' data-ver='CURRENT_VER'>
 ```
 And replace `CURRENT_VER` with the Va2 version you can see in your console once `va2.js` loaded.<br>
 This meta tag allows you to track significant releases and whether it's recommended to update your local files immediately or not.
