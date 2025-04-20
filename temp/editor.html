@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang='en'>
+<head><meta charset='utf-8'><meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
+	<!-- Metadata -->
+	<title>Va2.lib: Editor</title>
+	<meta name='title' content=''>
+	<meta name='description' content=''>
+	<meta name='keywords' content=''>
+	<!-- Core modules -->
+	<script src='../lib/va2.js' async defer></script>
+	<link href='../lib/va2.css' rel='stylesheet'>
+	<!-- Google -->
+	<link rel='preconnect' href='https://fonts.googleapis.com'>
+	<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+	<meta name='google-site-verification' content=''>
+	<!-- Fonts & Styles -->
+	<link rel='preload' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' as='style' onload='this.onload=null;this.rel="stylesheet"'>
+	<noscript><link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200'></noscript>
+	<link rel='preload' href='https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto+Slab:wght@100..900&family=Smooch+Sans:wght@100..900&family=VT323&display=swap' as='style' onload='this.onload=null;this.rel="stylesheet"'>
+	<noscript><link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Inconsolata:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto+Slab:wght@100..900&family=Smooch+Sans:wght@100..900&family=VT323&display=swap'></noscript>
+	<!-- Other -->
+	<link href='editor.css' rel='stylesheet'>
+	<script>
+	window.onload = ()=>{
+		init();
+		extern.js('editor.js', 'Editor');
+	}
+	</script>
+</head>
+
+<body class='ani-g'>
+	<div id='va2context' class='round bounded hide z2 ani0 p2'>
+		<div id='va2contextClose' onclick='hide(this.root()); wipe(this.root().item(1))'></div>
+		<div id='va2contextMenu' class='th_windowFg round p2 py1-g px2-g my1-g hr40 scroll border shadow'></div>
+	</div>
+
+	<main>
+		<div id='editor_menuWrap' class='h w1-10-3 xs-w p1 xs-abs z1 slideP'>
+			<div id='editor_menu' class='h w th_windowFg round p3'>
+				
+			</div>
+		</div>
+
+		<div id='workareaWrap' class='h f1 p1 scroll'>
+			<div id='workarea' class='h w th_windowBg border round p3 scroll center'></div>
+		</div>
+
+		<div id='editor_sourcesWrap' class='h w1-10-3 xs-w p1 xs-abs z1 slideN hide'>
+			<div id='editor_sources' class='h w th_windowFg round bound py1 px2'>
+				<div id='editor_srcHeader' class='w f bb pb1'>
+					<p id='editor_srcName' class='w1-10-9 f1 p1' data-empty='No element selected'>No element selected</p>
+					<p class='btn top-r tc py1' onclick='hide(this.root(3))'><gicon class='scale15'>close</gicon></p>
+				</div>
+				<div id='editor_srcBody' class='mt1-g'></div>
+			</div>
+		</div>
+	</main>
+
+	<header class='px1 g1'>
+		<div class='h f'>
+			<div class='m round center th_itemBg py05 px1 g1 fs2'>
+				<p class='gicon cblue-hov pt' onclick="tshow('editor_menuWrap')">chevron_left</p>
+				<p class='gicon cblue-hov pt' onclick="">add</p>
+			</div>
+		</div>
+		<div class='h f f1 py1 xs-hide s-hide'>
+			<div class='w h border px1 f br'>
+				<div class='h m fh ml0 m-g g1 round scroll'>
+					<p class='btn'>sample text</p>
+					<p class='btn'>sample text</p>
+					<p class='btn'>sample text</p>
+					<p class='btn'>sample text</p>
+				</div>
+			</div>
+		</div>
+		<div class='h f right'>
+			<div class='m round center th_itemBg py05 px1 g1 fs2'>
+				<p class='gicon cblue-hov pt' onclick='themeset()'>contrast</p>
+				<p class='gicon cblue-hov pt' onclick='fullscreen()'>expand_circle_up</p>
+				<p class='gicon cblue-hov pt' onclick="setclass(document.body, 'noani')">motion_mode</p>
+				<p class='gicon cblue-hov pt' onclick="tshow('editor_sourcesWrap')">chevron_right</p>
+			</div>
+		</div>
+	</header>
+</body>
+</html>
