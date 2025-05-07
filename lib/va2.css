@@ -616,12 +616,12 @@ select * {
 .ob { font-style: oblique }
 .lt { text-decoration: line-through }
 .ul { text-decoration: underline }
-.uc { text-transform: uppercase }
-.lc { text-transform: lowercase }
-.cp { text-transform: capitalize }
-.tl, .center .tl { text-align: left }
-.tr, .center .tr { text-align: right }
-.tc, .center .tc { text-align: center }
+.uc, .uc-g > * { text-transform: uppercase }
+.lc, .lc-g > * { text-transform: lowercase }
+.cp, .cp-g > * { text-transform: capitalize }
+.tl, .center .tl, .tl-g > * { text-align: left }
+.tr, .center .tr, .tr-g > * { text-align: right }
+.tc, .center .tc, .tc-g > * { text-align: center }
 .kana { text-orientation: upright; writing-mode: vertical-rl; letter-spacing: 0em; line-height: 1.5; }
 
 /* Fonts */
