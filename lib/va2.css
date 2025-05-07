@@ -885,7 +885,7 @@ div:has(> .submenu):hover > .submenu { display: block; }
 	word-break: break-word;
 }
 #va2context > div:first-child { background: #0002; }
-#va2contextMenu { width: 30rem; animation: slideFromB 0.2s; }
+#va2contextMenu { width: 25rem; animation: slideFromB 0.2s; }
 .slide { display: flex; }
 .slideN { animation: slideFromR var(--animation); }
 .slideP { animation: slideFromL var(--animation); }
