@@ -739,6 +739,8 @@ select * {
 .bb, .by, .bb-hov:hover { border-bottom: var(--border) solid var(--itemBg); }
 
 /* Colors */
+.fc { color: var(--fontColor); }		.fc-hov:hover { color: var(--fontColor); }
+.fcx { color: var(--fontColorX); }		.fcx-hov:hover { color: var(--fontColorX); }
 .cwhite, .cwhite-g > *, .ccwhite > span, .ccwhite > c { color: #fff; }				.cwhite-hov:hover, .c-g-hov > *:hover { color: #fff; }
 .cblack, .cblack-g > *, .ccblack > span, .ccblack > c { color: #000; }				.cblack-hov:hover, .cblack-g-hov > *:hover { color: #000; }
 .cred, .cred-g > *, .ccred > span, .ccred > c { color: var(--red); }				.cred-hov:hover, .cred-g-hov > *:hover { color: var(--red); }
@@ -748,8 +750,6 @@ select * {
 .cpurple, .cpurple-g > *, .ccpurple > span, .ccpurple > c { color: var(--purple); }	.cpurple-hov:hover, .cpurple-g-hov > *:hover { color: var(--purple); }
 .cpink, .cpink-g > *, .ccpink > span, .ccpink > c { color: var(--pink); }			.cpink-hov:hover, .cpink-g-hov > *:hover { color: var(--pink); }
 .cbrown, .cbrown-g > *, .ccbrown > span, .ccbrown > c { color: var(--brown); }		.cbrown-hov:hover, .cbrown-g-hov > *:hover { color: var(--brown); }
-.fc { color: var(--fontColor) !important; }		.fc-hov:hover { color: var(--fontColor) !important; }
-.fcx { color: var(--fontColorX) !important; }		.fcx-hov:hover { color: var(--fontColorX) !important; }
 
 .white, .white-g > * { background-color: #fff !important; }		.white-hov:hover { background-color: #fff !important; }
 .black, .black-g > * { background-color: #000 !important; }		.black-hov:hover { background-color: #000 !important; }
