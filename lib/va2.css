@@ -163,7 +163,7 @@ h4, .h4 { font-size: 1.35rem; }
 h5, .h5 { font-size: 1.2rem; }
 hr {
 	margin: auto; padding: 0px;
-	height: 0px; border: none;
+	height: 0px; width: 100%; border: none;
 	border-bottom: 2px solid var(--itemFg);
 }
 img { z-index: 1 }
@@ -338,16 +338,17 @@ select * {
 .abs.mid, .fix.mid, .abs.mid-l, .fix.mid-l, .abs.mid-r, .fix.mid-r { top: 50%; transform: translateY(-50%); }
 
 /* Background positions */
-.bgt { background-position: center top }
-.bgb { background-position: center bottom }
+.bgt { background-position: center top !important; }
+.bgb { background-position: center bottom !important; }
+.bg, .bgc { background-position: center !important; }
 
-.bgl { background-position: left center }
-.bglb { background-position: left bottom }
-.bglt { background-position: left top }
+.bgl { background-position: left center !important; }
+.bglb { background-position: left bottom !important; }
+.bglt { background-position: left top !important; }
 
-.bgr { background-position: right center }
-.bgrb { background-position: right bottom }
-.bgrt { background-position: right top }
+.bgr { background-position: right center !important; }
+.bgrb { background-position: right bottom !important; }
+.bgrt { background-position: right top !important; }
 
 .bgfill { background-size: cover; background-position: center; background-repeat: no-repeat; }
 .bgcont { background-size: contain; background-position: center; background-repeat: no-repeat; }
