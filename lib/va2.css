@@ -350,8 +350,8 @@ select * {
 .bgrb { background-position: right bottom !important; }
 .bgrt { background-position: right top !important; }
 
-.bgfill { background-size: cover; background-position: center; background-repeat: no-repeat; }
-.bgcont { background-size: contain; background-position: center; background-repeat: no-repeat; }
+.bgfill { background-size: cover !important; background-position: center; background-repeat: no-repeat !important; }
+.bgcont { background-size: contain !important; background-position: center; background-repeat: no-repeat !important; }
 
 /* Image positions */
 /* (top/bottom) */
