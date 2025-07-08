@@ -839,7 +839,6 @@ div:has(> .submenu):hover > .submenu { display: block; }
 /* va2.js */
 #va2notif {
 	z-index: 89;
-	display: none;
 	position: fixed;
 	max-height: 20%;
 	top: 1rem;
@@ -851,7 +850,7 @@ div:has(> .submenu):hover > .submenu { display: block; }
 	border-radius: var(--corners);
 	border: var(--border) solid var(--itemBg);
 	text-align: center;
-	transform: translateY(-100%);
+	transform: translateY(-150%);
 }
 #va2prompt {
 	z-index: 88;
