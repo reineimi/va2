@@ -725,7 +725,6 @@ select * {
 /* Plain text */
 .text {
 	display: inline;
-	font: inherit; color: inherit;
 	text-decoration: none;
 	border: none; outline: none;
 }
@@ -829,6 +828,28 @@ select * {
 
 
 		/*=== MODULES/OTHER ===*/
+
+/* Multi-color elements */
+.mult > *:nth-child(6n+1) { background-color: var(--yellow); }
+.mult > *:nth-child(6n+2) { background-color: var(--green); }
+.mult > *:nth-child(6n+3) { background-color: var(--blue); }
+.mult > *:nth-child(6n+4) { background-color: var(--purple); }
+.mult > *:nth-child(6n+5) { background-color: var(--pink); }
+.mult > *:nth-child(6n+6) { background-color: var(--red); }
+
+.cmult > *:nth-child(6n+1) { color: var(--yellow); }
+.cmult > *:nth-child(6n+2) { color: var(--green); }
+.cmult > *:nth-child(6n+3) { color: var(--blue); }
+.cmult > *:nth-child(6n+4) { color: var(--purple); }
+.cmult > *:nth-child(6n+5) { color: var(--pink); }
+.cmult > *:nth-child(6n+6) { color: var(--red); }
+
+.bmult > *:nth-child(6n+1) { border-color: var(--yellow); }
+.bmult > *:nth-child(6n+2) { border-color: var(--green); }
+.bmult > *:nth-child(6n+3) { border-color: var(--blue); }
+.bmult > *:nth-child(6n+4) { border-color: var(--purple); }
+.bmult > *:nth-child(6n+5) { border-color: var(--pink); }
+.bmult > *:nth-child(6n+6) { border-color: var(--red); }
 
 /* Input field */
 .input {
