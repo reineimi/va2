@@ -723,7 +723,7 @@ select * {
 .ref:hover { color: var(--fontColorX) }
 
 /* Plain text */
-.text {
+.text, .text-g > p, .text-g > a, .text-g > pre, .text-g > h1, .text-g > h2, .text-g > h3, .text-g > h4, .text-g > h5, .text-g > h {
 	display: inline;
 	text-decoration: none;
 	border: none; outline: none;
