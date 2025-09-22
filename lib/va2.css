@@ -163,7 +163,7 @@ hr {
 }
 img { z-index: 1; cursor: pointer; }
 img.emoji { width: 1em; pointer-events: none }
-img.fs { background-color: #000 !important; z-index: 10 !important; }
+img.fs { background-color: #000 !important; z-index: 10 !important; border-radius: 0px !important; }
 a { color: inherit; display: inline }
 b { display: inline; font-weight: 700; margin: 0px }
 i { display: inline; font-style: italic; margin: 0px }
