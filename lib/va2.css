@@ -304,7 +304,7 @@ select * {
 /* No interaction */
 .nil { pointer-events: none !important; }
 /* No selection */
-.nosel, .ref, a, object, img, video, span, #va2ctxt, gicon, .gicon, anicon, .anicon {
+.nosel, .ref, a, object, img, video, span, #va2ctxt, gicon, .gicon, anicon, .anicon, .btn {
 	-webkit-touch-callout: none !important;
 	-webkit-user-select: none !important;
 	-khtml-user-select: none !important;
@@ -1201,12 +1201,53 @@ div:has(> #va2notifs) { animation: appearFromT 0.25s; }
 .scale2 { transform: scale(2); }		.scale095 { transform: scale(0.95); }
 
 .ts-hover:hover { filter: brightness(0.85); }
+.ts-hover1:hover { transform: scale(0.98); }
 
 .ani-hover1:hover { animation: hover1 var(--animation); }
 @keyframes hover1 {
 	40% { transform: scale(0.85); }
 	75% { transform: scale(1.1); }
 }
+
+.ani-appearFromT { animation: appearFromT var(--animation); }
+.ani-appearFromB { animation: appearFromB var(--animation); }
+.ani-appearFromL { animation: appearFromL var(--animation); }
+.ani-appearFromLT { animation: appearFromLT var(--animation); }
+.ani-appearFromLB { animation: appearFromLB var(--animation); }
+.ani-appearFromR { animation: appearFromR var(--animation); }
+.ani-appearFromRT { animation: appearFromRT var(--animation); }
+.ani-appearFromRB { animation: appearFromRB var(--animation); }
+.ani-fade { animation: fade var(--animation); }
+.ani-fadeout { animation: fadeout var(--animation); }
+.ani-slideT { animation: slideT var(--animation); }
+.ani-slideB { animation: slideB var(--animation); }
+.ani-slideL { animation: slideL var(--animation); }
+.ani-slideR { animation: slideR var(--animation); }
+.ani-slideFromT { animation: slideFromT var(--animation); }
+.ani-slideFromB { animation: slideFromB var(--animation); }
+.ani-slideFromL { animation: slideFromL var(--animation); }
+.ani-slideFromR { animation: slideFromR var(--animation); }
+.ani-expand { animation: expand var(--animation); }
+.ani-expandT { animation: expandT var(--animation); }
+.ani-expandB { animation: expandB var(--animation); }
+.ani-expandL { animation: expandL var(--animation); }
+.ani-expandR { animation: expandR var(--animation); }
+.ani-expandX { animation: expandX var(--animation); }
+.ani-expandY { animation: expandY var(--animation); }
+.ani-shrink { animation: shrink var(--animation); }
+.ani-shrinkT { animation: shrinkT var(--animation); }
+.ani-shrinkB { animation: shrinkB var(--animation); }
+.ani-shrinkL { animation: shrinkL var(--animation); }
+.ani-shrinkR { animation: shrinkR var(--animation); }
+.ani-shrinkX { animation: shrinkX var(--animation); }
+.ani-shrinkY { animation: shrinkY var(--animation); }
+.ani-fold { animation:  var(--animation); }
+.ani-foldX { animation:  var(--animation); }
+.ani-foldY { animation:  var(--animation); }
+.ani-rotL { animation: rotL var(--animation); }
+.ani-rotR { animation: rotR var(--animation); }
+.ani-fall { animation: fall var(--animation); }
+.ani-popUp { animation: popUp var(--animation); }
 
 @keyframes remove { 100% { display: none; } }
 @keyframes fade { 0% { opacity: 1 } 100% { opacity: 0 } }
