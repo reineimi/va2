@@ -58,13 +58,13 @@ S and L means Small and Large */
 	--font: 'Noto Sans JP', sans-serif;
 	--fontX: 'Montserrat', sans-serif;
 	--fontBtn: 'Noto Sans JP', sans-serif;
-	--fontPrint: 'Roboto Slab';
-	--fontPrintX: 'Smooch Sans';
-	--fontCode: 'Inconsolata';
-	--fontFancy: 'Dancing Script';
-	--fontNovel: 'Cinzel';
-	--fontPixel: 'VT323';
-	--fontIco: 'Material Symbols';
+	--fontPrint: 'Roboto Slab', serif;
+	--fontPrintX: 'Smooch Sans', sans-serif;
+	--fontCode: 'Inconsolata', monospace;
+	--fontFancy: 'Dancing Script', cursive;
+	--fontNovel: 'Cinzel', fantasy;
+	--fontPixel: 'VT323', sans-serif;
+	--fontIco: 'Material Symbols', sans-serif;
 
 	/* Main styles */
 	--fontSize: calc(8px + 0.8vh - 0.16vmin);
@@ -775,15 +775,15 @@ select * {
 .fs5 { font-size: 5rem !important; }		.fs5-5 { font-size: 5.5rem !important; }
 
 /* Font width (variable) */
-.fw1, .fw1-hov:hover { font-variation-settings: 'wght' 100; }
-.fw2, .fw2-hov:hover { font-variation-settings: 'wght' 200; }
-.fw3, .fw3-hov:hover { font-variation-settings: 'wght' 300; }
-.fw4, .fw4-hov:hover { font-variation-settings: 'wght' 400; }
-.fw5, .fw5-hov:hover { font-variation-settings: 'wght' 500; }
-.fw6, .fw6-hov:hover { font-variation-settings: 'wght' 600; }
-.fw7, .fw7-hov:hover { font-variation-settings: 'wght' 700; }
-.fw8, .fw8-hov:hover { font-variation-settings: 'wght' 800; }
-.fw9, .fw9-hov:hover { font-variation-settings: 'wght' 900; }
+.fw1, .fw1-hov:hover { font-weight: 100; font-variation-settings: 'wght' 100; }
+.fw2, .fw2-hov:hover { font-weight: 200; font-variation-settings: 'wght' 200; }
+.fw3, .fw3-hov:hover { font-weight: 300; font-variation-settings: 'wght' 300; }
+.fw4, .fw4-hov:hover { font-weight: 400; font-variation-settings: 'wght' 400; }
+.fw5, .fw5-hov:hover { font-weight: 500; font-variation-settings: 'wght' 500; }
+.fw6, .fw6-hov:hover { font-weight: 600; font-variation-settings: 'wght' 600; }
+.fw7, .fw7-hov:hover { font-weight: 700; font-variation-settings: 'wght' 700; }
+.fw8, .fw8-hov:hover { font-weight: 800; font-variation-settings: 'wght' 800; }
+.fw9, .fw9-hov:hover { font-weight: 900; font-variation-settings: 'wght' 900; }
 
 /* Batch formatting */
 .va0 { vertical-align: 0%; }
