@@ -733,7 +733,9 @@ select * {
 .tc, .center .tc, .tc-g > *, .btn { text-align: center }
 .twrap { white-space: normal; }
 .tnowrap { white-space: nowrap; }
-.pre { white-space: pre-line; }
+.pre { white-space: pre; }
+.preln { white-space: pre-line; }
+.prewr { white-space: pre-wrap; }
 .kana { text-orientation: upright; writing-mode: vertical-rl; letter-spacing: 0em; line-height: 1.5; }
 
 /* Fonts */
@@ -749,7 +751,15 @@ select * {
 .fontIco { font-family: var(--fontIco); }
 
 /* Font size */
-.fs02 { font-size: 0.25rem !important; }	.fs05 { font-size: 0.5rem !important; }
+.fs01 { font-size: 0.1rem !important; }		.fs015 { font-size: 0.15rem !important; }
+.fs02 { font-size: 0.2rem !important; }		.fs025 { font-size: 0.25rem !important; }
+.fs03 { font-size: 0.3rem !important; }		.fs035 { font-size: 0.35rem !important; }
+.fs04 { font-size: 0.4rem !important; }		.fs045 { font-size: 0.45rem !important; }
+.fs05 { font-size: 0.5rem !important; }		.fs055 { font-size: 0.55rem !important; }
+.fs06 { font-size: 0.6rem !important; }		.fs065 { font-size: 0.65rem !important; }
+.fs07 { font-size: 0.7rem !important; }		.fs075 { font-size: 0.75rem !important; }
+.fs08 { font-size: 0.8rem !important; }		.fs085 { font-size: 0.85rem !important; }
+.fs09 { font-size: 0.9rem !important; }		.fs095 { font-size: 0.95rem !important; }
 .fs1 { font-size: 1rem !important; }
 .fs1-1 { font-size: 1.1rem !important; }	.fs1-15 { font-size: 1.15rem !important; }
 .fs1-2 { font-size: 1.2rem !important; }	.fs1-25 { font-size: 1.25rem !important; }
@@ -784,6 +794,18 @@ select * {
 .fw7, .fw7-hov:hover { font-weight: 700; font-variation-settings: 'wght' 700; }
 .fw8, .fw8-hov:hover { font-weight: 800; font-variation-settings: 'wght' 800; }
 .fw9, .fw9-hov:hover { font-weight: 900; font-variation-settings: 'wght' 900; }
+
+/* Line height */
+.lh01 { line-height: 0.1; }	.lh11 { line-height: 1.1; }
+.lh02 { line-height: 0.2; }	.lh12 { line-height: 1.2; }
+.lh03 { line-height: 0.3; }	.lh13 { line-height: 1.3; }
+.lh04 { line-height: 0.4; }	.lh14 { line-height: 1.4; }
+.lh05 { line-height: 0.5; }	.lh15 { line-height: 1.5; }
+.lh06 { line-height: 0.6; }	.lh16 { line-height: 1.6; }
+.lh07 { line-height: 0.7; }	.lh17 { line-height: 1.7; }
+.lh08 { line-height: 0.8; }	.lh18 { line-height: 1.8; }
+.lh09 { line-height: 0.9; }	.lh19 { line-height: 1.9; }
+.lh1 { line-height: 1; }	.lh2 { line-height: 2; }
 
 /* Batch formatting */
 .va0 { vertical-align: 0%; }
