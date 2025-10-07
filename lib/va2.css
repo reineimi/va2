@@ -1425,22 +1425,20 @@ div:has(> #va2notifs) { animation: appearFromT 0.25s; }
 .scale2, .scale2-hov:hover { transform: scale(2); }			.scale095, .scale095-hov:hover { transform: scale(0.95); }
 .scale25, .scale25-hov:hover { transform: scale(2.5); }		.scale3, .scale3-hov:hover { transform: scale(3); }
 
-.ts0, .noani, .noani * { transition: none !important; }
 .ts, .ts-g > *, .ts-all * { transition-duration: var(--transition); }
-.ts02, .ts02-g > * { transition-duration: 0.2s; }
-.ts025, .ts025-g > * { transition-duration: 0.25s; }
-.ts03, .ts03-g > * { transition-duration: 0.3s; }
-.ts04, .ts04-g > * { transition-duration: 0.4s; }
-.ts05, .ts05-g > * { transition-duration: 0.5s; }
-.ts06, .ts06-g > * { transition-duration: 0.6s; }
-.ts07, .ts07-g > * { transition-duration: 0.7s; }
-.ts08, .ts08-g > * { transition-duration: 0.8s; }
-.ts09, .ts09-g > * { transition-duration: 0.9s; }
-.ts1, .ts1-g > * { transition-duration: 1s; }
-.ts15, .ts15-g > * { transition-duration: 1.5s; }
-.ts2, .ts2-g > * { transition-duration: 2s; }
-.ts25, .ts25-g > * { transition-duration: 2.5s; }
-.ts3, .ts3-g > * { transition-duration: 3s; }
+.ts0, .noani, .noani * { transition: none !important; }  .ts005, .ts005-g > * { transition-duration: 0.05s; }
+.ts01, .ts01-g > * { transition-duration: 0.1s; }	.ts015, .ts015-g > * { transition-duration: 0.15s; }
+.ts02, .ts02-g > * { transition-duration: 0.2s; }	.ts025, .ts025-g > * { transition-duration: 0.25s; }
+.ts03, .ts03-g > * { transition-duration: 0.3s; }	.ts035, .ts035-g > * { transition-duration: 0.35s; }
+.ts04, .ts04-g > * { transition-duration: 0.4s; }	.ts045, .ts045-g > * { transition-duration: 0.45s; }
+.ts05, .ts05-g > * { transition-duration: 0.5s; }	.ts055, .ts055-g > * { transition-duration: 0.55s; }
+.ts06, .ts06-g > * { transition-duration: 0.6s; }	.ts065, .ts065-g > * { transition-duration: 0.65s; }
+.ts07, .ts07-g > * { transition-duration: 0.7s; }	.ts075, .ts075-g > * { transition-duration: 0.75s; }
+.ts08, .ts08-g > * { transition-duration: 0.8s; }	.ts085, .ts085-g > * { transition-duration: 0.85s; }
+.ts09, .ts09-g > * { transition-duration: 0.9s; }	.ts095, .ts095-g > * { transition-duration: 0.95s; }
+.ts1, .ts1-g > * { transition-duration: 1s; }		.ts15, .ts15-g > * { transition-duration: 1.5s; }
+.ts2, .ts2-g > * { transition-duration: 2s; }		.ts25, .ts25-g > * { transition-duration: 2.5s; }
+.ts3, .ts3-g > * { transition-duration: 3s; }		.ts35, .ts35-g > * { transition-duration: 3.5s; }
 
 .ani0, .noani, .noani * { animation: none !important; }
 .ani, .ani-g > *, .ani-all * { animation-duration: var(--animation); animation-timing-function: ease-in; }
