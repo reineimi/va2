@@ -1147,7 +1147,6 @@ div:has(> .submenu):hover > .submenu { display: block; }
 #va2notifs_wrap { z-index: 89; }
 #va2notifs_wrap > div { width: 100vmin; }
 #va2notifs_wrap > div:first-child { animation: fadeout 0.35s; }
-#va2notifs { height: 70vh; }
 #va2notifs img { display: block; width: 80vmin; border-radius: var(--cornersS); }
 #va2notifs_nav { justify-content: end; }
 div:has(> #va2notifs) { animation: appearFromT 0.25s; }
