@@ -113,12 +113,12 @@ html {
 	overscroll-behavior-y: none !important;
 	font-size: var(--fontSize);
 }
-::-webkit-scrollbar { width: 0px; height: 0px; background: #0000 }
 sel { color: var(--highlight); background: #0001; }
 ::selection { color: var(--highlight); background: #0001; }
 ::-moz-selection { color: var(--highlight); background: #0001; }
 ::placeholder { color: var(--fontColor); opacity: 0.6 }
 ::-ms-input-placeholder { color: var(--fontColor); opacity: 0.6 }
+::-webkit-scrollbar { width: 0px; height: 0px; background: #0000 }
 ::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	appearance: none;
@@ -294,8 +294,8 @@ select * {
 }
 
 .theme-dark {
-	--fontColor: #707070;
-	--fontColorX: #5f5f5f;
+	--fontColor: #888;
+	--fontColorX: #777;
 	--colorMax: #000;
 	--colorMin: #fff;
 	--highlight: #fff;
@@ -1464,6 +1464,11 @@ div:has(> #va2notifs) { animation: appearFromT 0.25s; }
 .ani8, .ani8-g > *, .ani8-all * { animation-duration: 8s; }
 .ani9, .ani9-g > *, .ani9-all * { animation-duration: 9s; }
 .ani10, .ani10-g > *, .ani10-all * { animation-duration: 10s; }
+
+.theme-light .rbshift { box-shadow: 3px 1px #3bf3, -3px -1px #f3b3; }
+.theme-dark  .rbshift { box-shadow: 3px 1px #2793, -3px -1px #9273; }
+.theme-light .trbshift { text-shadow: 2px 1px #3bf7, -2px 0px #f3b8; }
+.theme-dark  .trbshift { text-shadow: 2px 1px #2797, -2px 0px #9277; }
 
 .ts-hover:hover { filter: brightness(0.85); }
 .ts-hover1:hover { transform: scale(0.98); }
