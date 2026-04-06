@@ -807,6 +807,14 @@ select * {
 .lh09 { line-height: 0.9; }	.lh19 { line-height: 1.9; }
 .lh1 { line-height: 1; }	.lh2 { line-height: 2; }
 
+/* Letter spacing */
+.ls1 { letter-spacing: 1px; } .ls2 { letter-spacing: 2px; }
+.ls3 { letter-spacing: 3px; } .ls4 { letter-spacing: 4px; }
+.ls5 { letter-spacing: 5px; } .ls6 { letter-spacing: 6px; }
+.ls01 { letter-spacing: 0.1rem; } .ls02 { letter-spacing: 0.2rem; }
+.ls03 { letter-spacing: 0.3rem; } .ls04 { letter-spacing: 0.4rem; }
+.ls05 { letter-spacing: 0.5rem; } .ls06 { letter-spacing: 0.6rem; }
+
 /* Batch formatting */
 .va0 { vertical-align: 0%; }
 .va50 { vertical-align: 50%; }
