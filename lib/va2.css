@@ -1518,6 +1518,7 @@ div:has(> #va2notifs) { animation: appearFromT 0.25s; }
 .ani-rotR { animation-name: rotR; }
 .ani-fall { animation-name: fall; }
 .ani-popUp { animation-name: popUp; }
+.ani-shadow, .ani-shadow-g > *, .ani-shadow-hov:hover, .ani-shadow-g-hov > *:hover { animation-name: shadow; }
 
 .ani-c-mult, .ani-c-mult-hov:hover { animation-name: c-mult; }
 .ani-c-cmult, .ani-c-cmult-hov:hover { animation-name: c-cmult; }
@@ -1664,6 +1665,12 @@ div:has(> #va2notifs) { animation: appearFromT 0.25s; }
 @keyframes rotL { 100% { transform: rotate(-360deg) } }
 @keyframes rotR { 100% { transform: rotate(360deg) } }
 @keyframes fall { 0% { opacity: 0; transform: translateY(-20vmin) scaleY(0) } }
+@keyframes shadow {
+	0%, 100% { box-shadow: -0.1rem 0px 0px var(--accent); }
+	25% { box-shadow: 0px -0.1rem 0px var(--accent); }
+	50% { box-shadow: 0.1rem 0px 0px var(--accent); }
+	75% { box-shadow: 0px 0.1rem 0px var(--accent); }
+}
 @keyframes pulse { 50% { filter: blur(6vmin) } }
 @keyframes popUp {
 	0% { transform: scale(0) }
