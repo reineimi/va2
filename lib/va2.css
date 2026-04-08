@@ -370,7 +370,7 @@ select * {
 /* No interaction */
 .nil { pointer-events: none !important; }
 /* No selection */
-.nosel, .ref, a, object, img, video, span, #va2ctxt, gicon, .gicon, anicon, .anicon, .btn {
+.nosel, .ref, a, object, img, video, span, gicon, .gicon, anicon, .anicon, .btn {
 	-webkit-touch-callout: none !important;
 	-webkit-user-select: none !important;
 	-khtml-user-select: none !important;
@@ -391,7 +391,7 @@ select * {
 .show { display: block !important; }
 .hide { display: none !important; }
 .pt, .pt-g > * { cursor: pointer !important; }
-.m, .m-g > *, .center > div, #va2context > * { margin: auto }
+.m, .m-g > *, .center > div { margin: auto }
 
 
 		/*=== POSITIONS ===*/
@@ -680,7 +680,7 @@ select * {
 .iblock, .inline-block { display: inline-block !important;  }
 .iflex, .inline-flex { display: inline-flex !important;  }
 /* Flex */
-.f, .fh, .fv, .fhr, .fvr, .center, body, main, #va2context { display: flex; flex-wrap: wrap; }
+.f, .fc, .fh, .fv, .fhr, .fvr, .center, body, main, #va2context { display: flex; flex-wrap: wrap; }
 /* Horizontal */
 .fh { flex-direction: column }
 .fhr { flex-direction: column-reverse }
@@ -703,7 +703,7 @@ select * {
 /* Flex content alignment */
 .start { justify-content: flex-start !important; }
 .end { justify-content: flex-end !important; }
-.center { justify-content: center; align-items: flex-start; }
+.center, .fc { justify-content: center; align-items: flex-start; }
 .center > * { position: relative; margin: auto; text-align: center; white-space: pre-line; overflow-wrap: break-word; }
 .spread { justify-content: space-between !important; }
 
@@ -975,7 +975,6 @@ select * {
 .crimson, .crimson-g > *, .crimson-hov:hover, .crimson-g-hov > *:hover { background-color: var(--darkcrimson) !important; }
 .brown, .brown-g > *, .brown-hov:hover, .brown-g-hov > *:hover { background-color: var(--darkbrown) !important; }
 
-.bn { border-color: #0000 !important; }
 .bwhite, .bwhite-g > *, .bwhite-hov:hover { border-color: #fff !important; }
 .bblack, .bblack-g > *, .bblack-hov:hover { border-color: #000 !important; }
 .bred, .bred-g > *, .bred-hov:hover { border-color: var(--red) !important; }
@@ -1003,6 +1002,7 @@ select * {
 .bdpink, .bdpink-g > *, .bdpink-hov:hover { border-color: var(--darkpink) !important; }
 .bdcrimson, .bdcrimson-g > *, .bdcrimson-hov:hover { border-color: var(--darkcrimson) !important; }
 .bdbrown, .bdbrown-g > *, .bdbrown-hov:hover { border-color: var(--darkbrown) !important; }
+.bn { border-color: #0000 !important; } .bc { border-color: var(--accent) !important; }
 
 /* Multi-color elements */
 .mult > *:nth-child(11n+1), .mult-hov > *:nth-child(11n+1):hover { background-color: var(--darkred); }
@@ -1147,25 +1147,6 @@ input:checked ~.chbox { background: var(--accent) }
 div:has(> .submenu):hover > .submenu { display: block; }
 
 /* va2.js */
-#va2notif { z-index: 88; top: var(--headerH); left: 0px; }
-#va2notif { transform: translateY(-150%); }
-#va2notif > div, #va2prompt > * { max-width: 90vmin; }
-#va2notif img { display: block; width: 10rem; }
-#va2prompt { animation: slideFromT 0.5s forwards; }
-#va2notifs_wrap { z-index: 89; }
-#va2notifs_wrap > div { width: 100vmin; }
-#va2notifs_wrap > div:first-child { animation: fadeout 0.35s; }
-#va2notifs img { display: block; width: 80vmin; border-radius: var(--cornersS); }
-#va2notifs_nav { justify-content: end; }
-div:has(> #va2notifs) { animation: appearFromT 0.25s; }
-
-#va2console {
-	padding: 0.5rem 1rem;
-	text-wrap: wrap;
-	word-break: break-word;
-}
-#va2context > div:first-child { background: #0002; }
-#va2contextMenu { width: 25rem; animation: slideFromB 0.2s; }
 .slide { display: flex; }
 .slideN { animation: slideFromR var(--animation); }
 .slideP { animation: slideFromL var(--animation); }
