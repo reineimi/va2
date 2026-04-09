@@ -666,6 +666,80 @@ input:checked ~.chbox { background: var(--accent) }
 .hr90 { height: 90rem; }	.hv90 { height: 90vmin; }	.hrv90 { height: calc(45rem + 45vmin); }		.vhr90 { height: calc(45rem + 45vh); }
 .hr100 { height: 100rem; }	.hv100 { height: 100vmin; }	.hrv100 { height: calc(50rem + 50vmin); }		.vhr100 { height: calc(50rem + 50vh); }
 
+.h-m, .h-m-g > * { max-height: 100% !important; }
+.h1-m { max-height: 1%; }		.vh-m { max-height: var(--dvh); }
+.h5-m { max-height: 5%; }		.vh5-m { max-height: calc(var(--dvh)*0.05); }
+.h10-m { max-height: 10%; }		.vh10-m { max-height: calc(var(--dvh)*0.1); }
+.h15-m { max-height: 15%; }		.vh15-m { max-height: calc(var(--dvh)*0.15); }
+.h20-m { max-height: 20%; }		.vh20-m { max-height: calc(var(--dvh)*0.2); }
+.h25-m { max-height: 25%; }		.vh25-m { max-height: calc(var(--dvh)*0.25); }
+.h30-m { max-height: 30%; }		.vh30-m { max-height: calc(var(--dvh)*0.3); }
+.h40-m { max-height: 40%; }		.vh40-m { max-height: calc(var(--dvh)*0.4); }
+.h50-m { max-height: 50%; }		.vh50-m { max-height: calc(var(--dvh)*0.5); }
+.h60-m { max-height: 60%; }		.vh60-m { max-height: calc(var(--dvh)*0.6); }
+.h70-m { max-height: 70%; }		.vh70-m { max-height: calc(var(--dvh)*0.7); }
+.h80-m { max-height: 80%; }		.vh80-m { max-height: calc(var(--dvh)*0.8); }
+.h90-m { max-height: 90%; }		.vh90-m { max-height: calc(var(--dvh)*0.9); }
+.h95-m { max-height: 95%; }		.vh95-m { max-height: calc(var(--dvh)*0.95); }
+.vh100-m { max-height: var(--dvh); }
+
+.hr1-m { max-height: 1rem; }	.hv1-m { max-height: 1vmin; }	.hrv1-m { max-height: calc(0.5rem + 0.5vmin); }		.vhr1-m { max-height: calc(0.5rem + 0.5vh); }
+.hr2-m { max-height: 2rem; }	.hv2-m { max-height: 2vmin; }	.hrv2-m { max-height: calc(1rem + 1vmin); }			.vhr2-m { max-height: calc(1rem + 1vh); }
+.hr3-m { max-height: 3rem; }	.hv3-m { max-height: 3vmin; }	.hrv3-m { max-height: calc(1.5rem + 1.5vmin); }		.vhr3-m { max-height: calc(1.5rem + 1.5vh); }
+.hr4-m { max-height: 4rem; }	.hv4-m { max-height: 4vmin; }	.hrv4-m { max-height: calc(2rem + 2vmin); }			.vhr4-m { max-height: calc(2rem + 2vh); }
+.hr5-m { max-height: 5rem; }	.hv5-m { max-height: 5vmin; }	.hrv5-m { max-height: calc(2.5rem + 2.5vmin); }		.vhr5-m { max-height: calc(2.5rem + 2.5vh); }
+.hr10-m { max-height: 10rem; }	.hv10-m { max-height: 10vmin; }	.hrv10-m { max-height: calc(5rem + 5vmin); }			.vhr10-m { max-height: calc(5rem + 5vh); }
+.hr15-m { max-height: 15rem; }	.hv15-m { max-height: 15vmin; }	.hrv15-m { max-height: calc(7.5rem + 7.5vmin); }		.vhr15-m { max-height: calc(7.5rem + 7.5vh); }
+.hr20-m { max-height: 20rem; }	.hv20-m { max-height: 20vmin; }	.hrv20-m { max-height: calc(10rem + 10vmin); }		.vhr20-m { max-height: calc(10rem + 10vh); }
+.hr25-m { max-height: 25rem; }	.hv25-m { max-height: 25vmin; }	.hrv25-m { max-height: calc(12.5rem + 12.5vmin); }	.vhr25-m { max-height: calc(12.5rem + 12.5vh); }
+.hr30-m { max-height: 30rem; }	.hv30-m { max-height: 30vmin; }	.hrv30-m { max-height: calc(15rem + 15vmin); }		.vhr30-m { max-height: calc(15rem + 15vh); }
+.hr35-m { max-height: 35rem; }	.hv35-m { max-height: 35vmin; }	.hrv35-m { max-height: calc(17.5rem + 17.5vmin); }	.vhr35-m { max-height: calc(17.5rem + 17.5vh); }
+.hr40-m { max-height: 40rem; }	.hv40-m { max-height: 40vmin; }	.hrv40-m { max-height: calc(20rem + 20vmin); }		.vhr40-m { max-height: calc(20rem + 20vh); }
+.hr45-m { max-height: 45rem; }	.hv45-m { max-height: 45vmin; }	.hrv45-m { max-height: calc(22.5rem + 22.5vmin); }	.vhr45-m { max-height: calc(22.5rem + 22.5vh); }
+.hr50-m { max-height: 50rem; }	.hv50-m { max-height: 50vmin; }	.hrv50-m { max-height: calc(25rem + 25vmin); }		.vhr50-m { max-height: calc(25rem + 25vh); }
+.hr60-m { max-height: 60rem; }	.hv60-m { max-height: 60vmin; }	.hrv60-m { max-height: calc(30rem + 30vmin); }		.vhr60-m { max-height: calc(30rem + 30vh); }
+.hr70-m { max-height: 70rem; }	.hv70-m { max-height: 70vmin; }	.hrv70-m { max-height: calc(35rem + 35vmin); }		.vhr70-m { max-height: calc(35rem + 35vh); }
+.hr80-m { max-height: 80rem; }	.hv80-m { max-height: 80vmin; }	.hrv80-m { max-height: calc(40rem + 40vmin); }		.vhr80-m { max-height: calc(40rem + 40vh); }
+.hr90-m { max-height: 90rem; }	.hv90-m { max-height: 90vmin; }	.hrv90-m { max-height: calc(45rem + 45vmin); }		.vhr90-m { max-height: calc(45rem + 45vh); }
+.hr100-m { max-height: 100rem; }	.hv100-m { max-height: 100vmin; }	.hrv100-m { max-height: calc(50rem + 50vmin); }		.vhr100-m { max-height: calc(50rem + 50vh); }
+
+.h-mi, .h-mi-g > * { min-height: 100% !important; }
+.h1-mi { min-height: 1%; }			.vh-mi { min-height: var(--dvh); }
+.h5-mi { min-height: 5%; }			.vh5-mi { min-height: calc(var(--dvh)*0.05); }
+.h10-mi { min-height: 10%; }		.vh10-mi { min-height: calc(var(--dvh)*0.1); }
+.h15-mi { min-height: 15%; }		.vh15-mi { min-height: calc(var(--dvh)*0.15); }
+.h20-mi { min-height: 20%; }		.vh20-mi { min-height: calc(var(--dvh)*0.2); }
+.h25-mi { min-height: 25%; }		.vh25-mi { min-height: calc(var(--dvh)*0.25); }
+.h30-mi { min-height: 30%; }		.vh30-mi { min-height: calc(var(--dvh)*0.3); }
+.h40-mi { min-height: 40%; }		.vh40-mi { min-height: calc(var(--dvh)*0.4); }
+.h50-mi { min-height: 50%; }		.vh50-mi { min-height: calc(var(--dvh)*0.5); }
+.h60-mi { min-height: 60%; }		.vh60-mi { min-height: calc(var(--dvh)*0.6); }
+.h70-mi { min-height: 70%; }		.vh70-mi { min-height: calc(var(--dvh)*0.7); }
+.h80-mi { min-height: 80%; }		.vh80-mi { min-height: calc(var(--dvh)*0.8); }
+.h90-mi { min-height: 90%; }		.vh90-mi { min-height: calc(var(--dvh)*0.9); }
+.h95-mi { min-height: 95%; }		.vh95-mi { min-height: calc(var(--dvh)*0.95); }
+.vh100-mi { min-height: var(--dvh); }
+
+.hr1-mi { min-height: 1rem; }	.hv1-mi { min-height: 1vmin; }		.hrv1-mi { min-height: calc(0.5rem + 0.5vmin); }	.vhr1-mi { min-height: calc(0.5rem + 0.5vh); }
+.hr2-mi { min-height: 2rem; }	.hv2-mi { min-height: 2vmin; }		.hrv2-mi { min-height: calc(1rem + 1vmin); }		.vhr2-mi { min-height: calc(1rem + 1vh); }
+.hr3-mi { min-height: 3rem; }	.hv3-mi { min-height: 3vmin; }		.hrv3-mi { min-height: calc(1.5rem + 1.5vmin); }	.vhr3-mi { min-height: calc(1.5rem + 1.5vh); }
+.hr4-mi { min-height: 4rem; }	.hv4-mi { min-height: 4vmin; }		.hrv4-mi { min-height: calc(2rem + 2vmin); }		.vhr4-mi { min-height: calc(2rem + 2vh); }
+.hr5-mi { min-height: 5rem; }	.hv5-mi { min-height: 5vmin; }		.hrv5-mi { min-height: calc(2.5rem + 2.5vmin); }	.vhr5-mi { min-height: calc(2.5rem + 2.5vh); }
+.hr10-mi { min-height: 10rem; }	.hv10-mi { min-height: 10vmin; }	.hrv10-mi { min-height: calc(5rem + 5vmin); }		.vhr10-mi { min-height: calc(5rem + 5vh); }
+.hr15-mi { min-height: 15rem; }	.hv15-mi { min-height: 15vmin; }	.hrv15-mi { min-height: calc(7.5rem + 7.5vmin); }	.vhr15-mi { min-height: calc(7.5rem + 7.5vh); }
+.hr20-mi { min-height: 20rem; }	.hv20-mi { min-height: 20vmin; }	.hrv20-mi { min-height: calc(10rem + 10vmin); }		.vhr20-mi { min-height: calc(10rem + 10vh); }
+.hr25-mi { min-height: 25rem; }	.hv25-mi { min-height: 25vmin; }	.hrv25-mi { min-height: calc(12.5rem + 12.5vmin); }	.vhr25-mi { min-height: calc(12.5rem + 12.5vh); }
+.hr30-mi { min-height: 30rem; }	.hv30-mi { min-height: 30vmin; }	.hrv30-mi { min-height: calc(15rem + 15vmin); }		.vhr30-mi { min-height: calc(15rem + 15vh); }
+.hr35-mi { min-height: 35rem; }	.hv35-mi { min-height: 35vmin; }	.hrv35-mi { min-height: calc(17.5rem + 17.5vmin); }	.vhr35-mi { min-height: calc(17.5rem + 17.5vh); }
+.hr40-mi { min-height: 40rem; }	.hv40-mi { min-height: 40vmin; }	.hrv40-mi { min-height: calc(20rem + 20vmin); }		.vhr40-mi { min-height: calc(20rem + 20vh); }
+.hr45-mi { min-height: 45rem; }	.hv45-mi { min-height: 45vmin; }	.hrv45-mi { min-height: calc(22.5rem + 22.5vmin); }	.vhr45-mi { min-height: calc(22.5rem + 22.5vh); }
+.hr50-mi { min-height: 50rem; }	.hv50-mi { min-height: 50vmin; }	.hrv50-mi { min-height: calc(25rem + 25vmin); }		.vhr50-mi { min-height: calc(25rem + 25vh); }
+.hr60-mi { min-height: 60rem; }	.hv60-mi { min-height: 60vmin; }	.hrv60-mi { min-height: calc(30rem + 30vmin); }		.vhr60-mi { min-height: calc(30rem + 30vh); }
+.hr70-mi { min-height: 70rem; }	.hv70-mi { min-height: 70vmin; }	.hrv70-mi { min-height: calc(35rem + 35vmin); }		.vhr70-mi { min-height: calc(35rem + 35vh); }
+.hr80-mi { min-height: 80rem; }	.hv80-mi { min-height: 80vmin; }	.hrv80-mi { min-height: calc(40rem + 40vmin); }		.vhr80-mi { min-height: calc(40rem + 40vh); }
+.hr90-mi { min-height: 90rem; }	.hv90-mi { min-height: 90vmin; }	.hrv90-mi { min-height: calc(45rem + 45vmin); }		.vhr90-mi { min-height: calc(45rem + 45vh); }
+.hr100-mi { min-height: 100rem; }	.hv100-mi { min-height: 100vmin; }	.hrv100-mi { min-height: calc(50rem + 50vmin); }		.vhr100-mi { min-height: calc(50rem + 50vh); }
+
 .ch1 { width: 1rem; height: 1rem; } .ch1-5 { width: 1.5rem; height: 1.5rem; }
 .ch2 { width: 2rem; height: 2rem; } .ch2-5 { width: 2.5rem; height: 2.5rem; }
 .ch3 { width: 3rem; height: 3rem; } .ch3-5 { width: 3.5rem; height: 3.5rem; }
