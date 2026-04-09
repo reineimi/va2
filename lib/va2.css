@@ -75,6 +75,8 @@ S and L means Small and Large */
 	--cornersL: 2.5rem;
 	--border: 0.1rem;
 	--shadow: 0px 0.5rem 2rem #0004;
+	--shadowX: 0px 0.5rem 2.5rem #0008;
+	--shadowS: 0px 0.25rem 1rem #0003;
 	--paddingX: 2rem;
 	--paddingY: 1.5rem;
 	--transition: 0.3s;
@@ -270,7 +272,7 @@ input:checked ~.chbox { background: var(--accent) }
 
 .theme-light {
 	--fontColor: #666;
-	--fontColorX: #838383;
+	--fontColorX: #868686;
 	--colorMax: #fff;
 	--colorMin: #000;
 	--highlight: #000;
@@ -321,7 +323,7 @@ input:checked ~.chbox { background: var(--accent) }
 
 .theme-dark {
 	--fontColor: #888;
-	--fontColorX: #777;
+	--fontColorX: #727272;
 	--colorMax: #000;
 	--colorMin: #fff;
 	--highlight: #fff;
@@ -330,7 +332,7 @@ input:checked ~.chbox { background: var(--accent) }
 	--windowBg: #121212;
 	--windowFg: #191919;
 	--itemBg: #222;
-	--itemFg: #2a2a2a;
+	--itemFg: #2d2d2d;
 	--theme: #000;
 	--themeInv: #fff;
 
@@ -386,6 +388,8 @@ input:checked ~.chbox { background: var(--accent) }
 .border, .borderFg { border: var(--border) solid var(--itemBg); }
 .borderFg { border-color: var(--itemFg); }
 .shadow { box-shadow: var(--shadow); }
+.shadowX { box-shadow: var(--shadowX); }
+.shadowS { box-shadow: var(--shadowS); }
 .noshadow { box-shadow: none !important; }
 
 .icon_active, .icon_active > * { color: var(--accent) !important; }
