@@ -77,6 +77,8 @@ S and L means Small and Large */
 	--shadow: 0px 0.5rem 2rem #0004;
 	--shadowX: 0px 0.5rem 2.5rem #0008;
 	--shadowS: 0px 0.25rem 1rem #0003;
+	--transparent: #0007;
+	--transparentX: #000a;
 	--paddingX: 2rem;
 	--paddingY: 1.5rem;
 	--transition: 0.3s;
@@ -391,6 +393,8 @@ input:checked ~.chbox { background: var(--accent) }
 .shadowX { box-shadow: var(--shadowX); }
 .shadowS { box-shadow: var(--shadowS); }
 .noshadow { box-shadow: none !important; }
+.transparent { background-color: var(--transparent) !important; }
+.transparentX { background-color: var(--transparentX) !important; }
 
 .icon_active, .icon_active > * { color: var(--accent) !important; }
 .iconBg_active { background-color: var(--accentBg) !important; }
@@ -993,8 +997,13 @@ input:checked ~.chbox { background: var(--accent) }
 .ccrimson, .ccrimson-g > *, .ccrimson-hov:hover, .ccrimson-g-hov > *:hover { color: var(--crimson); }
 .cbrown, .cbrown-g > *, .cbrown-hov:hover, .cbrown-g-hov > *:hover { color: var(--brown); }
 .cgray, .cgray-g > *, .cgray-hov:hover, .cgray-g-hov > *:hover { color: var(--lightgray); }
+.a-c a, .b-c b { color: var(--accent); }
 
-.bgc, .bgc-g > *, .bgc-hov:hover { background-color: var(--windowFg) !important; }
+.bgc, .bgc-g > *, .bgc-hov:hover { background-color: var(--windowBg) !important; }
+.fgc, .fgc-g > *, .fgc-hov:hover { background-color: var(--windowFg) !important; }
+.bgci, .bgci-g > *, .bgci-hov:hover { background-color: var(--itemBg) !important; }
+.fgci, .fgci-g > *, .fgci-hov:hover { background-color: var(--itemFg) !important; }
+
 .bgc0, .bgc0-g > *, .bgc0-hov:hover  { background-color: #0000 !important; }
 .white, .white-g > *, .white-hov:hover, .white-g-hov > *:hover { background-color: #fff !important; }
 .black, .black-g > *, .black-hov:hover, .black-g-hov > *:hover { background-color: #000 !important; }
@@ -1159,17 +1168,6 @@ input:checked ~.chbox { background: var(--accent) }
 div:has(> .submenu):hover > .submenu { display: block; }
 
 /* va2.js */
-#va2notif { z-index: 88; top: var(--headerH); left: 0px; }
-#va2notif { transform: translateY(-150%); }
-#va2notif > div, #va2prompt > * { max-width: 90vmin; }
-#va2notif img { display: block; width: 10rem; }
-#va2notifs_wrap { z-index: 89; }
-#va2notifs_wrap > div { width: 100vmin; }
-#va2notifs_wrap > div:first-child { animation: fadeout 0.35s; }
-#va2notifs img { display: block; width: 80vmin; border-radius: var(--cornersS); }
-#va2notifs_nav { justify-content: end; }
-div:has(> #va2notifs) { animation: appearFromT 0.25s; }
-
 .slide { display: flex; }
 .slideN { animation: slideFromR var(--animation); }
 .slideP { animation: slideFromL var(--animation); }
