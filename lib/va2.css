@@ -1080,8 +1080,8 @@ input:checked ~.chbox { background: var(--accent) }
 
 .bgc, .bgc-g > *, .bgc-hov:hover { background-color: var(--windowBg) !important; }
 .fgc, .fgc-g > *, .fgc-hov:hover { background-color: var(--windowFg) !important; }
-.bgci, .bgci-g > *, .bgci-hov:hover { background-color: var(--itemBg) !important; }
-.fgci, .fgci-g > *, .fgci-hov:hover { background-color: var(--itemFg) !important; }
+.bgic, .bgic-g > *, .bgic-hov:hover { background-color: var(--itemBg) !important; }
+.fgic, .fgic-g > *, .fgic-hov:hover { background-color: var(--itemFg) !important; }
 
 .bgc0, .bgc0-g > *, .bgc0-hov:hover  { background-color: #0000 !important; }
 .bga, .bga-g, .bga-hov:hover { background: var(--accentBg) !important; }
