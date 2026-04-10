@@ -61,7 +61,7 @@ S and L means Small and Large */
 	--fontPrint: 'Roboto Slab', serif;
 	--fontPrintX: 'Smooch Sans', sans-serif;
 	--fontCode: 'Inconsolata', monospace;
-	--fontFancy: 'Dancing Script', cursive;
+	--fontFancy: 'Dancing Script', 'Noto Sans JP', cursive;
 	--fontNovel: 'Cinzel', fantasy;
 	--fontPixel: 'VT323', sans-serif;
 	--fontIco: 'Material Symbols', sans-serif;
@@ -141,16 +141,12 @@ sel { color: var(--highlight); background: #0001; }
 }
 
 body {
-	height: var(--dvh);
-	width: 100vw;
-	margin: 0px;
-	font-size: inherit;
-	font-family: 'Noto Sans JP';
-	background: var(--windowBg);
-	color: var(--fontColor);
+	height: var(--dvh); width: 100vw; margin: 0px;
+	font-size: inherit; font-family: var(--font);
+	color: var(--fontColor); background: var(--windowBg);
 }
-#page_content_min { animation: remove 0s linear 1s forwards; }
-#page_content_wrap {
+#va2_page_content_min { animation: remove 0s linear 1s forwards; }
+#va2_page_content_wrap {
 	z-index: 0;
 	display: flex;
 	flex-wrap: wrap;
@@ -204,6 +200,7 @@ hr {
 img { z-index: 1; cursor: pointer; }
 img.emoji { width: 1em; pointer-events: none }
 img.fs, div.fs { background-color: #000 !important; z-index: 10 !important; border-radius: 0px !important; }
+li::marker { color: var(--fontColorX); }
 a { color: inherit; display: inline; text-decoration: none; }
 b { display: inline; font-weight: 700; margin: 0px }
 i { display: inline; font-style: italic; margin: 0px }
@@ -224,12 +221,14 @@ mask {}
 
 iframe { border: none; outline: none; border-radius: var(--corners) }
 input, textarea, select {
-	white-space: nowrap; border: none;
+	white-space: nowrap;
 	outline: none; color: inherit;
 	font: inherit; resize: none;
 	-webkit-appearance: none !important;
 	-moz-appearance: none !important;
 	appearance: none !important;
+	background: none;
+	border: 0px solid var(--itemBg);
 }
 input[type=range] { border: 2px solid var(--itemFg); }
 textarea { height: 4rem; background: none; }
@@ -245,7 +244,6 @@ select * {
 
 /* Input field */
 .input {
-	background: none;
 	font: inherit;
 	color: var(--fontColor);
 	border: var(--border) solid var(--itemBg);
@@ -388,7 +386,7 @@ input:checked ~.chbox { background: var(--accent) }
 .th_bFg { border-color: var(--itemFg) !important; }
 
 .border, .borderFg { border: var(--border) solid var(--itemBg); }
-.borderFg { border-color: var(--itemFg); }
+.borderFg { border-color: var(--itemFg) !important; }
 .shadow { box-shadow: var(--shadow); }
 .shadowX { box-shadow: var(--shadowX); }
 .shadowS { box-shadow: var(--shadowS); }
@@ -396,8 +394,14 @@ input:checked ~.chbox { background: var(--accent) }
 .transparent { background-color: var(--transparent) !important; }
 .transparentX { background-color: var(--transparentX) !important; }
 
-.icon_active, .icon_active > * { color: var(--accent) !important; }
-.iconBg_active { background-color: var(--accentBg) !important; }
+/* Buttons */
+.btn {
+	font-family: var(--fontBtn);
+	padding: 0.3em 1.2em;
+	border-radius: var(--cornersS);
+	cursor: pointer;
+}
+.btn:hover { background: var(--itemFg) !important; }
 
 
 		/*=== GENERAL ===*/
@@ -758,6 +762,7 @@ input:checked ~.chbox { background: var(--accent) }
 .g2 { gap: 1rem; }
 .g1 { gap: 0.5rem; }
 .g05 { gap: 0.25rem; }
+.g1px { gap: 1px; }
 .g0 { gap: 0px; }
 
 /* Overflow */
@@ -1011,19 +1016,19 @@ input:checked ~.chbox { background: var(--accent) }
 
 /* Borders */
 .b0 { border: none !important; }
-.b01, .b01-g > *, .b01-hov:hover { border: 0.1rem solid var(--itemBg); }	.b11, .b11-g > *, .b11-hov:hover { border: 1.1rem solid var(--itemBg); }
-.b02, .b02-g > *, .b02-hov:hover { border: 0.2rem solid var(--itemBg); }	.b12, .b12-g > *, .b12-hov:hover { border: 1.2rem solid var(--itemBg); }
-.b03, .b03-g > *, .b03-hov:hover { border: 0.3rem solid var(--itemBg); }	.b13, .b13-g > *, .b13-hov:hover { border: 1.3rem solid var(--itemBg); }
-.b04, .b04-g > *, .b04-hov:hover { border: 0.4rem solid var(--itemBg); }	.b14, .b14-g > *, .b14-hov:hover { border: 1.4rem solid var(--itemBg); }
-.b05, .b05-g > *, .b05-hov:hover { border: 0.5rem solid var(--itemBg); }	.b15, .b15-g > *, .b15-hov:hover { border: 1.5rem solid var(--itemBg); }
-.b06, .b06-g > *, .b06-hov:hover { border: 0.6rem solid var(--itemBg); }	.b16, .b16-g > *, .b16-hov:hover { border: 1.6rem solid var(--itemBg); }
-.b07, .b07-g > *, .b07-hov:hover { border: 0.7rem solid var(--itemBg); }	.b17, .b17-g > *, .b17-hov:hover { border: 1.7rem solid var(--itemBg); }
-.b08, .b08-g > *, .b08-hov:hover { border: 0.8rem solid var(--itemBg); }	.b18, .b18-g > *, .b18-hov:hover { border: 1.8rem solid var(--itemBg); }
-.b09, .b09-g > *, .b09-hov:hover { border: 0.9rem solid var(--itemBg); }	.b19, .b19-g > *, .b19-hov:hover { border: 1.9rem solid var(--itemBg); }
-.b1, .b1-g > *, .b1-hov:hover { border: 1rem solid var(--itemBg); }		.b1, .b1-g > *, .b1-hov:hover { border: 1rem solid var(--itemBg); }
-.b2, .b2-g > *, .b2-hov:hover { border: 2rem solid var(--itemBg); }		.b25, .b25-g > *, .b25-hov:hover { border: 2.5rem solid var(--itemBg); }
-.b3, .b3-g > *, .b3-hov:hover { border: 3rem solid var(--itemBg); }		.b35, .b35-g > *, .b35-hov:hover { border: 3.5rem solid var(--itemBg); }
-.b1px, .b1px-g > *, .b1px-hov:hover { border: 1px solid var(--itemBg); }	.b2px, .b2px-g > *, .b2px-hov:hover { border: 2px solid var(--itemBg); }
+.b01, .b01-g > *, .b01-hov:hover { border-width: 0.1rem !important; }	.b11, .b11-g > *, .b11-hov:hover { border-width: 1.1rem !important; }
+.b02, .b02-g > *, .b02-hov:hover { border-width: 0.2rem !important; }	.b12, .b12-g > *, .b12-hov:hover { border-width: 1.2rem !important; }
+.b03, .b03-g > *, .b03-hov:hover { border-width: 0.3rem !important; }	.b13, .b13-g > *, .b13-hov:hover { border-width: 1.3rem !important; }
+.b04, .b04-g > *, .b04-hov:hover { border-width: 0.4rem !important; }	.b14, .b14-g > *, .b14-hov:hover { border-width: 1.4rem !important; }
+.b05, .b05-g > *, .b05-hov:hover { border-width: 0.5rem !important; }	.b15, .b15-g > *, .b15-hov:hover { border-width: 1.5rem !important; }
+.b06, .b06-g > *, .b06-hov:hover { border-width: 0.6rem !important; }	.b16, .b16-g > *, .b16-hov:hover { border-width: 1.6rem !important; }
+.b07, .b07-g > *, .b07-hov:hover { border-width: 0.7rem !important; }	.b17, .b17-g > *, .b17-hov:hover { border-width: 1.7rem !important; }
+.b08, .b08-g > *, .b08-hov:hover { border-width: 0.8rem !important; }	.b18, .b18-g > *, .b18-hov:hover { border-width: 1.8rem !important; }
+.b09, .b09-g > *, .b09-hov:hover { border-width: 0.9rem !important; }	.b19, .b19-g > *, .b19-hov:hover { border-width: 1.9rem !important; }
+.b1, .b1-g > *, .b1-hov:hover { border-width: 1rem !important; }		.b1, .b1-g > *, .b1-hov:hover { border-width: 1rem !important; }
+.b2, .b2-g > *, .b2-hov:hover { border-width: 2rem !important; }		.b25, .b25-g > *, .b25-hov:hover { border-width: 2.5rem !important; }
+.b3, .b3-g > *, .b3-hov:hover { border-width: 3rem !important; }		.b35, .b35-g > *, .b35-hov:hover { border-width: 3.5rem !important; }
+.b1px, .b1px-g > *, .b1px-hov:hover { border-width: 1px !important; }	.b2px, .b2px-g > *, .b2px-hov:hover { border-width: 2px !important; }
 .bL, .bL-g > *, .bX, .bX-g > *, .bL-hov:hover { border-left: var(--border) solid var(--itemBg); }
 .bR, .bR-g > *, .bX, .bX-g > *, .bR-hov:hover { border-right: var(--border) solid var(--itemBg); }
 .bT, .bT-g > *, .bY, .bY-g > *, .bT-hov:hover { border-top: var(--border) solid var(--itemBg); }
@@ -1055,7 +1060,7 @@ input:checked ~.chbox { background: var(--accent) }
 .fc, .fc-g > *, .fc-hov:hover, .fc-g-hov > *:hover { color: var(--fontColor); }
 .fcx, .fcx-g > *, .fcx-hov:hover, .fcx-g-hov > *:hover { color: var(--fontColorX); }
 .fc0, .fc0-g > *, .fc0-hov:hover, .fc0-g-hov > *:hover { color: #0000; }
-.c, .c-g, .c-hov:hover { color: var(--accent) !important; }
+.c, .c-g, .c-hov:hover, .a, .a-g, .a-hov:hover { color: var(--accent) !important; }
 .cwhite, .cwhite-g > *, .cwhite-hov:hover, .cwhite-g-hov > *:hover { color: var(--white); }
 .cblack, .cblack-g > *, .cblack-hov:hover, .cblack-g-hov > *:hover { color: var(--black); }
 .cred, .cred-g > *, .cred-hov:hover, .cred-g-hov > *:hover { color: var(--red); }
@@ -1079,6 +1084,7 @@ input:checked ~.chbox { background: var(--accent) }
 .fgci, .fgci-g > *, .fgci-hov:hover { background-color: var(--itemFg) !important; }
 
 .bgc0, .bgc0-g > *, .bgc0-hov:hover  { background-color: #0000 !important; }
+.bga, .bga-g, .bga-hov:hover { background: var(--accentBg) !important; }
 .white, .white-g > *, .white-hov:hover, .white-g-hov > *:hover { background-color: #fff !important; }
 .black, .black-g > *, .black-hov:hover, .black-g-hov > *:hover { background-color: #000 !important; }
 .gray, .gray-g > *, .gray-hov:hover, .gray-g-hov > *:hover { background-color: var(--gray) !important; }
@@ -1094,6 +1100,11 @@ input:checked ~.chbox { background: var(--accent) }
 .pink, .pink-g > *, .pink-hov:hover, .pink-g-hov > *:hover { background-color: var(--darkpink) !important; }
 .crimson, .crimson-g > *, .crimson-hov:hover, .crimson-g-hov > *:hover { background-color: var(--darkcrimson) !important; }
 .brown, .brown-g > *, .brown-hov:hover, .brown-g-hov > *:hover { background-color: var(--darkbrown) !important; }
+
+.bbg, .bbg-g > *, .bbg-hov:hover { border-color: var(--windowBg) !important; }
+.bfg, .bfg-g > *, .bfg-hov:hover { border-color: var(--windowFg) !important; }
+.bbgi, .bbgi-g > *, .bbgi-hov:hover { border-color: var(--itemBg) !important; }
+.bfgi, .bfgi-g > *, .bfgi-hov:hover { border-color: var(--itemFg) !important; }
 
 .bwhite, .bwhite-g > *, .bwhite-hov:hover { border-color: #fff !important; }
 .bblack, .bblack-g > *, .bblack-hov:hover { border-color: #000 !important; }
@@ -1123,6 +1134,38 @@ input:checked ~.chbox { background: var(--accent) }
 .bdcrimson, .bdcrimson-g > *, .bdcrimson-hov:hover { border-color: var(--darkcrimson) !important; }
 .bdbrown, .bdbrown-g > *, .bdbrown-hov:hover { border-color: var(--darkbrown) !important; }
 .bn { border-color: #0000 !important; } .bc { border-color: var(--accent) !important; }
+
+.bbg, .bbg-g > *, .bbg-hov:hover,
+.bfg, .bfg-g > *, .bfg-hov:hover,
+.bbgi, .bbgi-g > *, .bbgi-hov:hover,
+.bfgi, .bfgi-g > *, .bfgi-hov:hover,
+.bwhite, .bwhite-g > *, .bwhite-hov:hover,
+.bblack, .bblack-g > *, .bblack-hov:hover,
+.bred, .bred-g > *, .bred-hov:hover,
+.borange, .borange-g > *, .borange-hov:hover,
+.byellow, .byellow-g > *, .byellow-hov:hover,
+.bgreen, .bgreen-g > *, .bgreen-hov:hover,
+.bteal, .bteal-g > *, .bteal-hov:hover,
+.bcyan, .bcyan-g > *, .bcyan-hov:hover,
+.bskyblue, .bskyblue-g > *, .bskyblue-hov:hover,
+.bblue, .bblue-g > *, .bblue-hov:hover,
+.bpurple, .bpurple-g > *, .bpurple-hov:hover,
+.bpink, .bpink-g > *, .bpink-hov:hover,
+.bcrimson, .bcrimson-g > *, .bcrimson-hov:hover,
+.bbrown, .bbrown-g > *, .bbrown-hov:hover,
+.bdred, .bdred-g > *, .bdred-hov:hover,
+.bdorange, .bdorange-g > *, .bdorange-hov:hover,
+.bdyellow, .bdyellow-g > *, .bdyellow-hov:hover,
+.bdgreen, .bdgreen-g > *, .bdgreen-hov:hover,
+.bdteal, .bdteal-g > *, .bdteal-hov:hover,
+.bdcyan, .bdcyan-g > *, .bdcyan-hov:hover,
+.bdskyblue, .bdskyblue-g > *, .bdskyblue-hov:hover,
+.bdblue, .bdblue-g > *, .bdblue-hov:hover,
+.bdpurple, .bdpurple-g > *, .bdpurple-hov:hover,
+.bdpink, .bdpink-g > *, .bdpink-hov:hover,
+.bdcrimson, .bdcrimson-g > *, .bdcrimson-hov:hover,
+.bdbrown, .bdbrown-g > *, .bdbrown-hov:hover,
+.bsolid { border-style: solid; }
 
 /* Multi-color elements */
 .mult > *:nth-child(11n+1), .mult-hov > *:nth-child(11n+1):hover { background-color: var(--darkred); }
@@ -1215,14 +1258,6 @@ input:checked ~.chbox { background: var(--accent) }
 
 		/*=== MODULES/OTHER ===*/
 
-/* Buttons */
-.btn {
-	font-family: var(--fontBtn);
-	padding: 0.3em 1.2em;
-	border-radius: var(--cornersS);
-	cursor: pointer;
-}
-.btn:hover { background: var(--itemFg) !important; }
 /* Input cursor */
 .caret {
 	display: block;
