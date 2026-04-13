@@ -200,7 +200,7 @@ h5, .h5 { font-size: 1.2rem; }
 hr {
 	margin: auto; padding: 0px;
 	height: 0px; width: 100%; border: none;
-	border-bottom: 2px solid var(--itemFg);
+	border-bottom: 1px solid var(--itemFg);
 }
 img { z-index: 1; cursor: pointer; }
 img.emoji { width: 1em; pointer-events: none }
@@ -278,8 +278,8 @@ input:checked ~.chbox { background: var(--accent) }
 .theme-light {
 	--fontColor: #666;
 	--fontColorX: #868686;
-	--colorMax: #fff;
-	--colorMin: #000;
+	--colorMax: #000;
+	--colorMin: #fff;
 	--highlight: #000;
 	--windowBgX: #eaeaeadd;
 	--windowFgX: #f6f6f6dd;
@@ -329,8 +329,8 @@ input:checked ~.chbox { background: var(--accent) }
 .theme-dark {
 	--fontColor: #888;
 	--fontColorX: #727272;
-	--colorMax: #000;
-	--colorMin: #fff;
+	--colorMax: #fff;
+	--colorMin: #000;
 	--highlight: #fff;
 	--windowBgX: #000d;
 	--windowFgX: #000d;
@@ -1024,6 +1024,8 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 		/*=== COLORS AND BORDERS ===*/
 
 /* Colors: text (font) */
+.cmin, .cmin-g, .cmin-hov:hover, .cmin-g-hov > *:hover { color: var(--colorMin) !important; }
+.cmax, .cmax-g, .cmax-hov:hover, .cmax-g-hov > *:hover { color: var(--colorMax) !important; }
 .cwhite, .cwhite-g > *, .cwhite-hov:hover, .cwhite-g-hov > *:hover { color: var(--white) !important; }
 .cblack, .cblack-g > *, .cblack-hov:hover, .cblack-g-hov > *:hover { color: var(--black) !important; }
 .fc, .fc-g > *, .fc-hov:hover, .fc-g-hov > *:hover { color: var(--fontColor) !important; }
@@ -1311,6 +1313,9 @@ div:has(> .submenu):hover > .submenu { display: block; }
 	'opsz' 40;
 	vertical-align: -10%;
 }
+
+/* Google favicon */
+.gfavicon { display: inline-block; height: 1em; margin-right: 0.25rem; border-radius: 0.25rem; transform: translateY(0.1rem); }
 
 /* Anicons | github.com/Typogram/Anicons */
 .anicon, anicon {
