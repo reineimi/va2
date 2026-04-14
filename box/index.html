@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
+	<title>Va2Box</title>
+	<script src='https://reineimi.github.io/va2/lib/va2.js' async></script>
+	<link rel='preload' href='https://reineimi.github.io/va2/lib/va2.css' as='style' onload='this.onload=null;this.rel="stylesheet"'>
+	<noscript><link rel='stylesheet' href='https://reineimi.github.io/va2/lib/va2.css'></noscript>
+	<link rel='preconnect' href='https://reineimi.github.io/va2/lib/va2.css'>
+	<script>window.addEventListener('load', ()=>{
+		extern.js('https://reineimi.github.io/va2/lib/va2box.js', 'va2box');
+		init(); enable_prototypes();
+		show('Header', 'Main');
+		// Context menu
+		mk('va2ctxtItems', `
+			<p onclick='va2.mod.box.add(qem("main")[0])'>Create new object (<c>Va2box</c>)</p>
+			<p onclick='windows.add(); hide(emroot(this, 3))'>Create empty window</p>
+			<p onclick='windows.openAll(); hide(emroot(this, 3))'>Open all windows</p>
+			<a href='https://reineimi.github.io/reineimi/' target='_blank'>My profile</a>
+			<a href='https://github.com/reineimi/reineimi' target='_blank'>My GitHub</a>
+		`);
+		// Notifications
+		notify("<x class='fs1-5'><c>Va2Box:</c> How to start</x><ol class='pb1'>"+
+		"<li>Close the notification tray and press <c>Right click</c> or <c>Long tap</c>;</li>"+
+		"<li>In the menu, click <c>Create new object</c>;</li>"+
+		"<li>First, change <b>Template: <x class='btn px1 fs06 borderFg'>None</x></b> to <b>Template: <x class='btn px1 fs06 borderFg'>Section</x></b>;</li>"+
+		"<li>Then click <x class='btn green cwhite px2 fs06'>Append</x>;</li>"+
+		"<li>In the new window, select <b>Template: <x class='btn px1 fs06 borderFg'>Section Block</x></b>.</li></ol>"+
+		"Congradulations, you have created your first <b>section</b>!<br>"+
+		"Now you can click <x class='btn green cwhite px2 fs06'>Append</x> again "+
+		"(in the right/bottom window) and close the previous 2 windows.");
+		notify("Don't know what to do? Click here!", 'green cwhite', {silent:1});
+	});</script>
+</head>
+<body class='ani-all ts-all'>
+	<div id='Header' class='spx mb05 w hide'>
+		<header class='shadow f brB px2'>
+			<div class='m ml1 mr1 fontX fs3 fw8 nosel bounded scale08'><p class='cgray'>V A</p><p class='abs w h topR rot90 c mt3 mr05 zn1 b1px bn fs2-5'>I I</p></div>
+			<a class='block m ml1 fontX fs1-8 fw3 fw5-hov tc nosel' href='https://github.com/reineimi/va2' target='_blank'>V A <x class='iblock rot90 c ni_x'>I I</x> I I A</a>
+			<div class='m right'>
+				<div class='round center th_itemBg py1 px2 g2'>
+					<p class='btn_notifs gicon c-hov pt fs2' onclick='notifs.show()'>notifications</p>
+					<p class='gicon c-hov pt fs2' onclick='themeset()'>contrast</p>
+				</div>
+			</div>
+		</header>
+	</div>
+	<main id='Main' class='pt3 hide'></main>
+</body>
+</html>
