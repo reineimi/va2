@@ -407,10 +407,12 @@ input:checked ~.chbox { background: var(--accent) }
 
 .bga, .bga-g, .bga-hov:hover { background: var(--accentBg) !important; }
 .a-c a, .b-c b { color: var(--accent); }
-.c, .c-g, .c-hov:hover, .a, .a-g, .a-hov:hover, .gicon-hov:hover { color: var(--accent) !important; }
+.a-c a:hover { color: var(--accentBg); }
+.c, .c-g, .c-hov:hover, .c-g-hov:hover, .a, .a-g, .a-hov:hover, .gicon-hov:hover { color: var(--accent) !important; }
+.cd, .cd-g, .cd-hov:hover, .cd-g-hov:hover { color: var(--accentBg) !important; }
 
 /* Buttons */
-.btn, .btn-g > * {
+.btn, .btn-g > *, .btnc, .btnc-hov {
 	font-family: var(--fontBtn);
 	padding: 0.3em 1.2em;
 	border-radius: var(--cornersS);
@@ -418,7 +420,8 @@ input:checked ~.chbox { background: var(--accent) }
 	border: var(--border) solid var(--itemFg);
 	background: var(--itemBg);
 }
-.btn:hover, .btn-g > *:hover { background: var(--itemFg); }
+.btn:hover, .btn-g > *:hover, .btnc:hover { background: var(--itemFg); }
+.btnc, .btnc-hov:hover { background: var(--accentBg); color: var(--white); }
 
 
 		/*=== GENERAL ===*/
@@ -1071,7 +1074,9 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 .brown, .brown-g > *, .brown-hov:hover, .brown-g-hov > *:hover { background-color: var(--darkbrown) !important; }
 
 /* Colors: border */
-.bn, .bn-g > * { border-color: #0000 !important; } .bc, .bc-g > * { border-color: var(--accent) !important; }
+.bn, .bn-g > * { border-color: #0000 !important; }
+.bc, .bc-g > * { border-color: var(--accent) !important; }
+.bcd, .bcd-g > * { border-color: var(--accentBg) !important; }
 .bwhite, .bwhite-g > *, .bwhite-hov:hover { border-color: #fff !important; }
 .bblack, .bblack-g > *, .bblack-hov:hover { border-color: #000 !important; }
 .bred, .bred-g > *, .bred-hov:hover { border-color: var(--red) !important; }
