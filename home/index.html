@@ -283,8 +283,10 @@
 		</div>`);
 		qem('.imageA')[0].style.backgroundImage = `url(${va2.data.bgurl || 'https://files.mastodon.social/media_attachments/files/112/474/022/648/653/867/original/c558545806868f5f.jpg'})`;
 
-		va2.f.newApp({name:'reineimi', url:'https://reineimi.github.io/reineimi/', isIframe:1});
-		va2.f.newApp({name:'Va2box', url:'https://reineimi.github.io/va2/va2box/', isIframe:1});
+		if (Object.entries(va2.data.apps).length < 1) {
+			va2.f.newApp({name:'reineimi', url:'https://reineimi.github.io/reineimi/', isIframe:1});
+			va2.f.newApp({name:'Va2box', url:'https://reineimi.github.io/va2/va2box/', isIframe:1});
+		}
 	}
 	});</script>
 </head>
