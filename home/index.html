@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
 	<title>Home (Va2)</title>
-	<meta name='va2meta' content='{"ver": "1.89.97.211"}'>
+	<meta name='va2meta' content='{"ver": "1.91.101.215"}'>
 	<!-- --<script src='va2/lib/va2.js' async></script><link rel='stylesheet' href='va2/lib/va2.css'><!-- -->
 	<!-- -->
 	<script src='https://reineimi.github.io/va2/lib/va2.js' async></script>
@@ -10,7 +10,6 @@
 	<link rel='preconnect' href='https://reineimi.github.io/va2/lib/va2.css'><!-- -->
 	<style>
 	.chatBubble { max-width: 60%; }
-	.windowBody { height: calc(100% - 6rem) !important; }
 	</style>
 	<script>window.addEventListener('load', ()=>{
 	init({proto:0,maximize:0});
@@ -45,7 +44,7 @@
 	// Menu buttons
 	{
 		mk('va2ctxtItems', `
-		<p onclick="show('Apps_wrap'); hide('va2ctxt')">
+		<p onclick="tshow('Apps_wrap'); hide('va2ctxt')">
 			<gicon class='abs left ml3 fs1-5'>apps</gicon>
 			<x class='EN'>Open app launcher</x>
 			<x class='RU'>Открыть лаунчер</x>
@@ -60,7 +59,8 @@
 			<x class='EN'>Open all windows</x>
 			<x class='RU'>Открыть все окна</x>
 		</p>
-		<p onclick="stdin((v)=>{ qem('.imageA')[0].style.backgroundImage='url('+v+')'; va2.data.bgurl=v; va2.f.saveData(); }, 'Image URL:')">
+		<p onclick="stdin((v)=>{ qem('.imageA')[0].style.backgroundImage='url('+v+')'; `+
+		`va2.data.bgurl=v; va2.f.saveData(); }, '<b>Specify image URL</b><br><br>Current: <c>${va2.data.bgurl}</c>')">
 			<gicon class='abs left ml3 fs1-5'>image</gicon>
 			<x class='EN'>Change background</x>
 			<x class='RU'>Сменить фон</x>
@@ -87,44 +87,26 @@
 		</p>`);
 	}
 
-	/* "Add" button
-	create(0, {
-		className: 'gicon',
-		innerHTML: 'add',
-		onclick: function(){
-			hide(emroot(this,3));
-			stdin((url)=>{
-				timeout.set('new_link', ()=>{
-					stdin((name)=>{
-						mk('va2ctxtItems', `<a href='${url}' target='_blank'>${gfavicon(url)} ${name}</a>`);
-					},"<x class='EN'>Specify a <c>name</c> for the new button</x>"+
-					"<x class='RU'>Укажите <c>имя</c> для вашей ссылки</x>.");
-				}, 0.15);
-			},"<x class='EN'>Specify a <c>URL address</c> for the new button</x>"+
-			"<x class='RU'>Укажите <c>URL адрес</c> для новой кнопки</x>.");
-		}
-	}, 'va2ctxtItems'); //*/
-
-	// Time/date
-	timeout.set('timedate', ()=>{ show(emroot('Clocks')); }, 1.05);
-
 	// Chat window
 	{
+		// Chat input field button
+		va2.cl.chbtn = 'btn bbgi fcx fgc bgic-hov gicon mr0 fs1-8 px2 br0';
 		// Chat bubble
 		va2.cl.chbbl = 'chatBubble py1 px2 fgc bfgi b1px brRB0 wbbw break';
-		// Chat input field button
-		va2.cl.chbtn = 'btn fgc bbgi fcx gicon bga-hov cwhite-hov mr0 fs1-8 px2 br0';
+		// Chat message date
+		va2.cl.chmdt = 'fcx fs07 pt05 tr';
 
 		// Funcs
 		va2.f.chatSend = (em)=>{
 			timeout.del('chatEnter');
-			if (em.value.match(/[a-zA-Z0-9]+/gm)) {
-				const p = create('p', {className: va2.cl.chbbl}, chat);
+			if (em.value.match(/[^ \n]+/gm)) {
+				const msg = create(0, {className: va2.cl.chbbl}, chat);
 				if (va2.temp.htmlMode) {
-					p.innerHTML = em.value;
+					msg.innerHTML = em.value;
 				} else {
-					p.textContent = em.value;
+					msg.textContent = em.value;
 				}
+				mk(msg, `<p class='${va2.cl.chmdt}'>${timedate()}</p>`);
 				body.scrollTop = body.scrollHeight;
 				va2.data.chatHistory = chat.innerHTML;
 				va2.f.saveData();
@@ -134,7 +116,7 @@
 		};
 		va2.f.chatMediaView = function(em_or_uid){
 			const em = emi(em_or_uid);
-			setclass(em, 'fillx', 'black', 'z19', 'brRB0', 'bfgi');
+			setclass(em, 'fillx', 'black', 'z19', 'brS', 'pt1');
 			tshow(bottom);
 			scrollto(em);
 		};
@@ -149,6 +131,7 @@
 		win[0].id = 'Chat'; hide(win[0]);
 		windows.all.pop();
 		const body = win[1];
+		emprop(body, [['height','calc(100% - 6rem)']]);
 		body.dataset.uid = uid();
 		body.className = 'windowBody w scroll pt2 bgc f';
 		va2.em.chatBody = body;
@@ -163,9 +146,11 @@
 			innerHTML: 'attachment',
 			onclick: ()=>{
 				getfile((fname,em)=>{
-					em.className = va2.cl.chbbl;
+					em.className = 'w ts0 brS pt1';
 					em.onclick = ()=>{ va2.f.chatMediaView(em); };
-					mk(chat, em);
+					const wrap = create(0, {className: va2.cl.chbbl}, chat);
+					mk(wrap, em);
+					mk(wrap, `<p class='${va2.cl.chmdt}'>${timedate()}</p>`);
 					body.scrollTo({top: body.scrollHeight, behavior: 'smooth'});
 					va2.data.chatHistory = chat.innerHTML;
 					va2.f.saveData();
@@ -179,21 +164,56 @@
 			placeholder: 'Cats be dancin fr bruv.'
 		}, bottom);
 		enter(inp, (em)=>{
-			if (va2.opt.sendOnEnt) {
+			if (va2.opt.sendOnEnter) {
 				va2.f.chatSend(em);
 			}
 		});
 
 		// HTML mode button
-		mk(bottom, `<p class='${va2.cl.chbtn} px1' onclick='va2.temp.htmlMode ^= 1; setclass(this, "cwhite", "bga")'>code_blocks</p>`);
+		create('p', {
+			className: va2.cl.chbtn+' px1',
+			innerHTML: 'code_blocks',
+			onclick: function(){
+				va2.temp.htmlMode ^= 1;
+				setclass(this, "cwhite", "bga", "bga-hov");
+				// Initial language optimization concerns :^)
+				let status = {
+					EN: 'Enabled',
+					RU: 'Включен',
+				}
+				if (!va2.temp.htmlMode) {
+					status = {
+						EN: 'Disabled',
+						RU: 'Выключен',
+					}
+				}
+				notify(`<x class='EN'>HTML input mode: ${status[va2.opt.lang]}</x>
+				<x class='RU'>Режим ввода HTML кода: ${status[va2.opt.lang]}</x>`,
+				'cwhite '+(va2.temp.htmlMode ? 'green' : 'red'), {silent:1});
+			}
+		}, bottom);
 		// Send On Enter button
 		const btnEnter = create('p', {
 			className: va2.cl.chbtn+' px1',
 			innerHTML: 'subdirectory_arrow_left',
 			onclick: ()=>{
-				va2.opt.sendOnEnt ^= 1;
-				setclass(btnEnter, 'cwhite', 'bga');
+				va2.opt.sendOnEnter ^= 1;
+				setclass(btnEnter, 'cwhite', 'bga', 'bga-hov');
 				va2.f.saveData();
+				// Initial language optimization concerns :^)
+				let status = {
+					EN: 'Enabled',
+					RU: 'Включена',
+				}
+				if (!va2.opt.sendOnEnter) {
+					status = {
+						EN: 'Disabled',
+						RU: 'Выключена',
+					}
+				}
+				notify(`<x class='EN'>Send message on Enter: ${status[va2.opt.lang]}</x>
+				<x class='RU'>Отправка сообщения на Enter: ${status[va2.opt.lang]}</x>`,
+				'cwhite '+(va2.opt.sendOnEnter ? 'green' : 'red'), {silent:1});
 			}
 		}, bottom);
 
@@ -209,8 +229,8 @@
 		loop(qem('object'), (_,em)=>{
 			em.onclick = ()=>{ va2.f.chatMediaView(em); }
 		});
-		if (va2.opt.sendOnEnt) {
-			setclass(btnEnter, 'cwhite', 'bga');
+		if (va2.opt.sendOnEnter) {
+			setclass(btnEnter, 'cwhite', 'bga', 'bga-hov');
 		}
 	}
 
@@ -225,6 +245,25 @@
 		const apps = emi('Apps');
 		const site = /http[s]?:\/\/([^\/]+)/;
 
+		// "Add" button
+		emi('New_app').onclick = ()=>{
+			stdin((inp)=>{
+					const args = {};
+					loop(inp, (i,em)=>{
+						args[i] = em.value;
+					});
+					va2.f.newApp(args);
+				},
+				"<x class='EN'>Create new element</x><x class='RU'>Создать новый элемент</x>",
+				[
+					['name', "<x class='EN'>Element name</x><x class='RU'>Название элемента</x>"],
+					['url', "<x class='EN'>URL address</x><x class='RU'>URL ссылка</x>", 'https://...'],
+					['icon', "<a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a> <x class='EN'>(symbol ID, if needed)</x><x class='RU'>(ID символа, если требуется)</x>"],
+					['isIframe', "<x class='EN'>Open in this app (might not work)?</x><x class='RU'>Открывать в данном приложении (может не сработать)?</x>", 'yes (?)']
+				]
+			);
+		}
+
 		// Args: name, url, icon, isIframe, uid, root
 		va2.f.newApp = (args)=>{
 			if (!args || typeof(args)!=='object') {return 0;}
@@ -232,35 +271,67 @@
 			const em = create(0, {
 				className: 'wr6 fs08 tc pb4 px1 br b1px bn bfgi-hov wbbw',
 			}, args.root || apps);
-			em.dataset.uid = args.uid || uid('app_');
-			va2.data.apps[em.dataset.uid] = args;
+			const the_uid = args.uid || uid('app_');
+			em.dataset.uid = the_uid;
+			va2.data.apps[the_uid] = args;
 			// Icon
 			const icon = create(0, {
-				className: 'gicon btn fs2-5 p2 my1 w',
+				className: 'gicon btn fs2-5 p2 my1 w m0-g c-hov',
 				innerHTML: args.icon || 'question_mark'
 			}, em);
 			if (args.url) {
-				icon.innerHTML = gfavicon(args.url);
+				if (!args.icon) {
+					icon.innerHTML = '';
+					icon.className = 'btn bgspan ch5 my1';
+					icon.style.backgroundImage = gfavicon(args.url).src;
+				}
 				if (!args.isIframe) {
 					icon.onclick = ()=>{ href(args.url,1); }
 				} else {
 					icon.onclick = ()=>{
 						windows.add(args.url,
-						`<iframe class='w h bn' src='${args.url}'>`);
+						`<iframe class='fill bn br0' src='${args.url}'>`);
+						hide('Apps_wrap');
 					}
 				}
 			}
 			// Icon name
+			let appname = args.name;
 			if (args.name) {
 				mk(em, "<p class='w abs topL mt6 pt1 px05 nil'>"+args.name+'</p>');
 			} else if (args.url && args.url.match(site)) {
-				mk(em, "<p class='w abs topL mt6 pt1 px05 nil'>"+args.url.match(site)[1]+'</p>');
+				appname = args.url.match(site)[1];
+				mk(em, "<p class='w abs topL mt6 pt1 px05 nil'>"+appname+'</p>');
 			}
 			// Context menu
 			ctxt(em, ()=>{
-				
+				timeout.set('hide_ctxt', ()=>{ hide('va2ctxt'); }, 0.01);
+				popup(`
+				<div class='f w'>
+					<div class='m mb2 p2 bgc br tl wbbw w1-6-3'>
+						<div>name: <p class='c tr right'>${appname}</p></div>
+						<div class='f'><p>url:</p> <p class='c tr right pl1 w1-5-4'>${args.url || '-'}</p></div>
+						<div>icon: <p class='c tr right'>${args.icon || '-'}</p></div>
+						<div>is_iframe: <p class='c tr right'>${args.isIframe || '0'}</p></div>
+					</div>
+					<p class='w fs1-2'>Actions:</p>
+					<div class='m my2 m1-g btn-g'>
+						<p class='cwhite red' onclick="va2.f.rmApp('${the_uid}')"><x class='EN'>Remove</x><x class='RU'>Удалить</x></p>
+						<p class='cwhite blue' onclick="stdin((v)=>{ va2.data.apps['${the_uid}'].name=v; emitem(emi('${the_uid}'),2).innerHTML=v; })"><x class='EN'>Rename</x><x class='RU'>Переименовать</x></p>
+						
+					</div>
+				</div>`,
+				"<x class='EN'>Application</x><x class='RU'>Приложение</x>: <c>"+appname+'</c>');
 			});
+			va2.f.saveData();
 		};
+
+		// Remove app by UID
+		va2.f.rmApp = (uid)=>{
+			hide('va2popupWrap');
+			delete va2.data.apps[uid];
+			va2.f.saveData();
+		}
 
 		// Init
 		loop(va2.data.apps, (uid,args)=>{
@@ -281,17 +352,13 @@
 			<a class='block m mr0 fontX fs1-8 fw3 tc' href='https://github.com/reineimi/va2' target='_blank'>V A <x class='iblock rot90 c ni_x'>I I</x> I I A</a>
 			<p class='m mx2'>by</p> <div class='m ml0 ls2'><a class='fs1-6 fontFancy c' href='https://github.com/reineimi' target='_blank'>Reineimi</a></div>
 		</div>`);
+		timeout.set('timedate', ()=>{ show(emroot('Clocks')); }, 1.05);
 		qem('.imageA')[0].style.backgroundImage = `url(${va2.data.bgurl || 'https://files.mastodon.social/media_attachments/files/112/474/022/648/653/867/original/c558545806868f5f.jpg'})`;
-
-		if (Object.entries(va2.data.apps).length < 1) {
-			va2.f.newApp({name:'reineimi', url:'https://reineimi.github.io/reineimi/', isIframe:1});
-			va2.f.newApp({name:'Va2box', url:'https://reineimi.github.io/va2/va2box/', isIframe:1});
-		}
 	}
 	});</script>
 </head>
 
-<body class='ts-all'>
+<body class='ts-all' spellcheck='false'>
 	<div class='imageA fill bgspan bgc zn1 nosel nil o05'></div>
 	<main id='Main' class='h spx'>
 		<!-- Top right buttons -->
@@ -324,11 +391,11 @@
 			</div>
 		</div>
 		<!-- App launcher -->
-		<div id='Apps_wrap' class='fillx f spx pt1 pb7 nil hide'>
+		<div id='Apps_wrap' class='fillx f spx pt1 pb7 nil z2 hide'>
 			<div class='int w h f p1 scroll fgc br ani03 ani-slideFromB'>
 				<div id='Apps' class='m center mx0-g g05 nosel'>
 					<div class='wr6 fs08 tc pb4 px1 br b1px bn bfgi-hov wbbw'>
-						<p class='gicon btn fs2-5 p2 my1 w' onclick="popup(`<x class='EN'>Currently under development.</x><x class='RU'>Пока в процессе разработки.</x>`)">add</p>
+						<p data-uid='New_app' class='gicon btn fs2-5 p2 my1 w'>add</p>
 						<p class='w abs topL mt6 pt1 px05 nil'>
 							<x class='EN'>Add</x>
 							<x class='RU'>Добавить</x>
