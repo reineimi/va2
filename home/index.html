@@ -245,25 +245,6 @@
 		const apps = emi('Apps');
 		const site = /http[s]?:\/\/([^\/]+)/;
 
-		// "Add" button
-		emi('New_app').onclick = ()=>{
-			stdin((inp)=>{
-					const args = {};
-					loop(inp, (i,em)=>{
-						args[i] = em.value;
-					});
-					va2.f.newApp(args);
-				},
-				"<x class='EN'>Create new element</x><x class='RU'>Создать новый элемент</x>",
-				[
-					['name', "<x class='EN'>Element name</x><x class='RU'>Название элемента</x>"],
-					['url', "<x class='EN'>URL address</x><x class='RU'>URL ссылка</x>", 'https://...'],
-					['icon', "<a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a> <x class='EN'>(symbol ID, if needed)</x><x class='RU'>(ID символа, если требуется)</x>"],
-					['isIframe', "<x class='EN'>Open in this app (might not work)?</x><x class='RU'>Открывать в данном приложении (может не сработать)?</x>", 'yes (?)']
-				]
-			);
-		}
-
 		// Args: name, url, icon, isIframe, uid, root
 		va2.f.newApp = (args)=>{
 			if (!args || typeof(args)!=='object') {return 0;}
@@ -315,10 +296,19 @@
 						<div>is_iframe: <p class='c tr right'>${args.isIframe || '0'}</p></div>
 					</div>
 					<p class='w fs1-2'>Actions:</p>
-					<div class='m my2 m1-g btn-g'>
+					<div class='m my2 m1-g btn-g br05-g center'>
+						<p class='cwhite blue' onclick="stdin((v)=>{ `+
+							`va2.data.apps['${the_uid}'].name=v; emitem(emi('${the_uid}'),2).innerHTML=v; va2.f.saveData(); })">`+
+							`<x class='EN'>Rename</x><x class='RU'>Переименовать</x></p>
+						<p onclick="stdin((v)=>{ `+
+							`va2.data.apps['${the_uid}'].url=v; va2.f.saveData(); location.reload(); })">`+
+							`<x class='EN'>Change URL</x><x class='RU'>Изменить URL</x></p>
+						<p onclick="stdin((v)=>{ `+
+							`va2.data.apps['${the_uid}'].icon=v; va2.f.saveData(); location.reload(); })">`+
+							`<x class='EN'>Change icon</x><x class='RU'>Изм. иконку</x></p>
+						<p onclick="va2.data.apps['${the_uid}'].isIframe^=1; va2.f.saveData(); location.reload()">`+
+							`<x class='EN'>Re-integrate</x><x class='RU'>Встроить</x></p>
 						<p class='cwhite red' onclick="va2.f.rmApp('${the_uid}')"><x class='EN'>Remove</x><x class='RU'>Удалить</x></p>
-						<p class='cwhite blue' onclick="stdin((v)=>{ va2.data.apps['${the_uid}'].name=v; emitem(emi('${the_uid}'),2).innerHTML=v; })"><x class='EN'>Rename</x><x class='RU'>Переименовать</x></p>
-						
 					</div>
 				</div>`,
 				"<x class='EN'>Application</x><x class='RU'>Приложение</x>: <c>"+appname+'</c>');
@@ -330,7 +320,27 @@
 		va2.f.rmApp = (uid)=>{
 			hide('va2popupWrap');
 			delete va2.data.apps[uid];
+			rm(uid);
 			va2.f.saveData();
+		}
+
+		// "Add" button
+		emi('New_app').onclick = ()=>{
+			stdin((inp)=>{
+					const args = {};
+					loop(inp, (i,em)=>{
+						args[i] = em.value;
+					});
+					va2.f.newApp(args);
+				},
+				"<x class='EN'>Create new element</x><x class='RU'>Создать новый элемент</x>",
+				[
+					['name', "<x class='EN'>Element name</x><x class='RU'>Название элемента</x>"],
+					['url', "<x class='EN'>URL address</x><x class='RU'>URL ссылка</x>", 'https://...'],
+					['icon', "<a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a> <x class='EN'>(symbol ID, if needed)</x><x class='RU'>(ID символа, если требуется)</x>"],
+					['isIframe', "<x class='EN'>Open in this app (might not work)?</x><x class='RU'>Открывать в данном приложении (может не сработать)?</x>", 'yes (?)']
+				]
+			);
 		}
 
 		// Init
@@ -354,6 +364,10 @@
 		</div>`);
 		timeout.set('timedate', ()=>{ show(emroot('Clocks')); }, 1.05);
 		qem('.imageA')[0].style.backgroundImage = `url(${va2.data.bgurl || 'https://files.mastodon.social/media_attachments/files/112/474/022/648/653/867/original/c558545806868f5f.jpg'})`;
+		if (Object.entries(va2.data.apps).length < 1) {
+			va2.f.newApp({name:'My Page', icon:'logo_dev', url:'https://reineimi.github.io/reineimi/', isIframe:1});
+			va2.f.newApp({name:'Va2Box', icon:'deployed_code', url:'https://reineimi.github.io/va2/box/', isIframe:1});
+		}
 	}
 	});</script>
 </head>
