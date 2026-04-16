@@ -823,14 +823,24 @@ input:checked ~.chbox { background: var(--accent) }
 .fhr, .fhr-g > *,
 .fvr, .fvr-g > *,
 .center, .center-g > *,
+.fswap, .fswap-g > *,
 body, main, #va2context { display: flex; flex-wrap: wrap; }
-.nowrap { flex-wrap: nowrap !important;; }
+.nowrap { flex-wrap: nowrap !important; }
 /* Horizontal */
-.fh, .fh-g > * { flex-direction: column }
-.fhr, .fhr-g > * { flex-direction: column-reverse }
+.fh, .fh-g > * { flex-direction: column; }
+.fhr, .fhr-g > * { flex-direction: column-reverse; }
 /* Vertical */
-.fv, .fv-g > * { flex-direction: row }
-.fvr, .fvr-g > * { flex-direction: row-reverse }
+.fv, .fv-g > *, .fswap, .fswap-g > * { flex-direction: row; }
+.fvr, .fvr-g > * { flex-direction: row-reverse; }
+
+/* Flex content alignment */
+.start, .jcs { justify-content: flex-start !important; }
+.end, .jce { justify-content: flex-end !important; }
+.center, .jcc { justify-content: center !important; align-items: flex-start; }
+.spread, .jcsb { justify-content: space-between !important; }
+.ftop { align-content: start !important; }
+.fmid { align-content: center !important; }
+.fbot { align-content: end !important; }
 
 /* Flex content filling */
 .f1 { flex: 1; }
@@ -843,15 +853,6 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 .f03 { flex: 0.3; }
 .f02 { flex: 0.2; }
 .f01 { flex: 0.1; }
-
-/* Flex content alignment */
-.start, .jcs { justify-content: flex-start !important; }
-.end, .jce { justify-content: flex-end !important; }
-.center, .jcc { justify-content: center !important; align-items: flex-start; }
-.spread, .jcsb { justify-content: space-between !important; }
-.ftop { align-content: start !important; }
-.fmid { align-content: center !important; }
-.fbot { align-content: end !important; }
 
 /* One section of the page */
 .sect {
@@ -1377,6 +1378,7 @@ div:has(> .submenu):hover > .submenu { display: block; }
 	.w1-12 { width: calc(100%/6); }
 	.w1-14 { width: calc(100%/7); }
 	.w1-16 { width: calc(100%/8); }
+	.fswap, .fswap-g > * { flex-direction: column !important; }
 }
 @media screen and (min-width: 601px) and (max-width: 768px) {
 	.s-w { width: 100% !important; }
