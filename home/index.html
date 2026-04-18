@@ -1,26 +1,16 @@
 <!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
 	<title>Home (Va2)</title>
-	<meta name='va2meta' content='{"ver": "1.91.101.215"}'>
-	<!-- --<script src='va2/lib/va2.js' async></script><link rel='stylesheet' href='va2/lib/va2.css'><!-- -->
-	<!-- -->
-	<script src='https://reineimi.github.io/va2/lib/va2.js' async></script>
-	<link rel='preload' href='https://reineimi.github.io/va2/lib/va2.css' as='style' onload='this.onload=null;this.rel="stylesheet"'>
-	<noscript><link rel='stylesheet' href='https://reineimi.github.io/va2/lib/va2.css'></noscript>
-	<link rel='preconnect' href='https://reineimi.github.io/va2/lib/va2.css'><!-- -->
+	<meta name='va2meta' content='{"ver": "1.92.104.220"}'>
+	<script src='../lib/va2.js' async></script><link rel='stylesheet' href='../lib/va2.css'>
 	<style>
-	.chatBubble { max-width: 60%; }
+	.chatBubble { max-width: 70%; }
 	</style>
 	<script>window.addEventListener('load', ()=>{
 	init({proto:0,maximize:0});
 
 	// Local funcs
 	{
-		va2.f.lang = ()=>{
-			if (va2.opt.lang === 'EN') { va2lang('RU'); }
-			else if (va2.opt.lang === 'RU') { va2lang('EN'); }
-			va2.f.saveData();
-		}
 		va2.data.tshow = va2.data.tshow || {};
 		va2.f.tshow = (n)=>{
 			va2.data.tshow[n] = va2.data.tshow[n] ? 0 : 1;
@@ -46,77 +36,81 @@
 		mk('va2ctxtItems', `
 		<p onclick="tshow('Apps_wrap'); hide('va2ctxt')">
 			<gicon class='abs left ml3 fs1-5'>apps</gicon>
-			<x class='EN'>Open app launcher</x>
-			<x class='RU'>Открыть лаунчер</x>
+			Open app launcher
 		</p>
 		<p onclick="show('Chat'); hide('va2ctxt'); va2.em.chatBody.scrollTop=va2.em.chatBody.scrollHeight">
 			<gicon class='abs left ml3 fs1-5'>tooltip_2</gicon>
-			<x class='EN'>Open chat</x>
-			<x class='RU'>Открыть чат</x>
+			Open chat
 		</p>
 		<p onclick="windows.openAll(); hide('va2ctxt')">
 			<gicon class='abs left ml3 fs1-5'>window</gicon>
-			<x class='EN'>Open all windows</x>
-			<x class='RU'>Открыть все окна</x>
+			Open all windows
 		</p>
 		<p onclick="stdin((v)=>{ qem('.imageA')[0].style.backgroundImage='url('+v+')'; `+
 		`va2.data.bgurl=v; va2.f.saveData(); }, '<b>Specify image URL</b><br><br>Current: <c>${va2.data.bgurl}</c>')">
 			<gicon class='abs left ml3 fs1-5'>image</gicon>
-			<x class='EN'>Change background</x>
-			<x class='RU'>Сменить фон</x>
+			Change background
 		</p>
 		<p onclick="va2.f.tshow('Top_menu')">
 			<gicon class='abs left ml3 fs1-5'>bottom_panel_open</gicon>
-			<x class='EN'>Hide top panel</x>
-			<x class='RU'>Скрыть верхнюю панель</x>
+			Hide top panel
 		</p>
 		<p onclick="va2.f.tshow('Toolbar'); ">
 			<gicon class='abs left ml3 fs1-5'>bottom_panel_close</gicon>
-			<x class='EN'>Hide bottom panel</x>
-			<x class='RU'>Скрыть нижнюю панель</x>
+			Hide bottom panel
 		</p>
 		<p onclick="va2.f.setclass('Clocks', 'fgc')">
 			<gicon class='abs left ml3 fs1-5'>browse_gallery</gicon>
-			<x class='EN'>Hide clocks background</x>
-			<x class='RU'>Скрыть фон у часов</x>
+			Hide clocks background
 		</p>
 		<p onclick="windows.settings()">
 			<gicon class='abs left ml3 fs1-5'>settings</gicon>
-			<x class='EN'>Settings</x>
-			<x class='RU'>Настройки</x>
+			Settings
 		</p>`);
 	}
 
 	// Chat window
 	{
 		// Chat input field button
-		va2.cl.chbtn = 'btn bbgi fcx fgc bgic-hov gicon mr0 fs1-8 px2 br0';
+		va2.cl.chbtn = 'btn bbgi fcx fgc bga-hov cwhite-hov gicon mr0 fs1-8 px2 br0';
 		// Chat bubble
-		va2.cl.chbbl = 'chatBubble py1 px2 fgc bfgi b1px brRB0 wbbw break';
+		va2.cl.chbbl = 'chatBubble py1 px2 bga cwhite bfgi b1px brRB0 wbbw break';
 		// Chat message date
-		va2.cl.chmdt = 'fcx fs07 pt05 tr';
+		va2.cl.chmdt = 'clightgray fs06 pt05 tr';
 
 		// Funcs
-		va2.f.chatSend = (em)=>{
+		va2.f.msgCtxt = (em)=>{
+			ctxt(em, ()=>{
+				timeout.set('hide_ctxt', ()=>{ hide('va2ctxt'); }, 0.01);
+				popup(`
+				<div class='w center my2-g'>
+					<p class='btn red cwhite' onclick="rm('${em.dataset.uid}'); va2.f.chatSave(); hide('va2popupWrap')">Delete</p>
+				</div>`);
+			});
+		}
+		va2.f.chatSave = ()=>{
+			va2.data.chatHistory = chat.innerHTML;
+			va2.f.saveData();
+		}
+		va2.f.chatSend = (em, _parseHTML)=>{
 			timeout.del('chatEnter');
 			if (em.value.match(/[^ \n]+/gm)) {
 				const msg = create(0, {className: va2.cl.chbbl}, chat);
-				if (va2.temp.htmlMode) {
+				msg.dataset.uid = uid('bbl_');
+				if (_parseHTML || va2.temp.htmlMode) {
 					msg.innerHTML = em.value;
 				} else {
 					msg.textContent = em.value;
 				}
 				mk(msg, `<p class='${va2.cl.chmdt}'>${timedate()}</p>`);
 				body.scrollTop = body.scrollHeight;
-				va2.data.chatHistory = chat.innerHTML;
-				va2.f.saveData();
+				va2.f.msgCtxt(msg); va2.f.chatSave();
 			}
 			timeout.set('chatEnter', ()=>{em.value = '';}, 0.05);
-			if (em.value.match('chat.clear')) { va2.f.chatClear(); }
 		};
 		va2.f.chatMediaView = function(em_or_uid){
 			const em = emi(em_or_uid);
-			setclass(em, 'fillx', 'black', 'z19', 'brS', 'pt1');
+			setclass(em, 'fillx', 'black', 'z19', 'brS', 'pt1', 'hr40-m');
 			tshow(bottom);
 			scrollto(em);
 		};
@@ -127,7 +121,7 @@
 		}
 
 		// Chat area
-		const win = windows.add('<x class="EN">Chat</x><x class="RU">Чат</x>', 0, {btns:[1,1,0]});
+		const win = windows.add('Chat', 0, {btns:[1,1,0]});
 		win[0].id = 'Chat'; hide(win[0]);
 		windows.all.pop();
 		const body = win[1];
@@ -146,7 +140,7 @@
 			innerHTML: 'attachment',
 			onclick: ()=>{
 				getfile((fname,em)=>{
-					em.className = 'w ts0 brS pt1';
+					em.className = 'w ts0 brS pt1 hr40-m';
 					em.onclick = ()=>{ va2.f.chatMediaView(em); };
 					const wrap = create(0, {className: va2.cl.chbbl}, chat);
 					mk(wrap, em);
@@ -169,53 +163,81 @@
 			}
 		});
 
-		// HTML mode button
+		// Menu with other options
+		const theMenu = create('div', {
+			innerHTML: 'More options:',
+			className: 'abs botR mb5 p2 fgc br b1px bbgi brRB0 mt1-g tc hide ani-expandLT ani015'
+		}, bottom);
+		const btnMenu = create('p', {
+			className: va2.cl.chbtn,
+			innerHTML: 'menu',
+			title: 'More options',
+			onclick: ()=>{ tshow(theMenu); }
+		}, bottom);
+		body.onclick = ()=>{ hide(theMenu); }
+		inp.onclick = ()=>{ hide(theMenu); }
+
+		// Buttons
+			// Clear chat
 		create('p', {
-			className: va2.cl.chbtn+' px1',
-			innerHTML: 'code_blocks',
+			className: 'btn cred',
+			innerHTML: '<gicon>delete</gicon> Clear history',
+			onclick: ()=>{ va2.f.chatClear(); hide(theMenu); }
+		}, theMenu);
+			// HTML mode button
+		create('p', {
+			className: 'btn',
+			innerHTML: '<gicon>code_blocks</gicon> HTML mode',
 			onclick: function(){
 				va2.temp.htmlMode ^= 1;
 				setclass(this, "cwhite", "bga", "bga-hov");
 				// Initial language optimization concerns :^)
 				let status = {
-					EN: 'Enabled',
-					RU: 'Включен',
+					EN: 'Enabled'
 				}
 				if (!va2.temp.htmlMode) {
 					status = {
-						EN: 'Disabled',
-						RU: 'Выключен',
+						EN: 'Disabled'
 					}
 				}
-				notify(`<x class='EN'>HTML input mode: ${status[va2.opt.lang]}</x>
-				<x class='RU'>Режим ввода HTML кода: ${status[va2.opt.lang]}</x>`,
+				notify(`<x class='${va2.opt.lang}'>HTML input mode: ${status[va2.opt.lang]}</x>`,
 				'cwhite '+(va2.temp.htmlMode ? 'green' : 'red'), {silent:1});
 			}
-		}, bottom);
-		// Send On Enter button
+		}, theMenu);
+			// Send On Enter button
 		const btnEnter = create('p', {
-			className: va2.cl.chbtn+' px1',
-			innerHTML: 'subdirectory_arrow_left',
+			className: 'btn',
+			innerHTML: '<gicon>subdirectory_arrow_left</gicon> Send on Enter',
 			onclick: ()=>{
 				va2.opt.sendOnEnter ^= 1;
 				setclass(btnEnter, 'cwhite', 'bga', 'bga-hov');
 				va2.f.saveData();
 				// Initial language optimization concerns :^)
 				let status = {
-					EN: 'Enabled',
-					RU: 'Включена',
+					EN: 'Enabled'
 				}
 				if (!va2.opt.sendOnEnter) {
 					status = {
-						EN: 'Disabled',
-						RU: 'Выключена',
+						EN: 'Disabled'
 					}
 				}
-				notify(`<x class='EN'>Send message on Enter: ${status[va2.opt.lang]}</x>
-				<x class='RU'>Отправка сообщения на Enter: ${status[va2.opt.lang]}</x>`,
+				notify(`<x class='${va2.opt.lang}'>HTML input mode: ${status[va2.opt.lang]}</x>`,
 				'cwhite '+(va2.opt.sendOnEnter ? 'green' : 'red'), {silent:1});
 			}
-		}, bottom);
+		}, theMenu);
+			// Expand input
+		create('p', {
+			className: 'btn',
+			innerHTML: '<gicon>expand_all</gicon> Expand input',
+			onclick: ()=>{
+				popup(`
+				<div class='w f'>
+					<textarea class='w vh60 p1 b1px bbgi bgc' data-uid='chat_inp_expanded' placeholder='(HTML parsing enabled)'></textarea>
+					<p class='m mt2 btnc' onclick="va2.f.chatSend(emi('chat_inp_expanded'), 1); hide('va2popupWrap')">Send</p>
+				</div>`, 'Send message');
+				hide(theMenu);
+			}
+		}, theMenu);
 
 		// Send button
 		create('p', {
@@ -226,7 +248,8 @@
 
 		// Init
 		chat.innerHTML = va2.data.chatHistory || '';
-		loop(qem('object'), (_,em)=>{
+		loop(qem('.chatBubble'), (_,msg)=>{ va2.f.msgCtxt(msg); });
+		loop(qem('.chatBubble > object'), (_,em)=>{
 			em.onclick = ()=>{ va2.f.chatMediaView(em); }
 		});
 		if (va2.opt.sendOnEnter) {
@@ -298,20 +321,16 @@
 					<p class='w fs1-2'>Actions:</p>
 					<div class='m my2 m1-g btn-g br05-g center'>
 						<p class='cwhite blue' onclick="stdin((v)=>{ `+
-							`va2.data.apps['${the_uid}'].name=v; emitem(emi('${the_uid}'),2).innerHTML=v; va2.f.saveData(); })">`+
-							`<x class='EN'>Rename</x><x class='RU'>Переименовать</x></p>
+							`va2.data.apps['${the_uid}'].name=v; emitem(emi('${the_uid}'),2).innerHTML=v; va2.f.saveData(); })">Rename</p>
 						<p onclick="stdin((v)=>{ `+
-							`va2.data.apps['${the_uid}'].url=v; va2.f.saveData(); location.reload(); })">`+
-							`<x class='EN'>Change URL</x><x class='RU'>Изменить URL</x></p>
+							`va2.data.apps['${the_uid}'].url=v; va2.f.saveData(); location.reload(); })">Change URL</p>
 						<p onclick="stdin((v)=>{ `+
-							`va2.data.apps['${the_uid}'].icon=v; va2.f.saveData(); location.reload(); })">`+
-							`<x class='EN'>Change icon</x><x class='RU'>Изм. иконку</x></p>
-						<p onclick="va2.data.apps['${the_uid}'].isIframe^=1; va2.f.saveData(); location.reload()">`+
-							`<x class='EN'>Re-integrate</x><x class='RU'>Встроить</x></p>
-						<p class='cwhite red' onclick="va2.f.rmApp('${the_uid}')"><x class='EN'>Remove</x><x class='RU'>Удалить</x></p>
+							`va2.data.apps['${the_uid}'].icon=v; va2.f.saveData(); location.reload(); })">Change icon</p>
+						<p onclick="va2.data.apps['${the_uid}'].isIframe^=1; va2.f.saveData(); location.reload()">Re-integrate</p>
+						<p class='cwhite red' onclick="va2.f.rmApp('${the_uid}')">Remove</p>
 					</div>
 				</div>`,
-				"<x class='EN'>Application</x><x class='RU'>Приложение</x>: <c>"+appname+'</c>');
+				"Application: <c>"+appname+'</c>');
 			});
 			va2.f.saveData();
 		};
@@ -333,12 +352,12 @@
 					});
 					va2.f.newApp(args);
 				},
-				"<x class='EN'>Create new element</x><x class='RU'>Создать новый элемент</x>",
+				"Create new application",
 				[
-					['name', "<x class='EN'>Element name</x><x class='RU'>Название элемента</x>"],
-					['url', "<x class='EN'>URL address</x><x class='RU'>URL ссылка</x>", 'https://...'],
-					['icon', "<a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a> <x class='EN'>(symbol ID, if needed)</x><x class='RU'>(ID символа, если требуется)</x>"],
-					['isIframe', "<x class='EN'>Open in this app (might not work)?</x><x class='RU'>Открывать в данном приложении (может не сработать)?</x>", 'yes (?)']
+					['name', "Application name"],
+					['url', "URL address", 'https://...'],
+					['icon', "<a href='https://fonts.google.com/icons' target='_blank'>Google Icons</a> (symbol ID, if needed)"],
+					['isIframe', "Open in this app? (might not work)", 'yes (?)']
 				]
 			);
 		}
@@ -354,9 +373,7 @@
 	{
 		mk('va2ctxtMenu', `
 		<div class='px2 my2 fcx tc f nowrap g2'>
-			<p class='EN fs08 m'>To clear all the data stored by this web application, head to "Settings" menu and click "<x class='cred'>Erase data</x>".</p>
-			<p class='RU fs08 m'>Для того, чтобы очистить все данные данного веб приложения, перейдите в меню "Настройки" и нажмите "<x class='cred'>Erase data</x>".</p>
-			<p class='m btn p1 gicon fcx c-hov pt fs2' onclick='va2.f.lang()'>language_japanese_kana</p>
+			<p class='fs08 m'>To clear all the data stored by this web application, head to "Settings" menu and click "<x class='cred'>Erase data</x>".</p>
 		</div>
 		<hr><div class='center w nosel'>
 			<a class='block m mr0 fontX fs1-8 fw3 tc' href='https://github.com/reineimi/va2' target='_blank'>V A <x class='iblock rot90 c ni_x'>I I</x> I I A</a>
@@ -373,13 +390,11 @@
 </head>
 
 <body class='ts-all' spellcheck='false'>
-	<div class='imageA fill bgspan bgc zn1 nosel nil o05'></div>
+	<div class='imageA fill bgspan bgc zn1 nosel nil o06'></div>
 	<main id='Main' class='h spx'>
 		<!-- Top right buttons -->
 		<div id='Top_menu' class='w f fix topR mt1 mr1'>
 			<div class='m mr0 center fgc br py1 px2 g2'>
-				<!-- <p class='gicon c-hov pt fs2' onclick='fullscreen()'>fullscreen</p>
-				<p class='gicon c-hov pt fs2' onclick='themeset()'>contrast</p> -->
 				<p class='btn_notifs gicon c-hov pt fs2' onclick='notifs.show()'>notifications</p>
 				<p class='gicon c-hov pt fs2' onclick='show("va2ctxt")'>menu</p>
 			</div>
@@ -390,9 +405,7 @@
 				<div class='time fs4'></div>
 				<div class='date fs1-4 my05'></div>
 				<div>
-					<x class='EN'>Session time</x>
-					<x class='RU'>Время сессии</x>
-					: <x class='elapsed'></x>
+					Session time: <x class='elapsed'></x>
 				</div>
 			</div>
 		</div>
@@ -410,10 +423,7 @@
 				<div id='Apps' class='m center mx0-g g05 nosel'>
 					<div class='wr6 fs08 tc pb4 px1 br b1px bn bfgi-hov wbbw'>
 						<p data-uid='New_app' class='gicon btn fs2-5 p2 my1 w'>add</p>
-						<p class='w abs topL mt6 pt1 px05 nil'>
-							<x class='EN'>Add</x>
-							<x class='RU'>Добавить</x>
-						</p>
+						<p class='w abs topL mt6 pt1 px05 nil'>Add</p>
 					</div>
 				</div>
 			</div>

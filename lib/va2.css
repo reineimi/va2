@@ -317,8 +317,8 @@ input:checked ~.chbox { background: var(--accent) }
 	--darkbrown: #976;
 
 	--white: #fff;
-	--lightgray: #777;
-	--gray: #aaa;
+	--lightgray: #ddd;
+	--gray: #888;
 	--black: #000;
 
 	--accent: var(--yellow);
@@ -420,7 +420,7 @@ input:checked ~.chbox { background: var(--accent) }
 	border: var(--border) solid var(--itemFg);
 	background: var(--itemBg);
 }
-.btn:hover, .btn-g > *:hover, .btnc:hover { background: var(--itemFg); }
+.btn:hover, .btn-g > *:hover, .btnc:hover { background: var(--itemFg); color: var(--fontColor); }
 .btnc, .btnc-hov:hover { background: var(--accentBg); color: var(--white); }
 
 
@@ -1041,7 +1041,10 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 .fcx, .fcx-g > *, .fcx-hov:hover, .fcx-g-hov > *:hover { color: var(--fontColorX) !important; }
 .fc0, .fc0-g > *, .fc0-hov:hover, .fc0-g-hov > *:hover { color: #0000 !important; }
 .cwhite, .cwhite-g > *, .cwhite-hov:hover, .cwhite-g-hov > *:hover { color: var(--white) !important; }
+.clightgray, .clightgray-g > *, .clightgray-hov:hover, .clightgray-g-hov > *:hover { color: var(--lightgray) !important; }
+.cgray, .cgray-g > *, .cgray-hov:hover, .cgray-g-hov > *:hover { color: var(--gray) !important; }
 .cblack, .cblack-g > *, .cblack-hov:hover, .cblack-g-hov > *:hover { color: var(--black) !important; }
+
 .cred, .cred-g > *, .cred-hov:hover, .cred-g-hov > *:hover { color: var(--red) !important; }
 .corange, .corange-g > *, .corange-hov:hover, .corange-g-hov > *:hover { color: var(--orange) !important; }
 .cyellow, .cyellow-g > *, .cyellow-hov:hover, .cyellow-g-hov > *:hover { color: var(--yellow) !important; }
@@ -1058,9 +1061,11 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 
 /* Colors: box (background) */
 .bgc0, .bgc0-g > *, .bgc0-hov:hover  { background-color: #0000 !important; }
-.white, .white-g > *, .white-hov:hover, .white-g-hov > *:hover { background-color: #fff !important; }
-.black, .black-g > *, .black-hov:hover, .black-g-hov > *:hover { background-color: #000 !important; }
+.white, .white-g > *, .white-hov:hover, .white-g-hov > *:hover { background-color: var(--white) !important; }
+.lightgray, .lightgray-g > *, .lightgray-hov:hover, .lightgray-g-hov > *:hover { background-color: var(--lightgray) !important; }
 .gray, .gray-g > *, .gray-hov:hover, .gray-g-hov > *:hover { background-color: var(--gray) !important; }
+.black, .black-g > *, .black-hov:hover, .black-g-hov > *:hover { background-color: var(--black) !important; }
+
 .red, .red-g > *, .red-hov:hover, .red-g-hov > *:hover { background-color: var(--darkred) !important; }
 .orange, .orange-g > *, .orange-hov:hover, .orange-g-hov > *:hover { background-color: var(--darkorange) !important; }
 .yellow, .yellow-g > *, .yellow-hov:hover, .yellow-g-hov > *:hover { background-color: var(--darkyellow) !important; }
@@ -1079,7 +1084,10 @@ body, main, #va2context { display: flex; flex-wrap: wrap; }
 .bc, .bc-g > * { border-color: var(--accent) !important; }
 .bcd, .bcd-g > * { border-color: var(--accentBg) !important; }
 .bwhite, .bwhite-g > *, .bwhite-hov:hover { border-color: #fff !important; }
+.blightgray, .blightgray-g > *, .blightgray-hov:hover, .blightgray-g-hov > *:hover { border-color: var(--lightgray) !important; }
+.bgray, .bgray-g > *, .bgray-hov:hover, .bgray-g-hov > *:hover { border-color: var(--gray) !important; }
 .bblack, .bblack-g > *, .bblack-hov:hover { border-color: #000 !important; }
+
 .bred, .bred-g > *, .bred-hov:hover { border-color: var(--red) !important; }
 .borange, .borange-g > *, .borange-hov:hover { border-color: var(--orange) !important; }
 .byellow, .byellow-g > *, .byellow-hov:hover { border-color: var(--yellow) !important; }
