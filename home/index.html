@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover'>
 	<title>Home (Va2)</title>
-	<meta name='va2meta' content='{"ver": "1.92.104.220"}'>
+	<meta name='va2meta' content='{"ver": "1.92.104.221"}'>
 	<script src='../lib/va2.js' async></script><link rel='stylesheet' href='../lib/va2.css'>
 	<style>
 	.chatBubble { max-width: 70%; }
@@ -293,7 +293,7 @@
 					icon.onclick = ()=>{ href(args.url,1); }
 				} else {
 					icon.onclick = ()=>{
-						windows.add(args.url,
+						windows.add(`<a href='${args.url}' target='_blank'>${args.url}</a>`,
 						`<iframe class='fill bn br0' src='${args.url}'>`);
 						hide('Apps_wrap');
 					}
