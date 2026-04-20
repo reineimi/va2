@@ -4,7 +4,10 @@
 	<meta name='va2meta' content='{"ver": "1.92.104.221"}'>
 	<script src='../lib/va2.js' async></script><link rel='stylesheet' href='../lib/va2.css'>
 	<style>
-	.chatBubble { max-width: 70%; }
+		.chatBubble { max-width: 70%; }
+		.grad-lt {
+			background: linear-gradient(135deg, var(--accentBg) 0%, var(--windowFg) 60%);
+		}
 	</style>
 	<script>window.addEventListener('load', ()=>{
 	init({proto:0,maximize:0});
@@ -72,9 +75,9 @@
 	// Chat window
 	{
 		// Chat input field button
-		va2.cl.chbtn = 'btn bbgi fcx fgc bga-hov cwhite-hov gicon mr0 fs1-8 px2 br0';
+		va2.cl.chbtn = 'btn bbgi b1px fcx fgc bga-hov cwhite-hov gicon mr0 fs1-8 px2 br0';
 		// Chat bubble
-		va2.cl.chbbl = 'chatBubble py1 px2 bga cwhite bfgi b1px brRB0 wbbw break';
+		va2.cl.chbbl = 'chatBubble py1 px2 bga cwhite brRB0 wbbw break';
 		// Chat message date
 		va2.cl.chmdt = 'clightgray fs06 pt05 tr';
 
@@ -110,7 +113,8 @@
 		};
 		va2.f.chatMediaView = function(em_or_uid){
 			const em = emi(em_or_uid);
-			setclass(em, 'fillx', 'black', 'z19', 'brS', 'pt1', 'hr40-m');
+			setclass(em, 'fillx', 'bgc', 'z19', 'brS', 'pt1', 'hr40-m');
+			setclass(emroot(em), 'z19');
 			tshow(bottom);
 			scrollto(em);
 		};
@@ -127,12 +131,12 @@
 		const body = win[1];
 		emprop(body, [['height','calc(100% - 6rem)']]);
 		body.dataset.uid = uid();
-		body.className = 'windowBody w scroll pt2 bgc f';
+		body.className = 'grad-lt windowBody w scroll pt2 bgc f';
 		va2.em.chatBody = body;
-		const chat = create(0, {className:'w m mb0 mr0 fh m-g mr1-g mb1-g g1'}, body);
+		const chat = create(0, {className:'w m mt0 mr0 fh m-g mr1-g mb1-g g1'}, body);
 
 		// Input area
-		const bottom = create(0, {className: 'w f hr3 bT'}, emroot(win[1], 1));
+		const bottom = create(0, {className: 'w f hr3'}, emroot(win[1], 1));
 
 		// Attachments
 		const attach = create(0, {
@@ -143,6 +147,7 @@
 					em.className = 'w ts0 brS pt1 hr40-m';
 					em.onclick = ()=>{ va2.f.chatMediaView(em); };
 					const wrap = create(0, {className: va2.cl.chbbl}, chat);
+					wrap.dataset.uid = uid('bbl_');
 					mk(wrap, em);
 					mk(wrap, `<p class='${va2.cl.chmdt}'>${timedate()}</p>`);
 					body.scrollTo({top: body.scrollHeight, behavior: 'smooth'});
@@ -251,6 +256,7 @@
 		loop(qem('.chatBubble'), (_,msg)=>{ va2.f.msgCtxt(msg); });
 		loop(qem('.chatBubble > object'), (_,em)=>{
 			em.onclick = ()=>{ va2.f.chatMediaView(em); }
+			va2.f.msgCtxt(em);
 		});
 		if (va2.opt.sendOnEnter) {
 			setclass(btnEnter, 'cwhite', 'bga', 'bga-hov');
