@@ -10,7 +10,7 @@
 		}
 	</style>
 	<script>window.addEventListener('load', ()=>{
-	init({proto:0,maximize:0});
+	init({proto:0,maximize:0}); // ``
 
 	// Local funcs
 	{
@@ -86,9 +86,13 @@
 			ctxt(em, ()=>{
 				timeout.set('hide_ctxt', ()=>{ hide('va2ctxt'); }, 0.01);
 				popup(`
-				<div class='w center my2-g'>
-					<p class='btn red cwhite' onclick="rm('${em.dataset.uid}'); va2.f.chatSave(); hide('va2popupWrap')">Delete</p>
-				</div>`);
+				<div class='w f'>
+					<div class='m my1-g'>
+						<p class='btn green cwhite' onclick="copy(emitem(emi('${em.dataset.uid}'), 1).textContent); notify('Text copied', 'green cwhite'); hide('va2popupWrap')">Copy</p>
+						<p class='btn skyblue cwhite' onclick="va2.f.chatEdit('${em.dataset.uid}')">Edit</p>
+						<p class='btn red cwhite' onclick="rm('${em.dataset.uid}'); va2.f.chatSave(); hide('va2popupWrap')">Delete</p>
+					</div>
+				</div>`, 'Actions');
 			});
 		}
 		va2.f.chatSave = ()=>{
@@ -98,12 +102,15 @@
 		va2.f.chatSend = (em, _parseHTML)=>{
 			timeout.del('chatEnter');
 			if (em.value.match(/[^ \n]+/gm)) {
-				const msg = create(0, {className: va2.cl.chbbl}, chat);
+				const msg = create(0, {
+					className: va2.cl.chbbl,
+					innerHTML: '<div></div>'
+				}, chat);
 				msg.dataset.uid = uid('bbl_');
 				if (_parseHTML || va2.temp.htmlMode) {
-					msg.innerHTML = em.value;
+					emitem(msg, 1).innerHTML = em.value;
 				} else {
-					msg.textContent = em.value;
+					emitem(msg, 1).textContent = em.value;
 				}
 				mk(msg, `<p class='${va2.cl.chmdt}'>${timedate()}</p>`);
 				body.scrollTop = body.scrollHeight;
@@ -111,7 +118,7 @@
 			}
 			timeout.set('chatEnter', ()=>{em.value = '';}, 0.05);
 		};
-		va2.f.chatMediaView = function(em_or_uid){
+		va2.f.chatMediaView = (em_or_uid)=>{
 			const em = emi(em_or_uid);
 			setclass(em, 'fillx', 'bgc', 'z19', 'brS', 'pt1', 'hr40-m');
 			setclass(emroot(em), 'z19');
@@ -122,6 +129,13 @@
 			va2.data.chatHistory = '';
 			chat.innerHTML = '';
 			va2.f.saveData();
+		}
+		va2.f.chatEdit = (uid)=>{
+			const em = emitem(emi(uid), 1);
+			popup(`
+			<textarea class='bbgi bgc b1px p1 w hr25'>${em.innerHTML}</textarea>
+			<p class='btn mt2' onclick="emitem(emi('${uid}'), 1).innerHTML = emitem(emroot(this), 1).value; hide('va2popupWrap'); va2.f.chatSave()">Save</p>
+			`, 'Edit text');
 		}
 
 		// Chat area
