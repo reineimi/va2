@@ -405,7 +405,7 @@
 		va2.f.taskAdd = (_id, _args)=>{
 			const args = _args || {}
 			const id = _id || uid('task_');
-			const div = create(0, {className: 'w f bT mt1 mb2 fgc shadow'}, body);
+			const div = create(0, {className: 'w f bT mt1 mb2 fgc shadow brS bounded'}, body);
 			div.dataset.uid = id;
 			va2.data.tasks[id] = va2.data.tasks[id] || {};
 			const timers = create(0, {className: 'bR f'}, div);
