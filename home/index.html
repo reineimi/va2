@@ -5,12 +5,10 @@
 	<script src='../lib/va2.js' async></script><link rel='stylesheet' href='../lib/va2.css'>
 	<style>
 		.chatBubble { max-width: 70%; }
-		.grad-lt {
-			background: linear-gradient(135deg, var(--accentBg) 0%, var(--windowFg) 60%);
-		}
+		.grad-lt { background: linear-gradient(135deg, var(--accentBg) 0%, var(--windowFg) 60%); }
 	</style>
 	<script>window.addEventListener('load', ()=>{
-	init({proto:0,maximize:0}); // ``
+	init({proto:0,maximize:0}); // `${}`
 
 	// Local funcs
 	{
@@ -180,6 +178,9 @@
 			if (va2.opt.sendOnEnter) {
 				va2.f.chatSend(em);
 			}
+		});
+		ctxt(inp, (e)=>{
+			timeout.set('hide_ctxt', ()=>{ hide('va2ctxt'); }, 0.01);
 		});
 
 		// Menu with other options
@@ -365,13 +366,8 @@
 
 		// "Add" button
 		emi('New_app').onclick = ()=>{
-			stdin((inp)=>{
-					const args = {};
-					loop(inp, (i,em)=>{
-						args[i] = em.value;
-					});
-					va2.f.newApp(args);
-				},
+			stdin(
+				(args)=>{ va2.f.newApp(args); },
 				"Create new application",
 				[
 					['name', "Application name"],
@@ -387,6 +383,100 @@
 			args.uid = uid;
 			va2.f.newApp(args);
 		});
+	}
+
+	// Task scheduler
+	{
+		va2.data.tasks = va2.data.tasks || {};
+		va2.temp.taskTimers = {};
+
+		// Create window
+		const win = windows.add('Tasks', 0, {btns:[1,1,0]});
+		win[0].id = 'Tasks'; hide(win[0]);
+		windows.all.pop();
+		const body = win[1];
+		body.className = 'windowBody w scroll pt5 px1 bgc';
+		const nav = create(0, {
+			className: 'abs topL w hr3 py1 px2 f end fs08',
+			innerHTML: "<p class='btn' onclick='va2.f.taskAdd()'>Add</p>"
+		}, body);
+
+		// Create new task
+		va2.f.taskAdd = (_id, _args)=>{
+			const args = _args || {}
+			const id = _id || uid('task_');
+			const div = create(0, {className: 'w f bT mt1 mb2 fgc shadow'}, body);
+			div.dataset.uid = id;
+			va2.data.tasks[id] = va2.data.tasks[id] || {};
+			const timers = create(0, {className: 'bR f'}, div);
+
+			const dt = create('input', {
+				className: 'w0',
+				type: 'datetime-local',
+				value: args.timer || date('-')+'T'+time(':'),
+				onchange: ()=>{
+					va2.temp.taskTimers[id] = dt.value;
+					va2.data.tasks[id].timer = dt.value;
+					va2.f.saveData();
+				}
+			}, timers);
+			va2.temp.taskTimers[id] = dt.value;
+
+			const timer = create(0, {
+				className: 'tl fcx btn bgn fgic-hov br0 bR fontCode fs09 fw5 wr7 wbbw',
+				onclick: ()=>{ dt.showPicker(); }
+			}, timers);
+			timer.dataset.uid = id+'_timer';
+
+			const title = create('input', {
+				type: 'text',
+				className: 'f1 px1 bR bfgi wr5',
+				value: args.title || 'Title',
+				onblur: function(){
+					va2.data.tasks[id].title = this.value;
+					va2.f.saveData();
+				}
+			}, div);
+
+			const more = create('textarea', {
+				className: 'w h0 py0 px1 fgc bT',
+				value: args.text || '',
+				placeholder: '(Task description)',
+				onblur: function(){
+					va2.data.tasks[id].text = this.value;
+					va2.f.saveData();
+				}
+			});
+			const moreBtn = create('p', {
+				className: 'btn p2 bgn fgic-hov bn br0 gicon fs1-2',
+				innerHTML: 'more_horiz',
+				onclick: ()=>{ setclass(more, 'hr25'); }
+			}, div);
+			mk(div, `<p class='gicon cwhite red fgic-hov px1 py2 fs1-2 pt'
+			onclick="rm('${id}'); delete va2.temp.taskTimers['${id}']; delete va2.data.tasks['${id}']; va2.f.saveData()">close</p>`);
+			mk(div, more);
+
+			va2.f.saveData();
+		}
+
+		// Init
+		loop(va2.data.tasks, (id,dt)=>{
+			va2.f.taskAdd(id,dt);
+		});
+		interval.set('task_timers', ()=>{
+			loop(va2.temp.taskTimers, (id,t)=>{
+				const dif = (new Date(t) - new Date())/1000;
+				let s = Math.floor(dif%60);
+				if (s < 0) {
+					s = s+1;
+					addclass(emi(id+'_timer'), 'cred');
+				} else {
+					rmclass(emi(id+'_timer'), 'cred');
+				}
+				emi(id+'_timer').innerHTML = '<b>'+
+				Math.round(dif/60)+"m</b><p class='fs06 lh1 pt05'>"+t.replace('T',' ')+'</p>';
+			});
+		}, 1);
 	}
 
 	// Creds & other
@@ -435,6 +525,7 @@
 			<div id='Toolbar' class='m f p2 br bgc f g1'>
 				<p class='gicon btn fs1-6 p2' onclick="tshow('Chat'); va2.em.chatBody.scrollTop=va2.em.chatBody.scrollHeight">tooltip_2</p>
 				<p class='gicon btn fs1-6 p2' onclick="tshow('Apps_wrap')">apps</p>
+				<p class='gicon btn fs1-6 p2' onclick="tshow('Tasks')">ballot</p>
 			</div>
 		</div>
 		<!-- App launcher -->
