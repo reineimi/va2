@@ -783,7 +783,8 @@ input:checked ~.chbox { background: var(--accent) }
 .g0 { gap: 0px; }
 
 /* Overflow */
-.bounded { overflow: hidden !important; overscroll-behavior-x: none; overscroll-behavior-y: none; }
+.bounded { overscroll-behavior-x: none; overscroll-behavior-y: none; }
+.noscroll, .bounded { overflow: hidden !important; }
 .overflow { overflow: visible !important; }
 .scroll { overflow: scroll !important; }
 .scrollx { overflow-x: scroll !important; }
