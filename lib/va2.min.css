@@ -72,6 +72,7 @@ html {
 	overscroll-behavior-x: none !important;
 	overscroll-behavior-y: none !important;
 }
+body { overflow-y: auto; overscroll-behavior-y: auto; }
 .noscrollbar, .noscrollbar-all * { scrollbar-width: none !important; }
 .noscrollbar::-webkit-scrollbar,
 .noscrollbar-all *::-webkit-scrollbar { width: 0px; height: 0px; background: #0000 }
