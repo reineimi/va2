@@ -646,6 +646,8 @@ input:checked ~.chbox { background: var(--accent) }
 .wv90 { width: 90vmin; } .wv95 { width: 95vmin; }
 .wv100 { width: 100vmin; }
 
+.w-m, .w-m-g > * { max-width: 100% !important; }
+
 /* Height */
 .hmin { min-height: calc(100% - var(--headerH)); }
 .hmax { max-height: calc(100% - var(--headerH)); }
